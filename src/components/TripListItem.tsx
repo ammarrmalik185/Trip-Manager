@@ -1,7 +1,9 @@
-import {StyleSheet, Text, View} from "react-native";
+import {Button, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 
-export function TripListItem({item}: any){
-    return  <View style={styles.item}>
+export function TripListItem({item, navigation}: any){
+    return  <View style={styles.item} onTouchStart={() => {
+        navigation.navigate('Trip Home', {title: item.title})
+    }}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.date}>{item.date.from} to {item.date.to}</Text>
     </View>;
