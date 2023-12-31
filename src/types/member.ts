@@ -1,11 +1,11 @@
 class member {
     id: string;
     name: string;
-    email: string;
 
-    constructor(id: string, name: string, email: string) {
-        this.id = id;
+    constructor(name: string) {
+        this.id = Math.random().toString(36);
         this.name = name;
-        this.email = email;
     }
 }
+
+export default member;
