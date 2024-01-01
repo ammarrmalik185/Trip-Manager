@@ -6,10 +6,6 @@ import TripList from "./TripList.tsx";
 import TripOverview from "./TripOverview.tsx";
 import TripCreate from "./TripCreate.tsx";
 import Pages from "../types/pages.ts";
-import Login from "./Login.tsx";
-import Register from "./Register.tsx";
-import Profile from "./Profile.tsx";
-import EditProfile from "./EditProfile.tsx";
 import TripEdit from "./TripEdit.tsx";
 import TripDetails from "./TripDetails.tsx";
 import TripMembers from "./TripMembers.tsx";
@@ -34,14 +30,6 @@ function App(): React.JSX.Element {
       <NavigationContainer>
           <Stack.Navigator>
               <Stack.Screen name={Pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
-
-              <Stack.Screen name={Pages.Login} component={Login} options={{title: 'Login'}}/>
-              <Stack.Screen name={Pages.Register} component={Register} options={{title: 'Register'}}/>
-
-              <Stack.Screen name={Pages.Profile} component={Profile} options={{title: 'Your Profile'}}/>
-              <Stack.Screen name={Pages.EditProfile} component={EditProfile} options={{title: 'Edit Profile'}}/>
-
-              {/*<Stack.Screen name={Pages.TripList} component={TripsList} options={{title: 'Your Trips'}}/>*/}
               <Stack.Screen name={Pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
               <Stack.Screen name={Pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}} />
               <Stack.Screen name={Pages.TripDetails} component={TripDetails} options={{title: 'Trip Details'}} />

@@ -14,17 +14,13 @@ export class trip {
     logs: log[] = [];
 
     static allTrips: trip[] = [
-        { id: '1', title: "Honeymoon", description: "",destination: 'Paris', date: {from: new Date(), to: new Date()},
-            expenses: [new expense("Test", "Misc", 1000, new Date(), [], [])],
-            logs: [new log("temp", "Test", new Date()), new log("temp 2", "Test 3", new Date())],
-            members: [new member("Test"), new member("Test 2")]
-        },
-        { id: '2', title: "Test", description: "", destination: 'New York', date: {from: new Date(), to: new Date()}, members: [], expenses: [], logs: [new log("temp", "Test", new Date())] },
-        { id: '3', title: "Test 2", description: "",destination: 'Tokyo', date: {from: new Date(), to: new Date()}, members: [], expenses: [] , logs: [new log("temp", "Test", new Date())]},
+        { id: '1', title: "Honeymoon", description: "",destination: 'Paris', date: {from: new Date(), to: new Date()},expenses: [],logs: [],members: []},
+        { id: '2', title: "Test", description: "", destination: 'New York', date: {from: new Date(), to: new Date()}, members: [], expenses: [], logs: [] },
+        { id: '3', title: "Test 2", description: "",destination: 'Tokyo', date: {from: new Date(), to: new Date()}, members: [], expenses: [] , logs: []},
     ];
 
     constructor(){
-        this.id = "";
+        this.id = Math.random().toString(36);
         this.title = "";
         this.description = "";
         this.destination = "";
@@ -32,5 +28,9 @@ export class trip {
         this.members = [];
         this.expenses = [];
         this.logs = [];
+    }
+
+    static getTrip(id: string) : trip | undefined{
+        return this.allTrips.find(trp => trp.id == id);
     }
 }

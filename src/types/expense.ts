@@ -10,18 +10,18 @@ class expense {
     amount: number;
     date: Date;
 
-    paidBy: {payer: member, amount: number}[];
+    payers: {payer: member, amount: number}[];
     spenders: {spender: member, weight: number}[];
 
-    constructor(title: string, category: string, amount: number, date: Date, paidBy: {payer: member, amount: number}[], spenders: {spender: member, weight: number}[]) {
+    constructor() {
         this.id = Math.random().toString(36);
-        this.title = title;
-        this.category = category;
+        this.title = "";
+        this.category = "";
         this.description = "";
-        this.amount = amount;
-        this.date = date;
-        this.paidBy = paidBy;
-        this.spenders = spenders;
+        this.amount = 0;
+        this.date = new Date();
+        this.payers = [];
+        this.spenders = [];
     }
 
     calculate(): {member: member, amount: number}[]{
@@ -34,7 +34,7 @@ class expense {
             }
         })
 
-        this.paidBy.forEach(payer => {
+        this.payers.forEach(payer => {
             let member = result.find(member => member.member === payer.payer);
             if (member) {
                 member.amount -= payer.amount;
@@ -51,7 +51,7 @@ class expense {
     }
 
     validate(): boolean {
-        return true;
+        return this.payers.reduce((v, i) => v + i.amount, 0) == this.amount;
     }
 
 }

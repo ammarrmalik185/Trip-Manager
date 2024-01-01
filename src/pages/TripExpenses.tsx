@@ -12,6 +12,8 @@ export default function TripExpenses({route, navigation}:{route:any, navigation:
                 renderItem={(data) => <TripExpenseListItem item={data.item} navigation={navigation}/>}
                 keyExtractor={(item) => item.id.toString()}
             />
+
+
             <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate(Pages.TripExpensesCreate, {trip: route.params.trip})}>
                 <Text style={styles.fabText}>+</Text>
             </TouchableOpacity>

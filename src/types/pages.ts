@@ -1,9 +1,4 @@
 enum Pages {
-    Login = 'Login',
-    Register = 'Register',
-
-    Profile = 'Profile',
-    EditProfile = 'EditProfile',
 
     TripCreate = 'TripCreate',
     TripEdit = 'TripEdit',

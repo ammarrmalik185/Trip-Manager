@@ -17,6 +17,9 @@ function TripOverview({route, navigation}:any) {
             <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(Pages.TripLogs, {trip: route.params.trip})}>
                 <Text style={styles.acceptButtonText}>Logs</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(Pages.TripExpensesSettle, {trip: route.params.trip})}>
+                <Text style={styles.acceptButtonText}>Settle Expenses</Text>
+            </TouchableOpacity>
         </View>
     )
 }

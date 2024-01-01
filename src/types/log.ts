@@ -6,13 +6,13 @@ class log {
     distance_traveled: number;
     date: Date;
 
-    constructor(title: string, location: string, date: Date) {
+    constructor() {
         this.id = Math.random().toString(36);
-        this.title = title;
-        this.location = location;
+        this.title = "";
+        this.location = "";
         this.description = "";
         this.distance_traveled = 0;
-        this.date = date;
+        this.date = new Date();
     }
 }
 
