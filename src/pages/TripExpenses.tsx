@@ -9,7 +9,7 @@ export default function TripExpenses({route, navigation}:{route:any, navigation:
         <View style={styles.main}>
             <FlatList
                 data={route.params.trip.expenses}
-                renderItem={(data) => <TripExpenseListItem item={data.item} navigation={navigation}/>}
+                renderItem={(data) => <TripExpenseListItem item={data.item} trip={route.params.trip} navigation={navigation}/>}
                 keyExtractor={(item) => item.id.toString()}
             />
 

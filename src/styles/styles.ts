@@ -68,6 +68,10 @@ export default StyleSheet.create({
         fontSize: 32,
         color: '#ffffff'
     },
+    itemText:{
+        fontSize: 20,
+        color: 'rgba(255, 255, 255, 0.8)'
+    },
     title: {
         fontSize: 24,
         color: '#ffffff',

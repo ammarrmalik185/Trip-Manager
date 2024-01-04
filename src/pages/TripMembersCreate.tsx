@@ -13,6 +13,7 @@ export default function TripMembersCreate({navigation, route}:any) {
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
                 route.params.trip.members.push(newMember)
+                route.params.trip.saveTrip()
                 navigation.goBack()
             }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>
         </View>

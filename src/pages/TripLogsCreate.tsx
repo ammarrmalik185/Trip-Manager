@@ -34,6 +34,7 @@ export default function TripLogsCreate({navigation, route}:any) {
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
                 route.params.trip.logs.push(newLog)
+                route.params.trip.saveTrip()
                 navigation.navigate(Pages.TripLogs, {trip: route.params.trip})
             }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>
 

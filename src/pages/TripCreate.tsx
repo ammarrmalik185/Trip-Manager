@@ -24,8 +24,12 @@ function TripCreate({route, navigation}:any) {
                 </View>
             </View>
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                trip.allTrips.push(newTrip);
-                navigation.navigate(Pages.TripList, {trip: newTrip});
+
+                newTrip.saveTrip().then(() => {
+                    trip.allTrips.push(newTrip);
+                    navigation.navigate(Pages.TripList, {trip: newTrip});
+                }).catch(console.error);
+
             }}><Text style={styles.acceptButtonText}>Create Trip</Text></TouchableOpacity>
         </View>
     )

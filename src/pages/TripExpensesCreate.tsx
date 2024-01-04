@@ -19,10 +19,6 @@ export default function TripExpensesCreate({navigation, route}: any){
             <TextInput style={styles.inputField} placeholder={"Enter Expense Catagory"} onChangeText={txt => newExpense.category = txt}/>
         </View>
         <View style={styles.inputSection}>
-            <Text style={styles.inputLabel}>Total Amount</Text>
-            <TextInput style={styles.inputField} placeholder={"Enter Amount"} inputMode={"numeric"} onChangeText={txt => newExpense.amount = parseFloat(txt)}/>
-        </View>
-        <View style={styles.inputSection}>
             <Text style={styles.inputLabel}>Description</Text>
             <TextInput style={styles.inputField} placeholder={"Enter Description"} onChangeText={txt => newExpense.description = txt}/>
         </View>
@@ -41,11 +37,11 @@ export default function TripExpensesCreate({navigation, route}: any){
                     return <View>
                         <Text style={styles.inputLabel}>{data.item.name}</Text>
                         <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} onChangeText={txt => {
-                            let spender = newExpense.spenders.find(item => item.spender.id == data.item.id);
+                            let spender = newExpense.spenders.find(item => item.member.id == data.item.id);
                             if(spender){
-                                spender.weight = parseFloat(txt);
+                                spender.amount = parseFloat(txt);
                             }else{
-                                newExpense.spenders.push({spender: data.item as member, weight: parseFloat(txt)})
+                                newExpense.spenders.push({member: data.item as member, amount: parseFloat(txt)})
                             }
                         }}/>
                     </View>
@@ -61,11 +57,11 @@ export default function TripExpensesCreate({navigation, route}: any){
                 return <View>
                     <Text style={styles.inputLabel}>{data.item.name}</Text>
                     <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Amount Paid"} onChangeText={txt => {
-                        let payer = newExpense.payers.find(item => item.payer.id == data.item.id);
+                        let payer = newExpense.payers.find(item => item.member.id == data.item.id);
                         if(payer){
                             payer.amount = parseFloat(txt);
                         }else{
-                            newExpense.payers.push({payer: data.item as member, amount: parseFloat(txt)})
+                            newExpense.payers.push({member: data.item as member, amount: parseFloat(txt)})
                         }
                     }}/>
                 </View>
@@ -74,8 +70,15 @@ export default function TripExpensesCreate({navigation, route}: any){
         </View>
 
         <TouchableOpacity style={styles.acceptButton} onPress={() => {
-            route.params.trip.expenses.push(newExpense)
-            navigation.navigate(Pages.TripExpenses, {trip: route.params.trip})
+            if (newExpense.validate()){
+                route.params.trip.calculateTotal();
+                route.params.trip.expenses.push(newExpense);
+                route.params.trip.saveTrip();
+                navigation.navigate(Pages.TripExpenses, {trip: route.params.trip})
+            } else {
+                console.error("Not Valid")
+            }
+
         }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>
 
     </ScrollView>;

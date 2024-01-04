@@ -9,6 +9,7 @@ import member from "../types/member.ts";
 import log from "../types/log.ts";
 
 function TripList({navigation}:any): React.JSX.Element {
+    trip.loadTrips();
     return (
         <SafeAreaView style={styles.main}>
             <FlatList
