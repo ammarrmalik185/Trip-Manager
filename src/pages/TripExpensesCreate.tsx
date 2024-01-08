@@ -71,7 +71,7 @@ export default function TripExpensesCreate({navigation, route}: any){
 
         <TouchableOpacity style={styles.acceptButton} onPress={() => {
             if (newExpense.validate()){
-                route.params.trip.calculateTotal();
+                newExpense.calculateTotal();
                 route.params.trip.expenses.push(newExpense);
                 route.params.trip.saveTrip();
                 navigation.navigate(Pages.TripExpenses, {trip: route.params.trip})
