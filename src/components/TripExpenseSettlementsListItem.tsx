@@ -6,7 +6,7 @@ export default function TripExpenseSettlementsListItem({item}: {item: settlement
     return (
         <View style={styles.item}>
             <Text style={styles.itemsHeader}>{item.member.name}</Text>
-            <Text style={styles.itemText}>{item.amount}</Text>
+            <Text style={styles.itemText}>{Math.round(item.amount)}</Text>
         </View>  
     );
 }

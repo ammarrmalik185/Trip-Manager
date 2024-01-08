@@ -1,6 +1,5 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import expense from "../types/expense.ts";
-import member from "../types/member.ts";
 import styles from "../styles/styles.ts";
 import memberAmount from "../types/memberAmount.ts";
 import settlement from "../types/settlement.ts";
@@ -17,11 +16,9 @@ export default function TripExpensesSettle({navigation, route}: any){
             if (foundSettlement){
                 foundSettlement.addExpense(expenseRef, singleCalc.amount);
             }else{
-                console.log(singleCalc.member)
                 let newSettlement = new settlement(singleCalc.member, 0)
                 newSettlement.addExpense(expenseRef, singleCalc.amount);
                 settlements.push(newSettlement)
-
             }
         })
     })

@@ -61,6 +61,7 @@ export class trip {
 
     static loadTrips(): void {
         console.log("Trip Detection Started")
+        this.allTrips = [];
         readDir(DocumentDirectoryPath).then(result => {
             console.log("Trip Detected " + result.length)
             result.forEach(item => {

@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import * as url from "node:url";
 
 export default StyleSheet.create({
     inputField: {
@@ -32,7 +33,7 @@ export default StyleSheet.create({
     },
     main:{
         flex: 1,
-        backgroundColor: '#310f69',
+        backgroundColor: '#4169e1'
     },
     flatList: {
         marginTop: 20,
@@ -41,7 +42,7 @@ export default StyleSheet.create({
         position: 'absolute',
         width: 60,
         height: 60,
-        backgroundColor: '#5c69fa',
+        backgroundColor: '#9f69fa',
         alignItems: 'center',
         justifyContent: 'center',
         right: 30,
@@ -58,7 +59,7 @@ export default StyleSheet.create({
         marginTop: 20,
     },
     item: {
-        backgroundColor: '#5c69fa',
+        backgroundColor: '#9f69fa',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
@@ -82,7 +83,7 @@ export default StyleSheet.create({
         color: 'white',
     },
     acceptButton: {
-        backgroundColor: '#5e71fa',
+        backgroundColor: '#9f69fa',
         padding: 10,
         marginVertical: 8,
         marginHorizontal: 50,

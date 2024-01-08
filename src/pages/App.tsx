@@ -21,13 +21,12 @@ import TripLogs from "./TripLogs.tsx";
 import TripLogsCreate from "./TripLogsCreate.tsx";
 import TripLogsEdit from "./TripLogsEdit.tsx";
 import TripLogsDetails from "./TripLogsDetails.tsx";
-
-// import { createDrawerNavigator } from '@react-navigation/drawer';
+import { CurrentTheme } from "../styles/drawerTheme.ts";
 
 const Stack = createNativeStackNavigator();
 function App(): React.JSX.Element {
   return (
-      <NavigationContainer>
+      <NavigationContainer theme={CurrentTheme}>
           <Stack.Navigator>
               <Stack.Screen name={Pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
               <Stack.Screen name={Pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
