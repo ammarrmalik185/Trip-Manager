@@ -1,12 +1,12 @@
-import {Button, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
+import {Text, TouchableOpacity} from "react-native";
 import styles from "../styles/styles.ts";
 import Pages from "../types/pages.ts";
 import {trip} from "../types/trip.ts";
 import member from "../types/member.ts";
 
-export function TripMemberListItem({item, navigation}: {item: member, navigation: any}){
+export function TripMemberListItem({item, navigation, trip}: {item: member, navigation: any, trip: trip}){
     return  <TouchableOpacity style={styles.item} onPress={() => {
-        navigation.navigate(Pages.TripMembersDetails, {trip: item})
+        navigation.navigate(Pages.TripMembersDetails, {trip: trip, member: item})
     }}>
         <Text style={styles.itemsHeader}>{item.name}</Text>
     </TouchableOpacity>;

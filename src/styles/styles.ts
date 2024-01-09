@@ -2,6 +2,9 @@ import {StyleSheet} from "react-native";
 import * as url from "node:url";
 
 export default StyleSheet.create({
+
+    // input fields
+
     inputField: {
         height: 40,
         margin: 12,
@@ -31,10 +34,65 @@ export default StyleSheet.create({
     inputSection: {
         margin: 0
     },
+    inputDynamicList:{
+        borderRadius: 10,
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        margin: 12,
+        padding: 20
+    },
+    inputDynamicListTitle:{
+        color: "#fff",
+        fontWeight: "bold",
+        textAlign: "center",
+        fontSize: 30,
+    },
+    datePicker: {
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        borderRadius: 20,
+        height: 50
+    },
+    dropDownContainer:{
+        borderColor: 'white',
+        flex: 1,
+        width: "auto",
+        marginHorizontal: 12,
+        backgroundColor: "white"
+    },
+    dropDownContainerData:{
+        width: "auto",
+        marginHorizontal: 20,
+        borderColor: 'white',
+        backgroundColor: "white"
+    },
+    dropDownInfoText: {
+        fontSize: 18,
+        color: "black"
+    },
+    
+    // containers
+
     main:{
         flex: 1,
         backgroundColor: '#4169e1'
     },
+    container: {
+        flex: 1,
+        marginTop: 20,
+    },
+    item: {
+        backgroundColor: '#9f69fa',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderRadius: 10,
+    },
+    center:{
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    // buttons
+
     flatList: {
         marginTop: 20,
     },
@@ -54,17 +112,21 @@ export default StyleSheet.create({
         fontSize: 30,
         color: 'white',
     },
-    container: {
-        flex: 1,
-        marginTop: 20,
-    },
-    item: {
+    acceptButton: {
         backgroundColor: '#9f69fa',
-        padding: 20,
+        padding: 10,
         marginVertical: 8,
-        marginHorizontal: 16,
+        marginHorizontal: 50,
         borderRadius: 10,
     },
+    acceptButtonText: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
+    },
+
+    // texts
+
     itemsHeader: {
         fontSize: 32,
         color: '#ffffff'
@@ -82,37 +144,5 @@ export default StyleSheet.create({
         fontSize: 18,
         color: 'white',
     },
-    acceptButton: {
-        backgroundColor: '#9f69fa',
-        padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 50,
-        borderRadius: 10,
-    },
-    acceptButtonText: {
-        fontSize: 20,
-        color: 'white',
-        textAlign: 'center',
-    },
-    datePicker: {
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        borderRadius: 20,
-        height: 50
-    },
-    center:{
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    inputDynamicList:{
-        borderRadius: 10,
-        backgroundColor: "rgba(0, 0, 0, 0.3)",
-        margin: 12,
-        padding: 20
-    },
-    inputDynamicListTitle:{
-        color: "#fff",
-        fontWeight: "bold",
-        textAlign: "center",
-        fontSize: 30,
-    }
+
 })

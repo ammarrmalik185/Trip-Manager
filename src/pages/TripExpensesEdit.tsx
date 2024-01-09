@@ -50,9 +50,10 @@ export default function TripExpensesEdit({route, navigation} : any){
                         <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toString()} onChangeText={txt => {
                             let spender = spenders.find(item => item.member.id == data.item.id);
                             if(spender){
-                                spender.amount = parseFloat(txt);
+                                spender.amount = parseFloat(txt) || 0;
+                                setSpenders([...spenders])
                             }else{
-                                setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt)}])
+                                setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt) || 0}])
                             }
                         }}/>
                     </View>
@@ -72,10 +73,10 @@ export default function TripExpensesEdit({route, navigation} : any){
                     <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Amount Paid"} value={currentW.toString()} onChangeText={txt => {
                         let payer = payers.find(item => item.member.id == data.item.id);
                         if(payer){
-                            payer.amount = parseFloat(txt);
-                            setPayers(payers)
+                            payer.amount = parseFloat(txt) || 0;
+                            setPayers([...payers])
                         }else{
-                            setPayers([...payers, {member: data.item as member, amount: parseFloat(txt)}]);
+                            setPayers([...payers, {member: data.item as member, amount: parseFloat(txt) || 0}]);
                         }
                     }}/>
                 </View>
