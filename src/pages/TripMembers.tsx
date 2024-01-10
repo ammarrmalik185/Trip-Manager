@@ -8,6 +8,7 @@ export default function TripMembers({route, navigation}:{route:any, navigation:a
     return (
         <View style={styles.main}>
             <FlatList
+                style={styles.flatList}
                 data={route.params.trip.members}
                 renderItem={(data) => <TripMemberListItem trip={route.params.trip} item={data.item} navigation={navigation}/>}
                 keyExtractor={(item) => item.id.toString()}

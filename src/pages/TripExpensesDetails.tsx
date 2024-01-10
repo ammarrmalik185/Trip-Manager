@@ -4,10 +4,7 @@ import Pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
 
 export default function TripExpensesDetails({route, navigation}: any){
-    return <View>
-        <Text>TripExpensesDetails</Text>
-        <Text>Index: {route.params.index}</Text>
-        <Text>Expense: {route.params.expense.title}</Text>
+    return <View style={styles.main}>
         <TouchableOpacity style={styles.acceptButton} onPress={() => {navigation.navigate(Pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
             <Text style={styles.acceptButtonText}>Edit</Text>
         </TouchableOpacity>

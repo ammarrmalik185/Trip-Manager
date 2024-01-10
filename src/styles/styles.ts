@@ -90,11 +90,26 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    horizontalStack:{
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    imageItem:{
+        flexDirection: "row"
+    },
+    rightBox:{
+        right: 5,
+        width: 70,
+        height: 90,
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center"
+    },
 
     // buttons
 
     flatList: {
-        marginTop: 20,
+        marginTop: 15,
     },
     fab:{
         position: 'absolute',
@@ -128,7 +143,13 @@ export default StyleSheet.create({
     // texts
 
     itemsHeader: {
-        fontSize: 32,
+        fontWeight: "bold",
+        fontSize: 25,
+        color: '#ffffff'
+    },
+    itemsHeaderRight: {
+       alignSelf: "center",
+        fontSize: 20,
         color: '#ffffff'
     },
     itemText:{
@@ -136,13 +157,23 @@ export default StyleSheet.create({
         color: 'rgba(255, 255, 255, 0.8)'
     },
     title: {
-        fontSize: 24,
+        fontSize: 35,
         color: '#ffffff',
         textAlign: 'center'
     },
     date: {
-        fontSize: 18,
+        fontSize: 15,
         color: 'white',
     },
+    rightBoxMain:{
+        textAlign:"center",
+        color: "white",
+        fontSize: 30
+    },
+    rightBoxSub:{
+        textAlign:"center",
+        color: "white",
+        fontSize: 12
+    }
 
 })

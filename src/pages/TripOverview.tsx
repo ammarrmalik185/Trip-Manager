@@ -5,9 +5,12 @@ import styles from "../styles/styles.ts";
 function TripOverview({route, navigation}:any) {
     return (
         <View style={styles.main}>
-            <View style={styles.container}>
+            <View>
                 <Text style={styles.title}>{route.params.trip.title}</Text>
             </View>
+            <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(Pages.TripDetails, {trip: route.params.trip})}>
+                <Text style={styles.acceptButtonText}>Details</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(Pages.TripMembers, {trip: route.params.trip})}>
                 <Text style={styles.acceptButtonText}>Members</Text>
             </TouchableOpacity>

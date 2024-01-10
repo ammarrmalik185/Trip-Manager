@@ -25,7 +25,11 @@ export default function TripExpensesSettle({navigation, route}: any){
 
     return (
         <View style={styles.main}>
-            <FlatList style={styles.flatList} data={settlements} renderItem={TripExpenseSettlementsListItem}/>
+            <FlatList
+                style={styles.flatList}
+                data={settlements}
+                renderItem={TripExpenseSettlementsListItem}
+            />
         </View>
     )
 }

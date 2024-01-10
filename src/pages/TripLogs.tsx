@@ -8,8 +8,9 @@ export default function TripLogs({route, navigation}:{route:any, navigation:any}
     return (
         <View style={styles.main}>
             <FlatList
+                style={styles.flatList}
                 data={route.params.trip.logs}
-                renderItem={(data) => <TripLogListItem item={data.item} navigation={navigation}/>}
+                renderItem={(data) => <TripLogListItem item={data.item} navigation={navigation} trip={route.params.trip}/>}
                 keyExtractor={(item) => item.id.toString()}
             />
             <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate(Pages.TripLogsCreate, {trip: route.params.trip})}>

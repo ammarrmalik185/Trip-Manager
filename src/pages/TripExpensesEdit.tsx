@@ -6,6 +6,7 @@ import DatePicker from "react-native-date-picker";
 import Pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
 import member from "../types/member.ts";
+import Toast from "react-native-simple-toast";
 
 export default function TripExpensesEdit({route, navigation} : any){
     const [oldExpense, setOldExpense] = useState<expense>(route.params.expense);
@@ -98,14 +99,14 @@ export default function TripExpensesEdit({route, navigation} : any){
             newExpense.payers = payers;
 
             if (newExpense.validate()){
-                route.params.trip.calculateTotal();
+                newExpense.calculateTotal();
                 route.params.trip.expenses = route.params.trip.expenses.filter((exp: expense) => exp.id != newExpense.id);
                 route.params.trip.expenses.push(newExpense);
-
                 route.params.trip.saveTrip();
+
                 navigation.navigate(Pages.TripExpensesDetails, {trip: route.params.trip, expense: newExpense})
             } else {
-                console.error("Not Valid")
+                Toast.show("Expense not valid", Toast.SHORT)
             }
 
         }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>

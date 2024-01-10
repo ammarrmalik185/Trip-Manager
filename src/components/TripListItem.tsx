@@ -9,9 +9,9 @@ export function TripListItem({item, navigation}: {item: trip, navigation: any}){
     }}>
         <Text style={styles.itemsHeader}>{item.title}</Text>
         <Text style={styles.date}>{item.date.from.toLocaleDateString()}</Text>
-        <View style={{right: 0, width: 70, height: 110, position: "absolute", alignItems: "center", justifyContent: "center"}}>
-            <Text style={{textAlign:"center", color: "white", fontSize: 40}}>{item.members.length}</Text>
-            <Text style={{textAlign:"center", color: "white"}}>People</Text>
+        <View style={styles.rightBox}>
+            <Text style={styles.rightBoxMain}>{item.members.length}</Text>
+            <Text style={styles.rightBoxSub}>People</Text>
         </View>
     </TouchableOpacity>;
 }
