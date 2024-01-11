@@ -8,30 +8,40 @@ import { useState } from "react";
 export default function TripEdit({route, navigation} : any) {
     const [oldTrip, setOldTrip] = useState<trip>(new trip());
 
-    const [] = useState(oldTrip.title);
-
+    const [title, setTitle] = useState(oldTrip.title);
+    const [destination, setDestination] = useState(oldTrip.destination);
+    const [description, setDescription] = useState(oldTrip.description);
+    const [dateFrom, setDateFrom] = useState(oldTrip.date.from);
 
     return (
         <View style={styles.main}>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Trip Name</Text>
-                <TextInput style={styles.inputField} onChangeText={text => oldTrip.title = text} />
+                <TextInput style={styles.inputField} value={title} onChangeText={setTitle} />
             </View>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Trip Destination</Text>
-                <TextInput style={styles.inputField} onChangeText={text => oldTrip.destination = text} />
+                <TextInput style={styles.inputField} value={destination} onChangeText={setDestination} />
+            </View>
+            <View style={styles.inputSection}>
+                <Text style={styles.inputLabel}>Trip Description</Text>
+                <TextInput style={styles.inputField} value={description} onChangeText={setDescription} />
             </View>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Start Date</Text>
                 <View style={styles.center}>
-                    <DatePicker mode="date" style={styles.datePicker} date={oldTrip.date.from} onDateChange={date => oldTrip.date.from = date}/>
+                    <DatePicker mode="date" style={styles.datePicker} date={dateFrom} onDateChange={setDateFrom}/>
                 </View>
             </View>
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
 
+                oldTrip.title = title;
+                oldTrip.destination = destination;
+                oldTrip.description = description;
+                oldTrip.date.from = dateFrom;
+
                 oldTrip.saveTrip().then(() => {
-                    trip.allTrips.push(oldTrip);
-                    navigation.navigate(Pages.TripList, {trip: oldTrip});
+                    navigation.navigate(Pages.TripList);
                 }).catch(console.error);
 
             }}><Text style={styles.acceptButtonText}>Create Trip</Text></TouchableOpacity>

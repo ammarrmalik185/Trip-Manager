@@ -18,6 +18,10 @@ function TripCreate({route, navigation}:any) {
                 <TextInput style={styles.inputField} onChangeText={text => newTrip.destination = text} />
             </View>
             <View style={styles.inputSection}>
+                <Text style={styles.inputLabel}>Trip Discription</Text>
+                <TextInput style={styles.inputFieldMultiLine} onChangeText={text => newTrip.description = text} />
+            </View>
+            <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Start Date</Text>
                 <View style={styles.center}>
                     <DatePicker mode="date" style={styles.datePicker} date={newTrip.date.from} onDateChange={date => newTrip.date.from = date}/>
@@ -27,7 +31,7 @@ function TripCreate({route, navigation}:any) {
 
                 newTrip.saveTrip().then(() => {
                     trip.allTrips.push(newTrip);
-                    navigation.navigate(Pages.TripList, {trip: newTrip});
+                    navigation.navigate(Pages.TripOverview, {trip: newTrip});
                 }).catch(console.error);
 
             }}><Text style={styles.acceptButtonText}>Create Trip</Text></TouchableOpacity>
