@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TripList from "./TripList.tsx";
 import TripOverview from "./TripOverview.tsx";
 import TripCreate from "./TripCreate.tsx";
-import Pages from "../types/pages.ts";
+import pages from "../types/pages.ts";
 import TripEdit from "./TripEdit.tsx";
 import TripDetails from "./TripDetails.tsx";
 import TripMembers from "./TripMembers.tsx";
@@ -28,28 +28,28 @@ function App(): React.JSX.Element {
   return (
       <NavigationContainer theme={CurrentTheme}>
           <Stack.Navigator>
-              <Stack.Screen name={Pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
-              <Stack.Screen name={Pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
-              <Stack.Screen name={Pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}} />
-              <Stack.Screen name={Pages.TripDetails} component={TripDetails} options={{title: 'Trip Details'}} />
+              <Stack.Screen name={pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
+              <Stack.Screen name={pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
+              <Stack.Screen name={pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}} />
+              <Stack.Screen name={pages.TripDetails} component={TripDetails} options={{title: 'Trip Details'}} />
 
-              <Stack.Screen name={Pages.TripOverview} component={TripOverview} options={{title: 'Trip Overview'}} />
+              <Stack.Screen name={pages.TripOverview} component={TripOverview} options={{title: 'Trip Overview'}} />
 
-              <Stack.Screen name={Pages.TripMembers} component={TripMembers} options={{title: 'Trip Members'}} />
-              <Stack.Screen name={Pages.TripMembersCreate} component={TripMembersCreate} options={{title: 'Add Trip Member'}} />
-              <Stack.Screen name={Pages.TripMembersEdit} component={TripMembersEdit} options={{title: 'Edit Member Details'}} />
-              <Stack.Screen name={Pages.TripMembersDetails} component={TripMembersDetails} options={{title: 'Member Details'}} />
+              <Stack.Screen name={pages.TripMembers} component={TripMembers} options={{title: 'Trip Members'}} />
+              <Stack.Screen name={pages.TripMembersCreate} component={TripMembersCreate} options={{title: 'Add Trip Member'}} />
+              <Stack.Screen name={pages.TripMembersEdit} component={TripMembersEdit} options={{title: 'Edit Member Details'}} />
+              <Stack.Screen name={pages.TripMembersDetails} component={TripMembersDetails} options={{title: 'Member Details'}} />
 
-              <Stack.Screen name={Pages.TripExpenses} component={TripExpenses} options={{title: 'Trip Expenses'}} />
-              <Stack.Screen name={Pages.TripExpensesCreate} component={TripExpensesCreate} options={{title: 'Create an expense'}} />
-              <Stack.Screen name={Pages.TripExpensesEdit} component={TripExpensesEdit} options={{title: 'Edit expense details'}} />
-              <Stack.Screen name={Pages.TripExpensesDetails} component={TripExpensesDetails} options={{title: 'Expense Details'}} />
-              <Stack.Screen name={Pages.TripExpensesSettle} component={TripExpensesSettle} options={{title: 'Expense Settlements'}} />
+              <Stack.Screen name={pages.TripExpenses} component={TripExpenses} options={{title: 'Trip Expenses'}} />
+              <Stack.Screen name={pages.TripExpensesCreate} component={TripExpensesCreate} options={{title: 'Create an expense'}} />
+              <Stack.Screen name={pages.TripExpensesEdit} component={TripExpensesEdit} options={{title: 'Edit expense details'}} />
+              <Stack.Screen name={pages.TripExpensesDetails} component={TripExpensesDetails} options={{title: 'Expense Details'}} />
+              <Stack.Screen name={pages.TripExpensesSettle} component={TripExpensesSettle} options={{title: 'Expense Settlements'}} />
 
-              <Stack.Screen name={Pages.TripLogs} component={TripLogs} options={{title: 'Trip Logs'}} />
-              <Stack.Screen name={Pages.TripLogsCreate} component={TripLogsCreate} options={{title: 'Create trip log'}} />
-              <Stack.Screen name={Pages.TripLogsEdit} component={TripLogsEdit} options={{title: 'Edit log'}} />
-              <Stack.Screen name={Pages.TripLogsDetails} component={TripLogsDetails} options={{title: 'Edit Log Details'}} />
+              <Stack.Screen name={pages.TripLogs} component={TripLogs} options={{title: 'Trip Logs'}} />
+              <Stack.Screen name={pages.TripLogsCreate} component={TripLogsCreate} options={{title: 'Create trip log'}} />
+              <Stack.Screen name={pages.TripLogsEdit} component={TripLogsEdit} options={{title: 'Edit log'}} />
+              <Stack.Screen name={pages.TripLogsDetails} component={TripLogsDetails} options={{title: 'Edit Log Details'}} />
           </Stack.Navigator>
       </NavigationContainer>
   );

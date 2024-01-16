@@ -1,12 +1,15 @@
 import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../styles/styles.ts";
-import { useState } from "react";
-import log from "../types/log.ts";
-import DatePicker from "react-native-date-picker";
-import Pages from "../types/pages.ts";
+import React, { useState } from "react";
+import pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
 import member from "../types/member.ts";
 import Toast from "react-native-simple-toast";
+import { palette } from "../styles/colors.ts";
+import { expenseTypes } from "../types/expensetypes.ts";
+import { SelectList } from "react-native-dropdown-select-list";
+import { logger } from "../helpers/logger.ts";
+import DatePicker from "../components/DatePicker.tsx";
 
 export default function TripExpensesEdit({route, navigation} : any){
     const [oldExpense, setOldExpense] = useState<expense>(route.params.expense);
@@ -21,23 +24,31 @@ export default function TripExpensesEdit({route, navigation} : any){
     return <ScrollView style={styles.main}>
         <View style={styles.inputSection}>
             <Text style={styles.inputLabel}>Title</Text>
-            <TextInput style={styles.inputField} placeholder={"Enter Expense Title"} value={title} onChangeText={setTitle}/>
+            <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} placeholder={"Enter Expense Title"} value={title} onChangeText={setTitle}/>
         </View>
         <View style={styles.inputSection}>
             <Text style={styles.inputLabel}>Category</Text>
-            <TextInput style={styles.inputField} placeholder={"Enter Expense Catagory"} value={category} onChangeText={setCategory}/>
+            <SelectList
+                data={expenseTypes}
+                setSelected={(cat:any) => {
+                    if (expenseTypes.find(item => item.value == cat)) setCategory(cat)
+                }}
+                save="value"
+
+                boxStyles={styles.dropDownContainer}
+                dropdownTextStyles={styles.dropDownInfoText}
+                dropdownStyles={styles.dropDownContainerData}
+                inputStyles={styles.dropDownInfoText}
+                search={false}
+
+                defaultOption={expenseTypes.find(item => item.value === category)}
+            />
         </View>
         <View style={styles.inputSection}>
             <Text style={styles.inputLabel}>Description</Text>
-            <TextInput style={styles.inputField} placeholder={"Enter Description"} value={description} onChangeText={setDescription}/>
+            <TextInput multiline={true} style={styles.inputFieldMultiLine} placeholderTextColor={palette.placeholder} placeholder={"Enter Description"} value={description} onChangeText={setDescription}/>
         </View>
-        <View style={styles.inputSection}>
-            <Text style={styles.inputLabel}>Date</Text>
-            <View style={styles.center}>
-                <DatePicker mode={"date"} date={date} style={styles.datePicker} onDateChange={setDate}/>
-            </View>
-        </View>
-
+        <DatePicker value={date} onValueChanged={setDate}/>
         <View style={styles.inputDynamicList}>
             <Text style={styles.inputDynamicListTitle}>Spenders</Text>
             <FlatList
@@ -48,7 +59,7 @@ export default function TripExpensesEdit({route, navigation} : any){
                     let currentW = currentSpen == undefined ? 0 : currentSpen.amount;
                     return <View>
                         <Text style={styles.inputLabel}>{data.item.name}</Text>
-                        <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toString()} onChangeText={txt => {
+                        <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toString()} onChangeText={txt => {
                             let spender = spenders.find(item => item.member.id == data.item.id);
                             if(spender){
                                 spender.amount = parseFloat(txt) || 0;
@@ -71,7 +82,7 @@ export default function TripExpensesEdit({route, navigation} : any){
                 let currentW = currentSpen == undefined ? 0 : currentSpen.amount;
                 return <View>
                     <Text style={styles.inputLabel}>{data.item.name}</Text>
-                    <TextInput style={styles.inputField} inputMode={"numeric"} placeholder={"Amount Paid"} value={currentW.toString()} onChangeText={txt => {
+                    <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} inputMode={"numeric"} placeholder={"Amount Paid"} value={currentW.toString()} onChangeText={txt => {
                         let payer = payers.find(item => item.member.id == data.item.id);
                         if(payer){
                             payer.amount = parseFloat(txt) || 0;
@@ -94,6 +105,7 @@ export default function TripExpensesEdit({route, navigation} : any){
             newExpense.title = title;
             newExpense.description = description;
             newExpense.category = category;
+            console.log("Category Save: " + newExpense.category)
             newExpense.date = date;
             newExpense.spenders = spenders;
             newExpense.payers = payers;
@@ -104,7 +116,7 @@ export default function TripExpensesEdit({route, navigation} : any){
                 route.params.trip.expenses.push(newExpense);
                 route.params.trip.saveTrip();
 
-                navigation.navigate(Pages.TripExpensesDetails, {trip: route.params.trip, expense: newExpense})
+                navigation.navigate(pages.TripExpensesDetails, {trip: route.params.trip, expense: newExpense})
             } else {
                 Toast.show("Expense not valid", Toast.SHORT)
             }

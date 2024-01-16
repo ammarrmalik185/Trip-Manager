@@ -2,36 +2,37 @@ import {Button, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react
 import React, {useState} from "react";
 import {trip} from "../types/trip.ts";
 import styles from "../styles/styles.ts";
-import DatePicker from "react-native-date-picker";
-import Pages from "../types/pages.ts";
+import pages from "../types/pages.ts";
+import { palette } from "../styles/colors.ts";
+import DatePicker from "../components/DatePicker.tsx";
 
 function TripCreate({route, navigation}:any) {
     const [newTrip, setTrip] = useState<trip>(new trip());
+    const [refresh, setRefresh] = useState(false);
+
     return (
         <View style={styles.main}>
             <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Trip Name</Text>
-                <TextInput style={styles.inputField} onChangeText={text => newTrip.title = text} />
+                <Text style={styles.inputLabel}>Name</Text>
+                <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} onChangeText={text => newTrip.title = text} />
             </View>
             <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Trip Destination</Text>
-                <TextInput style={styles.inputField} onChangeText={text => newTrip.destination = text} />
+                <Text style={styles.inputLabel}>Destination</Text>
+                <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} onChangeText={text => newTrip.destination = text} />
             </View>
             <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Trip Discription</Text>
-                <TextInput style={styles.inputFieldMultiLine} onChangeText={text => newTrip.description = text} />
+                <Text style={styles.inputLabel}>Description</Text>
+                <TextInput multiline={true} style={styles.inputFieldMultiLine} placeholderTextColor={palette.placeholder} onChangeText={text => newTrip.description = text} />
             </View>
-            <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Start Date</Text>
-                <View style={styles.center}>
-                    <DatePicker mode="date" style={styles.datePicker} date={newTrip.date.from} onDateChange={date => newTrip.date.from = date}/>
-                </View>
-            </View>
+            <DatePicker value={newTrip.date.from} onValueChanged={(date: Date) => {
+                newTrip.date.from = date,
+                setRefresh(!refresh);
+            }}/>
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
 
                 newTrip.saveTrip().then(() => {
                     trip.allTrips.push(newTrip);
-                    navigation.navigate(Pages.TripOverview, {trip: newTrip});
+                    navigation.navigate(pages.TripOverview, {trip: newTrip});
                 }).catch(console.error);
 
             }}><Text style={styles.acceptButtonText}>Create Trip</Text></TouchableOpacity>

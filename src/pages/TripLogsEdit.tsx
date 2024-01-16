@@ -1,9 +1,10 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
-import DatePicker from "react-native-date-picker";
 import styles from "../styles/styles.ts";
-import Pages from "../types/pages.ts";
+import pages from "../types/pages.ts";
 import log from "../types/log.ts";
+import { palette } from "../styles/colors.ts";
+import DatePicker from "../components/DatePicker.tsx";
 
 export default function TripLogsEdit({route, navigation}: any) {
     const [oldLog, setOldLog] = useState<log>(route.params.log);
@@ -18,27 +19,22 @@ export default function TripLogsEdit({route, navigation}: any) {
         <View style={styles.main}>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Title</Text>
-                <TextInput style={styles.inputField} placeholder={"Enter Log Title"} value={title} onChangeText={setTitle}/>
+                <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} placeholder={"Enter Log Title"} value={title} onChangeText={setTitle}/>
             </View>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Location</Text>
-                <TextInput style={styles.inputField} placeholder={"Enter Current Location"} value={location} onChangeText={setLocation}/>
+                <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} placeholder={"Enter Current Location"} value={location} onChangeText={setLocation}/>
             </View>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Distance Traveled</Text>
-                <TextInput style={styles.inputField} placeholder={"Enter Total Distance Traveled"} inputMode={"numeric"}
+                <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} placeholder={"Enter Total Distance Traveled"} inputMode={"numeric"}
                            value={distance.toString()} onChangeText={txt => setDistancee(parseInt(txt))}/>
             </View>
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Description</Text>
-                <TextInput style={styles.inputField} placeholder={"Enter Description"} value={description} onChangeText={setDescription}/>
+                <TextInput multiline={true} style={styles.inputFieldMultiLine} placeholderTextColor={palette.placeholder} placeholder={"Enter Description"} value={description} onChangeText={setDescription}/>
             </View>
-            <View style={styles.inputSection}>
-                <Text style={styles.inputLabel}>Date</Text>
-                <View style={styles.center}>
-                    <DatePicker mode={"date"} date={date} style={styles.datePicker} onDateChange={setDate}/>
-                </View>
-            </View>
+            <DatePicker value={date} onValueChanged={setDate}/>
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
 
@@ -54,7 +50,7 @@ export default function TripLogsEdit({route, navigation}: any) {
                 route.params.trip.logs.push(newLog);
                 route.params.trip.saveTrip()
 
-                navigation.navigate(Pages.TripLogs, {trip: route.params.trip})
+                navigation.navigate(pages.TripLogs, {trip: route.params.trip})
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>
 

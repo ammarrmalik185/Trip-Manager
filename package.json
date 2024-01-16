@@ -16,13 +16,14 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "react": "18.2.0",
-    "react_native_simple_dropdown_select_list": "^1.0.8",
     "react-native": "0.73.1",
-    "react-native-date-picker": "^4.3.5",
+    "react-native-dropdown-select-list": "^2.0.5",
     "react-native-fs": "^2.20.0",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-screens": "^3.29.0",
-    "react-native-simple-toast": "^3.2.0"
+    "react-native-simple-toast": "^3.2.0",
+    "react-native-svg": "^14.1.0",
+    "react-native-ui-datepicker": "^1.0.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

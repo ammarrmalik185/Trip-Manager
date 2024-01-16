@@ -2,7 +2,8 @@ import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import member from "../types/member.ts";
 import { useState } from "react";
 import styles from "../styles/styles.ts";
-import Pages from "../types/pages.ts";
+import pages from "../types/pages.ts";
+import { palette } from "../styles/colors.ts";
 
 export default function TripMembersEdit({route, navigation}: any){
     const [oldMember, setOldMember] = useState<member>(route.params.member);
@@ -11,7 +12,7 @@ export default function TripMembersEdit({route, navigation}: any){
     return (
         <View style={styles.main}>
             <Text style={styles.inputLabel}>Name</Text>
-            <TextInput style={styles.inputField} value={name} onChangeText={setName}/>
+            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} value={name} onChangeText={setName}/>
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
 
@@ -24,7 +25,7 @@ export default function TripMembersEdit({route, navigation}: any){
                 route.params.trip.members.push(newMember)
                 route.params.trip.saveTrip()
 
-                navigation.navigate(Pages.TripMembers, {trip: route.params.trip})
+                navigation.navigate(pages.TripMembers, {trip: route.params.trip})
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>
         </View>

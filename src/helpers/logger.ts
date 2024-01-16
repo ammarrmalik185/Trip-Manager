@@ -17,7 +17,7 @@ export let logger = {
                     fs.appendFile(DocumentDirectoryPath + "/logs" , text)
                     break;
                 case logMode.console:
-                    console.log(txt)
+//                    console.log(txt)
                     break;
             }
         }

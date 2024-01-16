@@ -1,4 +1,4 @@
-enum Pages {
+enum pages {
 
     TripCreate = 'TripCreate',
     TripEdit = 'TripEdit',
@@ -24,4 +24,4 @@ enum Pages {
 
 }
 
-export default Pages;
+export default pages;

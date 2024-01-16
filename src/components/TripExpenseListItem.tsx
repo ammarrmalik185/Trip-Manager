@@ -1,6 +1,6 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "../styles/styles.ts";
-import Pages from "../types/pages.ts";
+import pages from "../types/pages.ts";
 import {trip} from "../types/trip.ts";
 import expense from "../types/expense.ts";
 
@@ -8,7 +8,7 @@ let image = require("");
 
 export function TripExpenseListItem({item, navigation, trip}: {item: expense, navigation: any, trip: trip}){
     return  <TouchableOpacity style={styles.item} onPress={() => {
-        navigation.navigate(Pages.TripExpensesDetails, {expense: item, trip: trip})
+        navigation.navigate(pages.TripExpensesDetails, {expense: item, trip: trip})
     }}>
         <View style={styles.horizontalStack}>
             <Text style={styles.itemsHeader}>{item.title}</Text>

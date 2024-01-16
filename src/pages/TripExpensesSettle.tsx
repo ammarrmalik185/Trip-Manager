@@ -4,6 +4,7 @@ import styles from "../styles/styles.ts";
 import memberAmount from "../types/memberAmount.ts";
 import settlement from "../types/settlement.ts";
 import TripExpenseSettlementsListItem from "../components/TripExpenseSettlementsListItem.tsx";
+import member from "../types/member.ts";
 
 export default function TripExpensesSettle({navigation, route}: any){
     let calculations = route.params.trip.expenses.map((item:expense) => item.calculate())
@@ -16,7 +17,7 @@ export default function TripExpensesSettle({navigation, route}: any){
             if (foundSettlement){
                 foundSettlement.addExpense(expenseRef, singleCalc.amount);
             }else{
-                let newSettlement = new settlement(singleCalc.member, 0)
+                let newSettlement = new settlement(route.params.trip.members.find((mem:member) => mem.id == singleCalc.member.id), 0)
                 newSettlement.addExpense(expenseRef, singleCalc.amount);
                 settlements.push(newSettlement)
             }
