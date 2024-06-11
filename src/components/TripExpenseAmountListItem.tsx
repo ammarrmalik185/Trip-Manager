@@ -1,8 +1,9 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import styles from "../styles/styles.ts";
-import settlement from "../types/settlement.ts";
+import offset from "../types/offset.ts";
+import memberAmount from "../types/memberAmount.ts";
 
-export default function TripExpenseSettlementsListItem({item}: {item: settlement}){
+export default function TripExpenseAmountListItem({item}: {item: memberAmount}){
     return (
         <TouchableOpacity style={styles.item} onPress={() => {
             

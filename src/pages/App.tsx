@@ -17,11 +17,13 @@ import TripExpensesCreate from "./TripExpensesCreate.tsx";
 import TripExpensesEdit from "./TripExpensesEdit.tsx";
 import TripExpensesDetails from "./TripExpensesDetails.tsx";
 import TripExpensesSettle from "./TripExpensesSettle.tsx";
+import TripExpensesComputed from "./TripExpensesComputed.tsx";
 import TripLogs from "./TripLogs.tsx";
 import TripLogsCreate from "./TripLogsCreate.tsx";
 import TripLogsEdit from "./TripLogsEdit.tsx";
 import TripLogsDetails from "./TripLogsDetails.tsx";
 import { CurrentTheme } from "../styles/drawerTheme.ts";
+
 
 const Stack = createNativeStackNavigator();
 function App(): React.JSX.Element {
@@ -45,6 +47,7 @@ function App(): React.JSX.Element {
               <Stack.Screen name={pages.TripExpensesEdit} component={TripExpensesEdit} options={{title: 'Edit expense details'}} />
               <Stack.Screen name={pages.TripExpensesDetails} component={TripExpensesDetails} options={{title: 'Expense Details'}} />
               <Stack.Screen name={pages.TripExpensesSettle} component={TripExpensesSettle} options={{title: 'Expense Settlements'}} />
+              <Stack.Screen name={pages.TripExpensesComputed} component={TripExpensesComputed} options={{title: 'Computed Expenses'}} />
 
               <Stack.Screen name={pages.TripLogs} component={TripLogs} options={{title: 'Trip Logs'}} />
               <Stack.Screen name={pages.TripLogsCreate} component={TripLogsCreate} options={{title: 'Create trip log'}} />

@@ -156,6 +156,12 @@ export default StyleSheet.create({
         elevation: 5,
     },
 
+    numericAssistedField:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-evenly"
+    },
+
     // buttons
 
     flatList: {
@@ -166,6 +172,18 @@ export default StyleSheet.create({
         width: 60,
         height: 60,
         backgroundColor: palette.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+        borderRadius: 30,
+        elevation: 8
+    },
+    fabNegative:{
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        backgroundColor: palette.secondary,
         alignItems: 'center',
         justifyContent: 'center',
         right: 30,
@@ -219,6 +237,43 @@ export default StyleSheet.create({
         fontSize: 20,
         color: palette.text,
         textAlign: 'center',
+    },
+
+    addButton:{
+        width: 40,
+        height: 40,
+        margin: 5,
+        backgroundColor: palette.primary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    addButtonSmall:{
+        width: 30,
+        height: 30,
+        margin: 5,
+        backgroundColor: palette.primary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    subtractButton:{
+        width: 40,
+        height: 40,
+        margin: 5,
+        backgroundColor: palette.secondary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    subtractButtonSmall:{
+        width: 30,
+        height: 30,
+        margin: 5,
+        backgroundColor: palette.secondary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
     },
 
     // texts

@@ -51,13 +51,19 @@ export class trip {
         });
     }
 
+    getMember(id: number): member{
+        console.log(id);
+        console.log("Members: " + this.members)
+        return this.members.find(mem => mem.id == id);
+    }
+
     deleteTrip(): Promise<void>{
         let path = DocumentDirectoryPath + "/trips/" + this.id + '.json';
         trip.allTrips.filter(item => item.id != this.id);
         return unlink(path);
     }
 
-    static loadTrips(): void {
+    static loadTrips(onLoad:any = () => null): void {
         this.allTrips = [];
         trip.createFolder().then(() => {
             readDir(DocumentDirectoryPath + "/trips").then(result => {
@@ -114,6 +120,7 @@ export class trip {
                                 })
 
                                 trip.allTrips.push(newTrip);
+                                onLoad(trip.allTrips);
                             } catch (err){
                                 logger.error(err)
                             }
@@ -125,15 +132,12 @@ export class trip {
         });
     }
 
-
-    static getTrip(id: string) : trip | undefined{
+    static getTrip(id: string): trip | undefined{
         return this.allTrips.find(trp => trp.id == id);
     }
 
     static createFolder(): Promise<void>{
         return mkdir(DocumentDirectoryPath + "/trips/");
     }
-
-    
 
 }

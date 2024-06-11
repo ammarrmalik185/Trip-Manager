@@ -57,6 +57,19 @@ class expense {
         this.amount = this.payers.reduce((v, i) => v + i.amount, 0);
     }
 
+    getCalulatedExpense() : calculatedExpense{
+        let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
+        return {
+            payers: this.payers,
+            spenders: this.spenders.map((spend: memberAmount) => {spend.amount *= this.amount / totalWeight; return spend})
+        }
+    }
+
+}
+
+export class calculatedExpense{
+    payers: memberAmount[] = [];
+    spenders: memberAmount[] = [];
 }
 
 export default expense;

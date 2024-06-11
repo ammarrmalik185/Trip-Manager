@@ -16,6 +16,7 @@ enum pages {
     TripExpensesCreate = 'TripExpensesCreate',
     TripExpensesEdit = 'TripExpensesEdit',
     TripExpensesSettle = 'TripExpensesSettle',
+    TripExpensesComputed = 'TripExpensesComputed',
 
     TripLogs = 'TripLogs',
     TripLogsDetails = 'TripLogsDetails',

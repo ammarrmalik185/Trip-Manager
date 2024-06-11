@@ -59,15 +59,58 @@ export default function TripExpensesEdit({route, navigation} : any){
                     let currentW = currentSpen == undefined ? 0 : currentSpen.amount;
                     return <View>
                         <Text style={styles.inputLabel}>{data.item.name}</Text>
-                        <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toString()} onChangeText={txt => {
-                            let spender = spenders.find(item => item.member.id == data.item.id);
-                            if(spender){
-                                spender.amount = parseFloat(txt) || 0;
-                                setSpenders([...spenders])
-                            }else{
-                                setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt) || 0}])
-                            }
-                        }}/>
+                        <View style={styles.numericAssistedField}>
+                            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toFixed(1).toString()} onChangeText={txt => {
+                                let spender = spenders.find(item => item.member.id == data.item.id);
+                                if(spender){
+                                    spender.amount = parseFloat(txt) || 0;
+                                    setSpenders([...spenders])
+                                }else{
+                                    setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt) || 0}])
+                                }
+                            }}/>
+                            <TouchableOpacity style={styles.addButtonSmall} onPress={() => {
+                                let spender = spenders.find(item => item.member.id == data.item.id);
+                                if(spender){
+                                    spender.amount += 0.1;
+                                    setSpenders([...spenders])
+                                }else{
+                                    setSpenders([...spenders, {member: data.item as member, amount: 0}])
+                                }
+                            }}><Text style={styles.acceptButtonText}>+</Text></TouchableOpacity>
+
+                            <TouchableOpacity style={styles.addButton} onPress={() => {
+                                let spender = spenders.find(item => item.member.id == data.item.id);
+                                if(spender){
+                                    spender.amount += 1;
+                                    setSpenders([...spenders])
+                                }else{
+                                    setSpenders([...spenders, {member: data.item as member, amount: 1}])
+                                }
+                            }}><Text style={styles.acceptButtonText}>+</Text></TouchableOpacity>
+
+                            <TouchableOpacity style={styles.subtractButton} onPress={() => {
+                                let spender = spenders.find(item => item.member.id == data.item.id);
+                                if(spender){
+                                    spender.amount -= 1;
+                                    if (spender.amount < 0) spender.amount = 0;
+                                    setSpenders([...spenders])
+                                }else{
+                                    setSpenders([...spenders, {member: data.item as member, amount: 0}])
+                                }
+                            }}><Text style={styles.acceptButtonText}>-</Text></TouchableOpacity>
+
+                            <TouchableOpacity style={styles.subtractButtonSmall} onPress={() => {
+                                let spender = spenders.find(item => item.member.id == data.item.id);
+                                if(spender){
+                                    spender.amount -= 0.1;
+                                    if (spender.amount < 0) spender.amount = 0;
+                                    setSpenders([...spenders])
+                                }else{
+                                    setSpenders([...spenders, {member: data.item as member, amount: 0}])
+                                }
+                            }}><Text style={styles.acceptButtonText}>-</Text></TouchableOpacity>
+                        </View>
                     </View>
             }}/>
         </View>
@@ -122,6 +165,8 @@ export default function TripExpensesEdit({route, navigation} : any){
             }
 
         }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>
+
+
 
     </ScrollView>;
 }
