@@ -42,6 +42,8 @@ export class trip {
             logs: this.logs
         });
 
+        console.log("Saving trip: " + thisdata)
+
         return new Promise<void>((resolve, reject) => {
             writeFile(path, thisdata, 'utf8').then((success) => {
                 resolve();
@@ -51,7 +53,7 @@ export class trip {
         });
     }
 
-    getMember(id: number): member{
+    getMember(id: string): member | undefined{
         console.log(id);
         console.log("Members: " + this.members)
         return this.members.find(mem => mem.id == id);

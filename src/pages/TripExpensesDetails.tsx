@@ -12,7 +12,7 @@ export default function TripExpensesDetails({route, navigation}: any){
         <Text style={styles.dateDisplay}>Amount: {route.params.expense.amount}</Text>
         <Text style={styles.dateDisplay}>Category: {route.params.expense.category}</Text>
         <Text style={styles.dateDisplay}>Payers: {route.params.expense.payers.map((p:any) => p.member.name).join(", ")}</Text>
-        <Text style={styles.dateDisplay}>Spenders: {route.params.expense.getCalulatedExpense().spenders.map((p:any) => p.member.name).join(", ")}</Text>
+        <Text style={styles.dateDisplay}>Spenders: {route.params.expense.spenders.map((p:any) => p.member.name).join(", ")}</Text>
 
         <View style={styles.buttonsContainer}>
             <TouchableOpacity style={styles.acceptButton} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>

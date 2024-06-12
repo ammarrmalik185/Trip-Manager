@@ -1,6 +1,6 @@
 import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "../styles/styles.ts";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
 import member from "../types/member.ts";
@@ -55,20 +55,24 @@ export default function TripExpensesEdit({route, navigation} : any){
                 data={route.params.trip.members}
                 extraData={spenders}
                 renderItem={(data) => {
-                    let currentSpen  = spenders.find(spend => spend.member.id == data.item.id);
-                    let currentW = currentSpen == undefined ? 0 : currentSpen.amount;
-                    return <View>
+                                        return <View>
                         <Text style={styles.inputLabel}>{data.item.name}</Text>
                         <View style={styles.numericAssistedField}>
-                            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"} value={currentW.toFixed(1).toString()} onChangeText={txt => {
-                                let spender = spenders.find(item => item.member.id == data.item.id);
-                                if(spender){
-                                    spender.amount = parseFloat(txt) || 0;
-                                    setSpenders([...spenders])
-                                }else{
-                                    setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt) || 0}])
-                                }
-                            }}/>
+                            <TextInput
+                                placeholderTextColor={palette.placeholder}
+                                style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"}
+                                value={(spenders.find(spend => spend.member.id == data.item.id) ?? 0).toString()}
+                                onChangeText={txt => {
+                                    let spender = spenders.find(item => item.member.id == data.item.id);
+                                    let value = txt.endsWith(".") ? parseFloat(txt.split(".")[0]) : parseFloat(txt);
+                                    if(spender){
+                                        spender.amount = value || 0;
+                                        setSpenders([...spenders])
+                                    }else{
+                                        setSpenders([...spenders, {member: data.item as member, amount: parseFloat(txt) || 0}])
+                                    }
+                                }}
+                            />
                             <TouchableOpacity style={styles.addButtonSmall} onPress={() => {
                                 let spender = spenders.find(item => item.member.id == data.item.id);
                                 if(spender){
@@ -148,7 +152,6 @@ export default function TripExpensesEdit({route, navigation} : any){
             newExpense.title = title;
             newExpense.description = description;
             newExpense.category = category;
-            console.log("Category Save: " + newExpense.category)
             newExpense.date = date;
             newExpense.spenders = spenders;
             newExpense.payers = payers;
