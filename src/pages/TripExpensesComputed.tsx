@@ -22,7 +22,9 @@ export default function TripExpensesComputed({navigation, route}: any){
                     data={route.params.trip.members.map((member: member) => {
                         return {
                             member: member,
-                            amount: route.params.trip.expenses.filter((exp: expense) => exp.payers.find(p => p.member.id == member.id)).reduce((acc: any, exp: expense) => acc + exp.amount, 0)
+                            amount: route.params.trip.expenses
+                                .filter((exp: expense) => exp.payers.find(p => p.member.id == member.id))
+                                .reduce((acc: any, exp: expense) => acc + exp.payers.find(m => m.member.id == member.id)?.amount ?? 0, 0)
                         }
                     }).filter((item: memberAmount) => item.amount != 0)}
                     renderItem={TripExpenseAmountListItem}

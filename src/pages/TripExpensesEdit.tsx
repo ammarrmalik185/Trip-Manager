@@ -55,13 +55,13 @@ export default function TripExpensesEdit({route, navigation} : any){
                 data={route.params.trip.members}
                 extraData={spenders}
                 renderItem={(data) => {
-                                        return <View>
+                    return <View>
                         <Text style={styles.inputLabel}>{data.item.name}</Text>
                         <View style={styles.numericAssistedField}>
                             <TextInput
                                 placeholderTextColor={palette.placeholder}
                                 style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"}
-                                value={(spenders.find(spend => spend.member.id == data.item.id) ?? 0).toString()}
+                                value={(spenders.find(spend => spend.member.id == data.item.id)?.amount ?? 0).toString()}
                                 onChangeText={txt => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     let value = txt.endsWith(".") ? parseFloat(txt.split(".")[0]) : parseFloat(txt);
