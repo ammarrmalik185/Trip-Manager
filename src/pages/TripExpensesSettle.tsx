@@ -10,7 +10,7 @@ import TripExpenseSettlementListItem from "../components/TripExpenseSettlementLi
 
 export default function TripExpensesSettle({navigation, route}: any){
 
-    let settlementManager = new SettlementManager(route.params.trip.expenses.map((exp: expense) => exp.getCalulatedExpense()));
+    let settlementManager = new SettlementManager(route.params.trip.expenses.map((exp: expense) => exp.getCalculatedExpense()));
 
     return (
         <View style={styles.main}>
