@@ -6,9 +6,10 @@ import pages from "../types/pages.ts";
 import Toast from 'react-native-simple-toast';
 import expense from "../types/expense.ts";
 
-export default function TripExpenses({route, navigation}:{route:any, navigation:any}){
+export default function TripExpenses({route, navigation,}:{route:any, navigation:any}){
     return (
         <View style={styles.main}>
+
             <FlatList
                 style={styles.flatList}
                 data={route.params.trip.expenses.sort((a:expense,b:expense) => new Date(b.date).getTime() - new Date(a.date).getTime())}

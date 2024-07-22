@@ -86,7 +86,7 @@ export default function TripExpensesCreate({navigation, route}: any){
                                     spender.amount += 0.1;
                                     setSpenders([...spenders])
                                 }else{
-                                    setSpenders([...spenders, {member: data.item as member, amount: 0}])
+                                    setSpenders([...spenders, {member: data.item as member, amount: 0.1}])
                                 }
                                 setRefresh(!refresh);
                             }}><Text style={styles.acceptButtonText}>+</Text></TouchableOpacity>

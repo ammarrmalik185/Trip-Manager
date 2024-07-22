@@ -69,8 +69,11 @@ export class trip {
         this.allTrips = [];
         trip.createFolder().then(() => {
             readDir(DocumentDirectoryPath + "/trips").then(result => {
+                let pending = 0;
                 result.forEach(item => {
                     if (item.isFile() && item.path.endsWith(".json")){
+                        pending += 1;
+                        console.log(pending + " 76")
                         readFile(item.path).then(result => {
                             logger.log(item.path);
                             logger.log(result);
@@ -120,14 +123,23 @@ export class trip {
 
                                     newTrip.expenses.push(newExpense);
                                 })
-
                                 trip.allTrips.push(newTrip);
-                                onLoad(trip.allTrips);
+                                pending -= 1;
+                                console.log(pending + " 128")
+                                if (pending == 0) onLoad(trip.allTrips);
                             } catch (err){
+                                pending -= 1;
+                                console.log(pending + " 132")
+                                if (pending == 0) onLoad(trip.allTrips);
                                 logger.error(err)
                             }
 
-                        }).catch(logger.error)
+                        }).catch((err) => {
+                            pending -= 1;
+                            console.log(pending + " 139")
+                            if (pending == 0) onLoad(trip.allTrips);
+                            logger.error(err)
+                        })
                     }
                 })
             })

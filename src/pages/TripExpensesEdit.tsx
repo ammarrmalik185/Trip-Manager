@@ -61,7 +61,7 @@ export default function TripExpensesEdit({route, navigation} : any){
                             <TextInput
                                 placeholderTextColor={palette.placeholder}
                                 style={styles.inputField} inputMode={"numeric"} placeholder={"Weight"}
-                                value={(spenders.find(spend => spend.member.id == data.item.id)?.amount ?? 0).toString()}
+                                value={(spenders.find(spend => spend.member.id == data.item.id)?.amount ?? 0).toFixed(1).toString()}
                                 onChangeText={txt => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     let value = txt.endsWith(".") ? parseFloat(txt.split(".")[0]) : parseFloat(txt);
@@ -79,7 +79,7 @@ export default function TripExpensesEdit({route, navigation} : any){
                                     spender.amount += 0.1;
                                     setSpenders([...spenders])
                                 }else{
-                                    setSpenders([...spenders, {member: data.item as member, amount: 0}])
+                                    setSpenders([...spenders, {member: data.item as member, amount: 0.1}])
                                 }
                             }}><Text style={styles.acceptButtonText}>+</Text></TouchableOpacity>
 
