@@ -42,7 +42,7 @@ export class trip {
             logs: this.logs
         });
 
-        console.log("Saving trip: " + thisdata)
+        logger.log("Saving trip: " + thisdata)
 
         return new Promise<void>((resolve, reject) => {
             writeFile(path, thisdata, 'utf8').then((success) => {
@@ -54,8 +54,6 @@ export class trip {
     }
 
     getMember(id: string): member | undefined{
-        console.log(id);
-        console.log("Members: " + this.members)
         return this.members.find(mem => mem.id == id);
     }
 
@@ -73,7 +71,6 @@ export class trip {
                 result.forEach(item => {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;
-                        console.log(pending + " 76")
                         readFile(item.path).then(result => {
                             logger.log(item.path);
                             logger.log(result);
@@ -125,18 +122,15 @@ export class trip {
                                 })
                                 trip.allTrips.push(newTrip);
                                 pending -= 1;
-                                console.log(pending + " 128")
                                 if (pending == 0) onLoad(trip.allTrips);
                             } catch (err){
                                 pending -= 1;
-                                console.log(pending + " 132")
                                 if (pending == 0) onLoad(trip.allTrips);
                                 logger.error(err)
                             }
 
                         }).catch((err) => {
                             pending -= 1;
-                            console.log(pending + " 139")
                             if (pending == 0) onLoad(trip.allTrips);
                             logger.error(err)
                         })

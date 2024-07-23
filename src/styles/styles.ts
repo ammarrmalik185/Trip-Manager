@@ -118,6 +118,15 @@ export default StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    horizontalStackContained:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: palette.border,
+        marginVertical: 5,
+        borderRadius: 15,
+        padding: 10,
+        alignItems: "center"
+    },
     imageItem:{
         flexDirection: "row"
     },
@@ -166,6 +175,7 @@ export default StyleSheet.create({
 
     flatList: {
         marginTop: 15,
+        marginBottom: 15
     },
     fab:{
         position: 'absolute',
@@ -225,6 +235,9 @@ export default StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 8,
         borderRadius: 10,
+        shadowRadius: 4,
+        shadowColor: palette.secondary,
+        shadowOpacity: 0.25,
     },
     declineButton:{
         backgroundColor: palette.secondary,

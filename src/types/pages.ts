@@ -12,6 +12,7 @@ enum pages {
     TripMembersEdit = 'TripMembersEdit',
 
     TripExpenses = 'TripExpenses',
+    TripExpensesCustomList = 'TripExpensesCustomList',
     TripExpensesDetails = 'TripExpensesDetails',
     TripExpensesCreate = 'TripExpensesCreate',
     TripExpensesEdit = 'TripExpensesEdit',
@@ -22,7 +23,6 @@ enum pages {
     TripLogsDetails = 'TripLogsDetails',
     TripLogsCreate = 'TripLogsCreate',
     TripLogsEdit = 'TripLogsEdit',
-
 }
 
 export default pages;

@@ -13,9 +13,7 @@ function TripList({navigation}:any): React.JSX.Element {
 
     useEffect(() => {
         trip.loadTrips((data: trip[]) => {
-            console.log(data);
             const sortedTrips = data.sort((a: trip, b: trip) => {
-                console.log(a.date.from, b.date.from)
                 return new Date(b.date.from).getTime() - new Date(a.date.from).getTime();
             });
             setTrips(sortedTrips);

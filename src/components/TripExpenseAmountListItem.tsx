@@ -3,10 +3,10 @@ import styles from "../styles/styles.ts";
 import offset from "../types/offset.ts";
 import memberAmount from "../types/memberAmount.ts";
 
-export default function TripExpenseAmountListItem({item}: {item: memberAmount}){
+export default function TripExpenseAmountListItem({item, onClick}: {item: memberAmount, onClick: any}){
     return (
         <TouchableOpacity style={styles.item} onPress={() => {
-            
+            onClick();
         }}>
             <View style={styles.horizontalStack}>
                 <Text style={styles.itemsHeader}>{item.member.name}</Text>

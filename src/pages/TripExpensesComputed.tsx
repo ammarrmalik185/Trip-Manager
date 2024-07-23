@@ -8,6 +8,8 @@ import member from "../types/member.ts";
 import SettlementManager from "../helpers/SettlementManager.ts";
 import TripExpenseSettlementListItem from "../components/TripExpenseSettlementListItem.tsx";
 import {expenseTypes} from "../types/expensetypes.ts";
+import Pages from "../types/pages.ts";
+import {trip} from "../types/trip.ts";
 
 export default function TripExpensesComputed({navigation, route}: any){
 
@@ -27,7 +29,9 @@ export default function TripExpensesComputed({navigation, route}: any){
                                 .reduce((acc: any, exp: expense) => acc + exp.payers.find(m => m.member.id == member.id)?.amount ?? 0, 0)
                         }
                     }).filter((item: memberAmount) => item.amount != 0)}
-                    renderItem={TripExpenseAmountListItem}
+                    renderItem={({item}) => <TripExpenseAmountListItem item={item} onClick={() => {
+                        navigation.navigate(Pages.TripExpensesCustomList, {trip: route.params.trip, customList:route.params.trip.expenses.filter((exp: expense) => exp.payers.find(p => p.member.id == item.member.id))})
+                    }}/>}
                 />
             </View>
             <View style={styles.container}>
@@ -37,10 +41,12 @@ export default function TripExpensesComputed({navigation, route}: any){
                     data={route.params.trip.members.map((member: member) => {
                         return {
                             member: member,
-                            amount: route.params.trip.expenses.filter((exp: expense) => exp.getCalculatedExpense().spenders.find(p => p.member.id == member.id)).reduce((acc: any, exp: expense) => acc + exp.getCalculatedExpense().spenders.find(p => p.member.id == member.id)?.amount, 0)
+                            amount: -route.params.trip.expenses.filter((exp: expense) => exp.getCalculatedExpense().spenders.find(p => p.member.id == member.id)).reduce((acc: any, exp: expense) => acc + exp.getCalculatedExpense().spenders.find(p => p.member.id == member.id)?.amount, 0)
                         }
                     }).filter((item: memberAmount) => item.amount != 0)}
-                    renderItem={TripExpenseAmountListItem}
+                    renderItem={({item}) => <TripExpenseAmountListItem item={item} onClick={() => {
+                        navigation.navigate(Pages.TripExpensesCustomList, {trip: route.params.trip, customList: route.params.trip.expenses.filter((exp: expense) => exp.getCalculatedExpense().spenders.find(p => p.member.id == item.member.id))})
+                    }}/>}
                 />
             </View>
             <View style={styles.container}>
@@ -48,7 +54,9 @@ export default function TripExpensesComputed({navigation, route}: any){
                 <FlatList
                     style={styles.flatList}
                     data={settlementManager.offsets}
-                    renderItem={TripExpenseAmountListItem}
+                    renderItem={({item}) => <TripExpenseAmountListItem item={item} onClick={() => {
+                        navigation.navigate(Pages.TripExpensesCustomList, {trip: route.params.trip, customList:route.params.trip.expenses.filter((exp: expense) => exp.payers.find(p => p.member.id == item.member.id) || exp.getCalculatedExpense().spenders.find(p => p.member.id == item.member.id))})
+                    }}/>}
                 />
             </View>
 
@@ -64,7 +72,9 @@ export default function TripExpensesComputed({navigation, route}: any){
                             amount: route.params.trip.expenses.filter((exp: expense) => exp.category == category.value).reduce((acc: any, exp: expense) => acc + exp.amount, 0)
                         }
                     }).filter((item: memberAmount) => item.amount != 0)}
-                    renderItem={TripExpenseAmountListItem}
+                    renderItem={({item}) => <TripExpenseAmountListItem item={item} onClick={() => {
+                        navigation.navigate(Pages.TripExpensesCustomList, {trip: route.params.trip, customList:route.params.trip.expenses.filter((exp: expense) => exp.category == item.member.name)})
+                    }}/>}
                 />
             </View>
         </ScrollView>
