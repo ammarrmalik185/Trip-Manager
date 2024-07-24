@@ -1,5 +1,9 @@
 enum pages {
 
+    // Trip Stack
+
+    TripStack = "TripStack",
+
     TripCreate = 'TripCreate',
     TripEdit = 'TripEdit',
     TripList = 'TripList',
@@ -23,6 +27,16 @@ enum pages {
     TripLogsDetails = 'TripLogsDetails',
     TripLogsCreate = 'TripLogsCreate',
     TripLogsEdit = 'TripLogsEdit',
+
+    // Expense Stack
+
+    SingleExpensesStack = "SingleExpensesStack",
+
+    SingleExpensesList = 'SingleExpensesList',
+    SingleExpensesCreate = 'SingleExpensesCreate',
+    SingleExpensesEdit = 'SingleExpensesEdit',
+    SingleExpensesDetails = 'SingleExpensesDetails',
+
 }
 
 export default pages;

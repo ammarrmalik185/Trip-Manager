@@ -39,7 +39,7 @@ export default function TripEdit({route, navigation} : any) {
                 oldTrip.date.from = dateFrom;
 
                 oldTrip.saveTrip().then(() => {
-                    navigation.navigate(pages.TripList);
+                    navigation.navigate(pages.TripDetails, {trip: oldTrip});
                 }).catch(console.error);
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>

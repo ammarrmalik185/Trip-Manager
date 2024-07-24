@@ -179,8 +179,8 @@ export default StyleSheet.create({
     },
     fab:{
         position: 'absolute',
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
@@ -225,8 +225,36 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
+    fabTopSmall:{
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        backgroundColor: palette.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 95,
+        borderRadius: 30,
+        elevation: 8
+    },
+    fabTopSmall2:{
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        backgroundColor: palette.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 130,
+        borderRadius: 30,
+        elevation: 8
+    },
     fabText:{
         fontSize: 30,
+        color: palette.text,
+    },
+    fabTextSmall:{
+        fontSize: 15,
         color: palette.text,
     },
     acceptButton: {
