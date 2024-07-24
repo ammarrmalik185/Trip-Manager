@@ -1,3 +1,5 @@
+import SingleExpenseOverview from "../pages/SingleExpenseOverview.tsx";
+
 enum pages {
 
     // Trip Stack
@@ -34,8 +36,9 @@ enum pages {
 
     SingleExpensesList = 'SingleExpensesList',
     SingleExpensesCreate = 'SingleExpensesCreate',
+    SingleExpenseOverview = 'SingleExpenseOverview',
     SingleExpensesEdit = 'SingleExpensesEdit',
-    SingleExpensesDetails = 'SingleExpensesDetails',
+    SingleExpensesSettle = 'SingleExpensesSettle'
 
 }
 

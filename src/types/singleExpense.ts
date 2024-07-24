@@ -77,19 +77,17 @@ export class singleExpense {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;
                         readFile(item.path).then(result => {
-                            logger.log(item.path);
-                            logger.log(result);
+                            logger.log(item.path + ":" + result);
                             try {
                                 let data = JSON.parse(result);
                                 let newSingleExpense = new singleExpense();
                                 newSingleExpense.id = data.id;
                                 newSingleExpense.title = data.title;
                                 newSingleExpense.description = data.description;
-                                newSingleExpense = data.destination;
-                                newSingleExpense.date = new Date(newSingleExpense.date)
+                                newSingleExpense.date = new Date(data.date)
                                 newSingleExpense.members = [];
-                                newSingleExpense.payers = [];
-                                newSingleExpense.spenders = [];
+                                newSingleExpense.payers = data.payers;
+                                newSingleExpense.spenders = data.spenders;
 
                                 data.members.forEach((item: any) => {
                                     let newMember = new member();

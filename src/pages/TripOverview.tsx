@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, View} from "react-native";
 import pages from "../types/pages.ts";
 import styles from "../styles/styles.ts";
-import { trip } from "../types/trip.ts";
+import Toast from "react-native-simple-toast";
 
 function TripOverview({route, navigation}:any) {
     return (
@@ -18,15 +18,37 @@ function TripOverview({route, navigation}:any) {
                 <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(pages.TripDetails, {trip: route.params.trip})}>
                     <Text style={styles.acceptButtonText}>Details</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(pages.TripMembers, {trip: route.params.trip})}>
-                    <Text style={styles.acceptButtonText}>Members</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(pages.TripLogs, {trip: route.params.trip})}>
-                    <Text style={styles.acceptButtonText}>Logs</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(pages.TripExpenses, {trip: route.params.trip})}>
-                    <Text style={styles.acceptButtonText}>Expenses</Text>
-                </TouchableOpacity>
+                <View style={styles.horizontalStack}>
+                    <TouchableOpacity style={styles.acceptButtonMax} onPress={() => navigation.navigate(pages.TripMembers, {trip: route.params.trip})}>
+                        <Text style={styles.acceptButtonText}>Members</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.addButtonInline} onPress={() => navigation.navigate(pages.TripMembersCreate, {trip: route.params.trip})}>
+                        <Text style={styles.fabText}>+</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.horizontalStack}>
+                    <TouchableOpacity style={styles.acceptButtonMax} onPress={() => navigation.navigate(pages.TripLogs, {trip: route.params.trip})}>
+                        <Text style={styles.acceptButtonText}>Logs</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.addButtonInline} onPress={() => navigation.navigate(pages.TripLogsCreate, {trip: route.params.trip})}>
+                        <Text style={styles.fabText}>+</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.horizontalStack}>
+                    <TouchableOpacity style={styles.acceptButtonMax} onPress={() => navigation.navigate(pages.TripExpenses, {trip: route.params.trip})}>
+                        <Text style={styles.acceptButtonText}>Expenses</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.addButtonInline} onPress={() => {
+                        // navigation.navigate(pages.TripExpensesCreate, {trip: route.params.trip}
+                        if (route.params.trip.members.length > 0){
+                            navigation.navigate(pages.TripExpensesCreate, {trip: route.params.trip})
+                        }else{
+                            Toast.show("Add members before adding expenses", Toast.LONG);
+                        }
+                    }}>
+                        <Text style={styles.fabText}>+</Text>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity style={styles.acceptButton} onPress={() => navigation.navigate(pages.TripExpensesComputed, {trip: route.params.trip})}>
                     <Text style={styles.acceptButtonText}>Computed Expenses</Text>
                 </TouchableOpacity>

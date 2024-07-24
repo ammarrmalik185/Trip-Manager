@@ -6,7 +6,7 @@ import {singleExpense} from "../types/singleExpense.ts";
 
 export function SingleExpensesListItem({item, navigation}: {item: singleExpense, navigation: any}){
     return  <TouchableOpacity style={styles.item} onPress={() => {
-        navigation.navigate(pages.TripOverview, {trip: item})
+        navigation.navigate(pages.SingleExpenseOverview, {singleExpense: item})
     }}>
         <Text style={styles.itemsHeader}>{item.title}</Text>
         <Text style={styles.date}>{item.date.toLocaleString()}</Text>

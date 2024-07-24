@@ -4,22 +4,21 @@ import {TripListItem} from "../components/TripListItem.tsx";
 import {trip} from "../types/trip.ts";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import expense from "../types/expense.ts";
-import member from "../types/member.ts";
-import log from "../types/log.ts";
 import {useFocusEffect} from "@react-navigation/native";
 
 function TripList({navigation}:any): React.JSX.Element {
     const [trips, setTrips] = React.useState<trip[]>([]);
 
-    useFocusEffect(() => {
+    useFocusEffect(
+      React.useCallback(() => {
         trip.loadTrips((data: trip[]) => {
             const sortedTrips = data.sort((a: trip, b: trip) => {
                 return new Date(b.date.from).getTime() - new Date(a.date.from).getTime();
             });
             setTrips(sortedTrips);
         });
-    });
+      }, [setTrips])
+    );
 
     return (
         <SafeAreaView style={styles.main}>

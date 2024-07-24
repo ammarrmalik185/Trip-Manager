@@ -19,6 +19,19 @@ export default StyleSheet.create({
         marginBottom: 5,
 
     },
+    inputFieldMax: {
+        borderWidth: 1,
+        borderColor: palette.border,
+        height: 40,
+        margin: 12,
+        padding: 10,
+        marginTop: 5,
+        backgroundColor: palette.card,
+        color: palette.text,
+        borderRadius: 10,
+        marginBottom: 5,
+        flex: 1
+    },
     inputFieldMultiLine: {
         borderWidth: 1,
         borderColor: palette.border,
@@ -116,7 +129,8 @@ export default StyleSheet.create({
     },
     horizontalStack:{
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     horizontalStackContained:{
         flexDirection: "row",
@@ -267,6 +281,17 @@ export default StyleSheet.create({
         shadowColor: palette.secondary,
         shadowOpacity: 0.25,
     },
+    acceptButtonMax: {
+        backgroundColor: palette.primary,
+        padding: 10,
+        marginVertical: 8,
+        marginHorizontal: 8,
+        borderRadius: 10,
+        shadowRadius: 4,
+        shadowColor: palette.secondary,
+        shadowOpacity: 0.25,
+        flex: 1
+    },
     declineButton:{
         backgroundColor: palette.secondary,
         padding: 10,
@@ -280,6 +305,15 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
 
+    addButtonInline:{
+        width: 40,
+        height: 40,
+        marginHorizontal: 5,
+        backgroundColor: palette.primary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
+    },
     addButton:{
         width: 40,
         height: 40,

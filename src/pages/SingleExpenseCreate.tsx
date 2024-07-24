@@ -1,11 +1,9 @@
-import {Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import React, {useState} from "react";
-import {trip} from "../types/trip.ts";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import { palette } from "../styles/colors.ts";
 import DatePicker from "../components/DatePicker.tsx";
-import expense from "../types/expense.ts";
 import {SelectList} from "react-native-dropdown-select-list";
 import {expenseTypes} from "../types/expensetypes.ts";
 import member from "../types/member.ts";
@@ -14,17 +12,17 @@ import {singleExpense} from "../types/singleExpense.ts";
 
 function SingleExpenseCreate({route, navigation}:any) {
     const [newExpense, setNewExpense] = useState(new singleExpense());
-
     const [refresh, setRefresh] = useState(false);
-    // const [payers, setPayers] = useState(newExpense.payers);
     const [spenders, setSpenders] = useState(newExpense.spenders);
 
     return (
         <ScrollView style={styles.main}>
+
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Title</Text>
                 <TextInput style={styles.inputField} placeholderTextColor={palette.placeholder} placeholder={"Enter Expense Title"} onChangeText={txt => newExpense.title = txt}/>
             </View>
+
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Category</Text>
                 <SelectList
@@ -43,14 +41,49 @@ function SingleExpenseCreate({route, navigation}:any) {
                     defaultOption={expenseTypes[0]}
                 />
             </View>
+
             <View style={styles.inputSection}>
                 <Text style={styles.inputLabel}>Description</Text>
                 <TextInput multiline={true} style={styles.inputFieldMultiLine} placeholder={"Enter Description"} placeholderTextColor={palette.placeholder} onChangeText={txt => newExpense.description = txt}/>
             </View>
+
             <DatePicker value={newExpense.date} onValueChanged={(date: Date) => {
                 newExpense.date = date
                 setRefresh(!refresh);
             }}/>
+
+            <View style={styles.inputDynamicList}>
+                <Text style={styles.inputDynamicListTitle}>Members</Text>
+                <FlatList
+                    data={newExpense.members}
+                    extraData={spenders}
+                    renderItem={(data) => {
+                        return <View>
+                            <View style={styles.horizontalStack}>
+                                <TextInput
+                                    value={data.item.name}
+                                    style={styles.inputFieldMax}
+                                    placeholderTextColor={palette.placeholder}
+                                    inputMode={"text"}
+                                    placeholder={"Name"}
+                                    onChangeText={txt => {
+                                        data.item.name = txt;
+                                        setRefresh(!refresh);
+                                    }}
+                                />
+                                <TouchableOpacity style={styles.subtractButton} onPress={() => {
+                                    setRefresh(!refresh);
+                                }}><Text style={styles.acceptButtonText}>-</Text></TouchableOpacity>
+                            </View>
+                        </View>
+                    }}
+                />
+               <TouchableOpacity style={styles.acceptButton} onPress={() => {
+                   newExpense.members.push(new member())
+                   setRefresh(!refresh);
+                }}><Text style={styles.acceptButtonText}>+</Text></TouchableOpacity>
+            </View>
+
             <View style={styles.inputDynamicList}>
                 <Text style={styles.inputDynamicListTitle}>Spenders</Text>
                 <FlatList
@@ -158,7 +191,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                     newExpense.calculateTotal();
                     newExpense.saveSingleExpense().then(() => {
                         singleExpense.allSingleExpenses.push(newExpense);
-                        navigation.navigate(pages.SingleExpensesDetails, {singleExpense: newExpense});
+                        navigation.navigate(pages.SingleExpenseOverview, {singleExpense: newExpense});
                     }).catch(console.error);
                 } else {
                     Toast.show("Expense is not valid", Toast.LONG);

@@ -2,11 +2,15 @@ import * as React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { CurrentTheme } from "../styles/drawerTheme.ts";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { palette } from "../styles/colors.ts";
+
+import pages from "../types/pages.ts";
 
 import TripList from "./TripList.tsx";
 import TripOverview from "./TripOverview.tsx";
 import TripCreate from "./TripCreate.tsx";
-import pages from "../types/pages.ts";
 import TripEdit from "./TripEdit.tsx";
 import TripDetails from "./TripDetails.tsx";
 import TripMembers from "./TripMembers.tsx";
@@ -24,12 +28,12 @@ import TripLogsCreate from "./TripLogsCreate.tsx";
 import TripLogsEdit from "./TripLogsEdit.tsx";
 import TripLogsDetails from "./TripLogsDetails.tsx";
 import TripExpensesCustomList from "./TripExpensesCustomList.tsx";
-import { CurrentTheme } from "../styles/drawerTheme.ts";
-import {GestureHandlerRootView} from "react-native-gesture-handler";
-import {View} from "react-native";
-import {palette} from "../styles/colors.ts";
+
 import SingleExpenseList from "./SingleExpenseList.tsx";
 import SingleExpenseCreate from "./SingleExpenseCreate.tsx";
+import SingleExpenseOverview from "./SingleExpenseOverview.tsx";
+import SingleExpensesEdit from "./SingleExpensesEdit.tsx";
+import SingleExpensesSettle from "./SingleExpensesSettle.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -67,8 +71,9 @@ const SingleExpensesStack = () => {
     return <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={pages.SingleExpensesList} component={SingleExpenseList} options={{title: 'Single Expenses'}}/>
         <Stack.Screen name={pages.SingleExpensesCreate} component={SingleExpenseCreate} options={{title: 'Single Expenses Create'}}/>
-        <Stack.Screen name={pages.SingleExpensesDetails} component={SingleExpenseList} options={{title: 'Single Expenses Details'}}/>
-        <Stack.Screen name={pages.SingleExpensesEdit} component={SingleExpenseList} options={{title: 'Single Expenses Edit'}}/>
+        <Stack.Screen name={pages.SingleExpenseOverview} component={SingleExpenseOverview} options={{title: 'Single Expenses Details'}}/>
+        <Stack.Screen name={pages.SingleExpensesEdit} component={SingleExpensesEdit} options={{title: 'Single Expenses Edit'}}/>
+        <Stack.Screen name={pages.SingleExpensesSettle} component={SingleExpensesSettle} options={{title: 'Single Expenses Sett;e'}}/>
     </Stack.Navigator>
 }
 
