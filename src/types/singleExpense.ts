@@ -3,6 +3,7 @@ import member from "./member.ts";
 import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import {logger} from "../helpers/logger.ts";
 import memberAmount from "./memberAmount.ts";
+import {sin} from "react-native-ui-datepicker/lib/typescript/src/components/TimePicker/AnimatedMath";
 
 export class singleExpense {
 
@@ -78,25 +79,7 @@ export class singleExpense {
                         readFile(item.path).then(result => {
                             logger.log(item.path + ":" + result);
                             try {
-                                let data = JSON.parse(result);
-                                let newSingleExpense = new singleExpense();
-                                newSingleExpense.id = data.id;
-                                newSingleExpense.title = data.title;
-                                newSingleExpense.description = data.description;
-                                newSingleExpense.date = new Date(data.date)
-                                newSingleExpense.members = [];
-                                newSingleExpense.payers = data.payers;
-                                newSingleExpense.spenders = data.spenders;
-
-                                data.members.forEach((item: any) => {
-                                    let newMember = new member();
-                                    newMember.id = item.id;
-                                    newMember.name = item.name;
-                                    newSingleExpense.members.push(newMember);
-                                })
-
-                                singleExpense.allSingleExpenses.push(newSingleExpense);
-
+                                singleExpense.allSingleExpenses.push(singleExpense.loadFromString(result));
                                 pending -= 1;
                                 if (pending == 0) onLoad(singleExpense.allSingleExpenses);
                             } catch (err){
@@ -114,6 +97,27 @@ export class singleExpense {
                 })
             })
         });
+    }
+
+    static loadFromString(content: string) : singleExpense{
+        let data = JSON.parse(content);
+        let newSingleExpense = new singleExpense();
+        newSingleExpense.id = data.id;
+        newSingleExpense.title = data.title;
+        newSingleExpense.description = data.description;
+        newSingleExpense.date = new Date(data.date)
+        newSingleExpense.members = [];
+        newSingleExpense.payers = data.payers;
+        newSingleExpense.spenders = data.spenders;
+
+        data.members.forEach((item: any) => {
+            let newMember = new member();
+            newMember.id = item.id;
+            newMember.name = item.name;
+            newSingleExpense.members.push(newMember);
+        })
+
+        return newSingleExpense;
     }
 
     static getTrip(id: string): singleExpense | undefined{

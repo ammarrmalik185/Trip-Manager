@@ -9,12 +9,12 @@ import {useFocusEffect} from "@react-navigation/native";
 import {singleExpense} from "../types/singleExpense.ts";
 import {TripListItem} from "../components/TripListItem.tsx";
 import {SingleExpensesListItem} from "../components/SingleExpenseListItem.tsx";
-import SettlementManager from "../helpers/SettlementManager.ts";
+import settlementCalculator from "../helpers/settlementCalculator.ts";
 import expense from "../types/expense.ts";
 import TripExpenseSettlementListItem from "../components/TripExpenseSettlementListItem.tsx";
 
 export default function SingleExpensesSettle({route, navigation}:{route:any, navigation:any}){
-    let settlementManager = new SettlementManager([route.params.singleExpense.getCalculatedExpense()]);
+    let settlementManager = new settlementManager([route.params.singleExpense.getCalculatedExpense()]);
     console.log(route.params.singleExpense)
     return (
         <View style={styles.main}>

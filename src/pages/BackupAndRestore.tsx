@@ -99,12 +99,15 @@ export default function BackupAndRestore(){
                     pickFile().then((content) => {
                         try {
                             let json = JSON.parse(content || "{}")
-                            trip.allTrips = json.trips;
-                            singleExpense.allSingleExpenses = json.singleExpenses;
 
                             for (const singleTrip of json.trips) {
                                 let newTrip = trip.loadFromString(singleTrip);
                                 newTrip.saveTrip();
+                            }
+
+                            for (const singleExpenseEntry of json.singleExpenses) {
+                                let newTrip = singleExpense.loadFromString(singleExpenseEntry);
+                                newTrip.saveSingleExpense();
                             }
 
                         } catch (err) {

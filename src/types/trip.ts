@@ -75,8 +75,7 @@ export class trip {
                             logger.log(item.path);
                             logger.log(result);
                             try {
-                                let newTrip = trip.loadFromString(result);
-                                trip.allTrips.push(newTrip);
+                                trip.allTrips.push(trip.loadFromString(result));
                                 pending -= 1;
                                 if (pending == 0) onLoad(trip.allTrips);
                             } catch (err){

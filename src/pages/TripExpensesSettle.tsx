@@ -5,12 +5,12 @@ import memberAmount from "../types/memberAmount.ts";
 import offset from "../types/offset.ts";
 import TripExpenseAmountListItem from "../components/TripExpenseAmountListItem.tsx";
 import member from "../types/member.ts";
-import SettlementManager from "../helpers/SettlementManager.ts";
+import settlementCalculator from "../helpers/settlementCalculator.ts";
 import TripExpenseSettlementListItem from "../components/TripExpenseSettlementListItem.tsx";
 
 export default function TripExpensesSettle({navigation, route}: any){
 
-    let settlementManager = new SettlementManager(route.params.trip.expenses.map((exp: expense) => exp.getCalculatedExpense()));
+    let settlementManager = new settlementManager(route.params.trip.expenses.map((exp: expense) => exp.getCalculatedExpense()));
 
     return (
         <View style={styles.main}>
