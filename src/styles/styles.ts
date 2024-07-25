@@ -19,6 +19,19 @@ export default StyleSheet.create({
         marginBottom: 5,
 
     },
+    inputFieldMax: {
+        borderWidth: 1,
+        borderColor: palette.border,
+        height: 40,
+        margin: 12,
+        padding: 10,
+        marginTop: 5,
+        backgroundColor: palette.card,
+        color: palette.text,
+        borderRadius: 10,
+        marginBottom: 5,
+        flex: 1
+    },
     inputFieldMultiLine: {
         borderWidth: 1,
         borderColor: palette.border,
@@ -116,7 +129,8 @@ export default StyleSheet.create({
     },
     horizontalStack:{
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     horizontalStackContained:{
         flexDirection: "row",
@@ -179,8 +193,8 @@ export default StyleSheet.create({
     },
     fab:{
         position: 'absolute',
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
@@ -225,8 +239,36 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
+    fabTopSmall:{
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        backgroundColor: palette.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 95,
+        borderRadius: 30,
+        elevation: 8
+    },
+    fabTopSmall2:{
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        backgroundColor: palette.primary,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 130,
+        borderRadius: 30,
+        elevation: 8
+    },
     fabText:{
         fontSize: 30,
+        color: palette.text,
+    },
+    fabTextSmall:{
+        fontSize: 15,
         color: palette.text,
     },
     acceptButton: {
@@ -238,6 +280,17 @@ export default StyleSheet.create({
         shadowRadius: 4,
         shadowColor: palette.secondary,
         shadowOpacity: 0.25,
+    },
+    acceptButtonMax: {
+        backgroundColor: palette.primary,
+        padding: 10,
+        marginVertical: 8,
+        marginHorizontal: 8,
+        borderRadius: 10,
+        shadowRadius: 4,
+        shadowColor: palette.secondary,
+        shadowOpacity: 0.25,
+        flex: 1
     },
     declineButton:{
         backgroundColor: palette.secondary,
@@ -252,6 +305,15 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
 
+    addButtonInline:{
+        width: 40,
+        height: 40,
+        marginHorizontal: 5,
+        backgroundColor: palette.primary,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center"
+    },
     addButton:{
         width: 40,
         height: 40,

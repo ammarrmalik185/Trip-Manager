@@ -1,4 +1,10 @@
+import SingleExpenseOverview from "../pages/SingleExpenseOverview.tsx";
+
 enum pages {
+
+    // Trip Stack
+
+    TripStack = "TripStack",
 
     TripCreate = 'TripCreate',
     TripEdit = 'TripEdit',
@@ -23,6 +29,17 @@ enum pages {
     TripLogsDetails = 'TripLogsDetails',
     TripLogsCreate = 'TripLogsCreate',
     TripLogsEdit = 'TripLogsEdit',
+
+    // Expense Stack
+
+    SingleExpensesStack = "SingleExpensesStack",
+
+    SingleExpensesList = 'SingleExpensesList',
+    SingleExpensesCreate = 'SingleExpensesCreate',
+    SingleExpenseOverview = 'SingleExpenseOverview',
+    SingleExpensesEdit = 'SingleExpensesEdit',
+    SingleExpensesSettle = 'SingleExpensesSettle'
+
 }
 
 export default pages;

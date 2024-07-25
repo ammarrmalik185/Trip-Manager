@@ -7,6 +7,7 @@ import Toast from 'react-native-simple-toast';
 import expense from "../types/expense.ts";
 
 export default function TripExpenses({route, navigation,}:{route:any, navigation:any}){
+
     return (
         <View style={styles.main}>
 
