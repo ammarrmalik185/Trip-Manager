@@ -144,6 +144,13 @@ export default StyleSheet.create({
     imageItem:{
         flexDirection: "row"
     },
+    appIconMedium:{
+        flexDirection: "row",
+        width: 80,
+        height: 80,
+        marginBottom: 10,
+        alignSelf: "center"
+    },
     rightBox:{
         right: 5,
         width: 70,

@@ -34,6 +34,9 @@ import SingleExpenseCreate from "./SingleExpenseCreate.tsx";
 import SingleExpenseOverview from "./SingleExpenseOverview.tsx";
 import SingleExpensesEdit from "./SingleExpensesEdit.tsx";
 import SingleExpensesSettle from "./SingleExpensesSettle.tsx";
+import CustomDrawer from "../components/CustomDrawer.tsx";
+import Settings from "./Settings.tsx";
+import BackupAndRestore from "./BackupAndRestore.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -81,9 +84,11 @@ function App(): React.JSX.Element {
   return (
       <GestureHandlerRootView>
           <NavigationContainer theme={CurrentTheme}>
-              <Drawer.Navigator screenOptions={{headerTintColor: palette.text}}>
+              <Drawer.Navigator screenOptions={{headerTintColor: palette.text}} drawerContent={props => <CustomDrawer {...props} />}>
                   <Drawer.Screen name={pages.TripStack} component={TripStack} options={{title: 'Trips'}}/>
                   <Drawer.Screen name={pages.SingleExpensesStack} component={SingleExpensesStack} options={{title: 'Single Expenses'}}/>
+                  <Drawer.Screen name={pages.BackupAndRestore} component={BackupAndRestore} options={{title: 'Backup and Restore'}}/>
+                  <Drawer.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>
               </Drawer.Navigator>
           </NavigationContainer>
       </GestureHandlerRootView>

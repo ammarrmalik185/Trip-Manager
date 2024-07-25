@@ -75,51 +75,7 @@ export class trip {
                             logger.log(item.path);
                             logger.log(result);
                             try {
-                                let data = JSON.parse(result);
-                                let newTrip = new trip();
-                                newTrip.id = data.id;
-                                newTrip.title = data.title;
-                                newTrip.description = data.description;
-                                newTrip.destination = data.destination;
-                                newTrip.date = data.date;
-                                newTrip.date.from = new Date(newTrip.date.from)
-                                newTrip.date.to = new Date(newTrip.date.to)
-                                newTrip.members = [];
-                                newTrip.expenses = [];
-                                newTrip.logs = [];
-
-                                data.members.forEach((item: any) => {
-                                    let newMember = new member();
-                                    newMember.id = item.id;
-                                    newMember.name = item.name;
-                                    newTrip.members.push(newMember);
-                                })
-
-                                data.logs.forEach((item: any) => {
-                                    let newLog = new log();
-                                    newLog.id = item.id;
-                                    newLog.date = new Date(item.date);
-                                    newLog.description = item.description;
-                                    newLog.distance_traveled = item.distance_traveled;
-                                    newLog.location = item.location;
-                                    newLog.title = item.title;
-
-                                    newTrip.logs.push(newLog);
-                                })
-
-                                data.expenses.forEach((item: any) => {
-                                    let newExpense = new expense();
-                                    newExpense.id = item.id;
-                                    newExpense.title = item.title;
-                                    newExpense.description = item.description;
-                                    newExpense.amount = item.amount;
-                                    newExpense.category = item.category;
-                                    newExpense.date = new Date(item.date);
-                                    newExpense.payers = item.payers;
-                                    newExpense.spenders = item.spenders;
-
-                                    newTrip.expenses.push(newExpense);
-                                })
+                                let newTrip = trip.loadFromString(result);
                                 trip.allTrips.push(newTrip);
                                 pending -= 1;
                                 if (pending == 0) onLoad(trip.allTrips);
@@ -138,6 +94,56 @@ export class trip {
                 })
             })
         });
+    }
+
+    static loadFromString(content: string) : trip{
+        let data = JSON.parse(content);
+        let newTrip = new trip();
+        newTrip.id = data.id;
+        newTrip.title = data.title;
+        newTrip.description = data.description;
+        newTrip.destination = data.destination;
+        newTrip.date = data.date;
+        newTrip.date.from = new Date(newTrip.date.from)
+        newTrip.date.to = new Date(newTrip.date.to)
+        newTrip.members = [];
+        newTrip.expenses = [];
+        newTrip.logs = [];
+
+        data.members.forEach((item: any) => {
+            let newMember = new member();
+            newMember.id = item.id;
+            newMember.name = item.name;
+            newTrip.members.push(newMember);
+        })
+
+        data.logs.forEach((item: any) => {
+            let newLog = new log();
+            newLog.id = item.id;
+            newLog.date = new Date(item.date);
+            newLog.description = item.description;
+            newLog.distance_traveled = item.distance_traveled;
+            newLog.location = item.location;
+            newLog.title = item.title;
+
+            newTrip.logs.push(newLog);
+        })
+
+        data.expenses.forEach((item: any) => {
+            let newExpense = new expense();
+            newExpense.id = item.id;
+            newExpense.title = item.title;
+            newExpense.description = item.description;
+            newExpense.amount = item.amount;
+            newExpense.category = item.category;
+            newExpense.date = new Date(item.date);
+            newExpense.payers = item.payers;
+            newExpense.spenders = item.spenders;
+
+            newTrip.expenses.push(newExpense);
+        })
+
+        return newTrip;
     }
 
     static getTrip(id: string): trip | undefined{

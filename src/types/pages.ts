@@ -38,7 +38,13 @@ enum pages {
     SingleExpensesCreate = 'SingleExpensesCreate',
     SingleExpenseOverview = 'SingleExpenseOverview',
     SingleExpensesEdit = 'SingleExpensesEdit',
-    SingleExpensesSettle = 'SingleExpensesSettle'
+    SingleExpensesSettle = 'SingleExpensesSettle',
+
+    // Management
+
+    BackupAndRestore = "BackupAndRestore",
+    Settings = 'Settings',
+
 
 }
 
