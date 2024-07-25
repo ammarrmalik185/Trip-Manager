@@ -73,7 +73,7 @@ const SingleExpensesStack = () => {
         <Stack.Screen name={pages.SingleExpensesCreate} component={SingleExpenseCreate} options={{title: 'Single Expenses Create'}}/>
         <Stack.Screen name={pages.SingleExpenseOverview} component={SingleExpenseOverview} options={{title: 'Single Expenses Details'}}/>
         <Stack.Screen name={pages.SingleExpensesEdit} component={SingleExpensesEdit} options={{title: 'Single Expenses Edit'}}/>
-        <Stack.Screen name={pages.SingleExpensesSettle} component={SingleExpensesSettle} options={{title: 'Single Expenses Sett;e'}}/>
+        <Stack.Screen name={pages.SingleExpensesSettle} component={SingleExpensesSettle} options={{title: 'Single Expenses Settle'}}/>
     </Stack.Navigator>
 }
 

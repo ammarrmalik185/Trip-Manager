@@ -72,6 +72,11 @@ function SingleExpenseCreate({route, navigation}:any) {
                                     }}
                                 />
                                 <TouchableOpacity style={styles.subtractButton} onPress={() => {
+
+                                    newExpense.members = newExpense.members.filter(member => member.id != data.item.id);
+                                    newExpense.payers = newExpense.payers.filter(payer => payer.member.id != data.item.id);
+                                    newExpense.spenders = newExpense.spenders.filter(spender => spender.member.id != data.item.id);
+
                                     setRefresh(!refresh);
                                 }}><Text style={styles.acceptButtonText}>-</Text></TouchableOpacity>
                             </View>

@@ -24,14 +24,6 @@ export default function SingleExpenseList({route, navigation}:{route:any, naviga
         });
       }, [setSingleExpenses])
     );
-    // useFocusEffect(() => {
-    //     singleExpense.loadSingleExpenses((data: singleExpense[]) => {
-    //         const sortedExpenses = data.sort((a: singleExpense, b: singleExpense) => {
-    //             return new Date(b.date).getTime() - new Date(a.date).getTime();
-    //         });
-    //         setSingleExpenses(sortedExpenses);
-    //     });
-    // }, [setSingleExpenses]);
 
     return (
         <SafeAreaView style={styles.main}>

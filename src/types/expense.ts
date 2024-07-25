@@ -58,13 +58,11 @@ class expense {
     }
 
     getCalculatedExpense() : calculatedExpense{
-        console.log(this.spenders)
         let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
         let value = {
             payers: this.payers,
             spenders: this.spenders.map((spend: memberAmount) => new memberAmount(spend.member, spend.amount * this.amount / totalWeight))
         }
-        console.log(this.spenders)
         return value;
     }
 

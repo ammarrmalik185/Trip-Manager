@@ -1,8 +1,7 @@
-import expense, {calculatedExpense} from "./expense.ts";
-import log from "./log.ts";
+import {calculatedExpense} from "./expense.ts";
 import member from "./member.ts";
-import { DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile } from "react-native-fs";
-import { logger } from "../helpers/logger.ts";
+import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
+import {logger} from "../helpers/logger.ts";
 import memberAmount from "./memberAmount.ts";
 
 export class singleExpense {
@@ -158,14 +157,11 @@ export class singleExpense {
     }
 
     getCalculatedExpense() : calculatedExpense{
-        console.log(this.spenders)
         let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
-        let value = {
+        return {
             payers: this.payers,
             spenders: this.spenders.map((spend: memberAmount) => new memberAmount(spend.member, spend.amount * this.amount / totalWeight))
-        }
-        console.log(this.spenders)
-        return value;
+        };
     }
 
 }
