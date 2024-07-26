@@ -1,9 +1,9 @@
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import member from "../types/member.ts";
-import { useState } from "react";
+import {useState} from "react";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import { palette } from "../styles/colors.ts";
+import {palette} from "../styles/colors.ts";
 
 export default function TripMembersEdit({route, navigation}: any){
     const [oldMember, setOldMember] = useState<member>(route.params.member);

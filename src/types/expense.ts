@@ -1,4 +1,3 @@
-import member from "./member.ts";
 import memberAmount from "./memberAmount.ts";
 
 class expense {
@@ -58,6 +57,7 @@ class expense {
     }
 
     getCalculatedExpense() : calculatedExpense{
+        this.calculateTotal();
         let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
         let value = {
             payers: this.payers,

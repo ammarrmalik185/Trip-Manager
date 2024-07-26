@@ -1,7 +1,7 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import settlement from "../types/settlements.ts";
-import { palette } from "../styles/colors.ts";
+import {palette} from "../styles/colors.ts";
 
 export default function TripExpenseSettlementListItem({item}: {item: settlement}){
     return (

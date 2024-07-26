@@ -1,8 +1,8 @@
-import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import { trip } from "../types/trip.ts";
-import { useState } from "react";
+import {trip} from "../types/trip.ts";
+import {useState} from "react";
 
 export default function TripDetails({route, navigation}: {route: any, navigation: any}) {
     const [currentTrip, setCurrentTrip] = useState<trip>(route.params.trip);

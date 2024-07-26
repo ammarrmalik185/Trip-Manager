@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {FlatList, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import {TripListItem} from "../components/TripListItem.tsx";
 import {trip} from "../types/trip.ts";

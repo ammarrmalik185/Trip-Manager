@@ -1,5 +1,3 @@
-import SingleExpenseOverview from "../pages/SingleExpenseOverview.tsx";
-
 enum pages {
 
     // Trip Stack

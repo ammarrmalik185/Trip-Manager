@@ -1,21 +1,14 @@
-import {FlatList, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {FlatList, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import React, {useState} from "react";
-import {TripLogListItem} from "../components/TripLogListItem.tsx";
-import log from "../types/log.ts";
-import {trip} from "../types/trip.ts";
-import {useFocusEffect} from "@react-navigation/native";
 import {singleExpense} from "../types/singleExpense.ts";
-import {TripListItem} from "../components/TripListItem.tsx";
-import {SingleExpensesListItem} from "../components/SingleExpenseListItem.tsx";
 import {palette} from "../styles/colors.ts";
 import {SelectList} from "react-native-dropdown-select-list";
 import {expenseTypes} from "../types/expensetypes.ts";
 import DatePicker from "../components/DatePicker.tsx";
 import member from "../types/member.ts";
 import Toast from "react-native-simple-toast";
-import expense from "../types/expense.ts";
 
 export default function SingleExpensesEdit({route, navigation}:{route:any, navigation:any}){
 

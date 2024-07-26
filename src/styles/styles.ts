@@ -1,6 +1,5 @@
 import {StyleSheet} from "react-native";
-import * as url from "node:url";
-import { palette } from "./colors.ts";
+import {palette} from "./colors.ts";
 
 export default StyleSheet.create({
 

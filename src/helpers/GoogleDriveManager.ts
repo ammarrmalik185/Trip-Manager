@@ -1,8 +1,7 @@
 // GoogleDriveManager.js
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { GoogleDriveAPI } from 'react-native-google-drive-api-wrapper';
-import { readFile, writeFile } from "react-native-fs";
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {GoogleDriveAPI} from 'react-native-google-drive-api-wrapper';
+import {readFile, writeFile} from "react-native-fs";
 
 GoogleSignin.configure({
     webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
@@ -10,6 +9,9 @@ GoogleSignin.configure({
 });
 
 class GoogleDriveManager {
+
+    driveApi: GoogleDriveAPI;
+
     constructor() {
         this.driveApi = new GoogleDriveAPI({
             clientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com', // From Google Cloud Console

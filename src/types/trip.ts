@@ -1,8 +1,8 @@
 import expense from "./expense.ts";
 import log from "./log.ts";
 import member from "./member.ts";
-import { DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile } from "react-native-fs";
-import { logger } from "../helpers/logger.ts";
+import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
+import {Logger} from "../helpers/Logger.ts";
 
 export class trip {
 
@@ -42,7 +42,7 @@ export class trip {
             logs: this.logs
         });
 
-        logger.log("Saving trip: " + thisdata)
+        Logger.log("Saving trip: " + thisdata)
 
         return new Promise<void>((resolve, reject) => {
             writeFile(path, thisdata, 'utf8').then((success) => {
@@ -72,8 +72,8 @@ export class trip {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;
                         readFile(item.path).then(result => {
-                            logger.log(item.path);
-                            logger.log(result);
+                            Logger.log(item.path);
+                            Logger.log(result);
                             try {
                                 trip.allTrips.push(trip.loadFromString(result));
                                 pending -= 1;
@@ -81,13 +81,13 @@ export class trip {
                             } catch (err){
                                 pending -= 1;
                                 if (pending == 0) onLoad(trip.allTrips);
-                                logger.error(err)
+                                Logger.error(err)
                             }
 
                         }).catch((err) => {
                             pending -= 1;
                             if (pending == 0) onLoad(trip.allTrips);
-                            logger.error(err)
+                            Logger.error(err)
                         })
                     }
                 })
@@ -98,6 +98,7 @@ export class trip {
     static loadFromString(content: string) : trip{
         let data = JSON.parse(content);
         let newTrip = new trip();
+
         newTrip.id = data.id;
         newTrip.title = data.title;
         newTrip.description = data.description;

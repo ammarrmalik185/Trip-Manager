@@ -1,10 +1,10 @@
 import memberAmount from "../types/memberAmount.ts";
 import member from "../types/member.ts";
 import settlement from "../types/settlements.ts"
-import { calculatedExpense } from "../types/expense.ts";
+import {calculatedExpense} from "../types/expense.ts";
 import offset from "../types/offset.ts";
 
-export default class settlementCalculator {
+export default class SettlementCalculator {
     expenses: calculatedExpense[];
 
     debtors: memberAmount[];

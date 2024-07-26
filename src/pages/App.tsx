@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { CurrentTheme } from "../styles/drawerTheme.ts";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { palette } from "../styles/colors.ts";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {CurrentTheme} from "../styles/drawerTheme.ts";
+import {GestureHandlerRootView} from "react-native-gesture-handler";
+import {palette} from "../styles/colors.ts";
 
 import pages from "../types/pages.ts";
 

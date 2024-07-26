@@ -2,18 +2,15 @@ import {FlatList, ScrollView, Text, View} from "react-native";
 import expense from "../types/expense.ts";
 import styles from "../styles/styles.ts";
 import memberAmount from "../types/memberAmount.ts";
-import offset from "../types/offset.ts";
 import TripExpenseAmountListItem from "../components/TripExpenseAmountListItem.tsx";
 import member from "../types/member.ts";
-import settlementCalculator from "../helpers/settlementCalculator.ts";
-import TripExpenseSettlementListItem from "../components/TripExpenseSettlementListItem.tsx";
+import SettlementCalculator from "../helpers/settlementCalculator.ts";
 import {expenseTypes} from "../types/expensetypes.ts";
 import Pages from "../types/pages.ts";
-import {trip} from "../types/trip.ts";
 
 export default function TripExpensesComputed({navigation, route}: any){
 
-    let settlementManager = new settlementManager(route.params.trip.expenses.map((exp: expense) => exp.getCalculatedExpense()));
+    let settlementCalculator = new SettlementCalculator(route.params.trip.expenses.map((exp: expense) => exp.getCalculatedExpense()));
 
     return (
         <ScrollView style={styles.main}>
@@ -53,7 +50,7 @@ export default function TripExpensesComputed({navigation, route}: any){
                 <Text style={styles.subTitle}>Offsets</Text>
                 <FlatList
                     style={styles.flatList}
-                    data={settlementManager.offsets}
+                    data={settlementCalculator.offsets}
                     renderItem={({item}) => <TripExpenseAmountListItem item={item} onClick={() => {
                         navigation.navigate(Pages.TripExpensesCustomList, {trip: route.params.trip, customList:route.params.trip.expenses.filter((exp: expense) => exp.payers.find(p => p.member.id == item.member.id) || exp.getCalculatedExpense().spenders.find(p => p.member.id == item.member.id))})
                     }}/>}

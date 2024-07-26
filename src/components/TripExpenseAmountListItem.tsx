@@ -1,6 +1,5 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import offset from "../types/offset.ts";
 import memberAmount from "../types/memberAmount.ts";
 
 export default function TripExpenseAmountListItem({item, onClick}: {item: memberAmount, onClick: any}){

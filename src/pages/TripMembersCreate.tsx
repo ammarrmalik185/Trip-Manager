@@ -1,9 +1,8 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import { useState } from "react";
+import {useState} from "react";
 import member from "../types/member.ts";
-import { trip } from "../types/trip.ts";
-import { palette } from "../styles/colors.ts";
+import {palette} from "../styles/colors.ts";
 
 export default function TripMembersCreate({navigation, route}:any) {
     const [newMember, setMember] = useState<member>(new member());

@@ -1,8 +1,7 @@
-import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {Image, SafeAreaView, Text, View} from "react-native";
 import styles from "../styles/styles.ts";
 import React from "react";
-import {DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-navigation/drawer";
-import {palette} from "../styles/colors.ts";
+import {DrawerContentScrollView, DrawerItemList} from "@react-navigation/drawer";
 
 export default function CustomDrawer(props:any) {
     return (

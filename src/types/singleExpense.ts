@@ -1,9 +1,8 @@
 import {calculatedExpense} from "./expense.ts";
 import member from "./member.ts";
 import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
-import {logger} from "../helpers/logger.ts";
+import {Logger} from "../helpers/Logger.ts";
 import memberAmount from "./memberAmount.ts";
-import {sin} from "react-native-ui-datepicker/lib/typescript/src/components/TimePicker/AnimatedMath";
 
 export class singleExpense {
 
@@ -47,7 +46,7 @@ export class singleExpense {
             members: this.members,
         });
 
-        logger.log("Saving Expense: " + thisdata)
+        Logger.log("Saving Expense: " + thisdata)
 
         return new Promise<void>((resolve, reject) => {
             writeFile(path, thisdata, 'utf8').then((success) => {
@@ -77,7 +76,7 @@ export class singleExpense {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;
                         readFile(item.path).then(result => {
-                            logger.log(item.path + ":" + result);
+                            Logger.log(item.path + ":" + result);
                             try {
                                 singleExpense.allSingleExpenses.push(singleExpense.loadFromString(result));
                                 pending -= 1;
@@ -85,13 +84,13 @@ export class singleExpense {
                             } catch (err){
                                 pending -= 1;
                                 if (pending == 0) onLoad(singleExpense.allSingleExpenses);
-                                logger.error(err)
+                                Logger.error(err)
                             }
 
                         }).catch((err) => {
                             pending -= 1;
                             if (pending == 0) onLoad(singleExpense.allSingleExpenses);
-                            logger.error(err)
+                            Logger.error(err)
                         })
                     }
                 })
@@ -161,6 +160,7 @@ export class singleExpense {
     }
 
     getCalculatedExpense() : calculatedExpense{
+        this.calculateTotal();
         let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
         return {
             payers: this.payers,

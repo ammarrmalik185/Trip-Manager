@@ -1,9 +1,9 @@
-import {Button, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import React, {useState} from "react";
 import {trip} from "../types/trip.ts";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import { palette } from "../styles/colors.ts";
+import {palette} from "../styles/colors.ts";
 import DatePicker from "../components/DatePicker.tsx";
 
 function TripCreate({route, navigation}:any) {

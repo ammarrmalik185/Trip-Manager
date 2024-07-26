@@ -1,9 +1,7 @@
-import {FlatList, Text, TouchableOpacity, View} from "react-native";
+import {FlatList, View} from "react-native";
 import {TripExpenseListItem} from "../components/TripExpenseListItem.tsx";
 import React from "react";
 import styles from "../styles/styles.ts";
-import pages from "../types/pages.ts";
-import Toast from 'react-native-simple-toast';
 import expense from "../types/expense.ts";
 
 export default function TripExpensesCustomList({route, navigation}:{route:any, navigation:any}){

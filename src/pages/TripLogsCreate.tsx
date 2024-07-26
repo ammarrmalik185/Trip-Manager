@@ -1,9 +1,9 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import { useState } from "react";
+import {useState} from "react";
 import log from "../types/log.ts";
 import pages from "../types/pages.ts";
-import { palette } from "../styles/colors.ts";
+import {palette} from "../styles/colors.ts";
 import DatePicker from "../components/DatePicker.tsx";
 
 export default function TripLogsCreate({navigation, route}:any) {

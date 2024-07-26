@@ -2,7 +2,6 @@ import styles from "../styles/styles.ts";
 import {Modal, Text, TouchableOpacity, View} from "react-native";
 import DateTimePicker, {DateType} from "react-native-ui-datepicker";
 import {palette} from "../styles/colors.ts";
-import {logger} from "../helpers/logger.ts";
 import {useState} from "react";
 
 export default function DatePicker({value, onValueChanged, title="Date and Time"} : {value: Date, onValueChanged: (date: Date) => void, title?: string}){

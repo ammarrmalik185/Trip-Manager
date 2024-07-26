@@ -1,46 +1,42 @@
-import {Alert, Linking, ShareContent, Text, TouchableOpacity, View} from "react-native";
-import styles from "../styles/styles.ts";
-import {logger} from "../helpers/logger.ts";
+import {Text, TouchableOpacity, View} from "react-native";
+import {Logger} from "../helpers/Logger.ts";
 import {trip} from "../types/trip.ts";
 import {singleExpense} from "../types/singleExpense.ts";
-import Toast from "react-native-simple-toast";
 import {DocumentDirectoryPath, readFile, writeFile} from "react-native-fs";
+import styles from "../styles/styles.ts";
+import Toast from "react-native-simple-toast";
 import Share from 'react-native-share';
 import DocumentPicker from 'react-native-document-picker';
-import {sin} from "react-native-ui-datepicker/lib/typescript/src/components/TimePicker/AnimatedMath";
 
-const GenerateDownloadFileScreen = (content: string) => {
-    const generateFile = async () => {
-        const fileName = 'trip-manager-backup.json';
-        const filePath = `${DocumentDirectoryPath}/${fileName}`;
+const generateFile = async (content: string) => {
+    const fileName = 'trip-manager-backup.json';
+    const filePath = `${DocumentDirectoryPath}/${fileName}`;
 
-        let generated = false;
+    let generated = false;
 
+    try {
+        await writeFile(filePath, content, 'utf8');
+        generated = true;
+    } catch (error) {
+        console.error(error)
+        Logger.error(error);
+        Toast.show('Failed to generate backup file', Toast.SHORT);
+    }
+
+    if (generated){
         try {
-            await writeFile(filePath, content, 'utf8');
-            generated = true;
-        } catch (error) {
-            console.error(error)
-            logger.error(error);
-            Toast.show('Failed to generate backup file', Toast.SHORT);
+            const shareOptions = {
+                title: 'Download your backup',
+                url: `file://${filePath}`,
+                type: 'application/json',
+            };
+            await Share.open(shareOptions);
+        } catch (error){
+            Toast.show('Saving Failed', Toast.SHORT);
         }
+    }
 
-        if (generated){
-            try {
-                const shareOptions = {
-                    title: 'Download your backup',
-                    url: `file://${filePath}`,
-                    type: 'application/json',
-                };
-                await Share.open(shareOptions);
-            } catch (error){
-                Toast.show('Saving Failed', Toast.SHORT);
-            }
-        }
-
-    };
-    generateFile();
-}
+};
 
 
 const pickFile = async () => {
@@ -49,21 +45,13 @@ const pickFile = async () => {
             type: [DocumentPicker.types.json],
         });
         const filePath = res[0].uri;
-        const fileName = res[0].name;
-
-        // Read the file content
-        const content = await readFile(filePath, 'utf8');
-        console.log(content)
-        return content;
-
-
-
+        return await readFile(filePath, 'utf8');
     } catch (err) {
         if (DocumentPicker.isCancel(err)) {
-            console.log('User cancelled the picker');
+            Logger.log('User cancelled the picker');
         } else {
-            console.error(err);
-            Alert.alert('Error', 'Failed to pick file');
+            Logger.error(err);
+            Toast.show('Failed to pick file', Toast.SHORT);
         }
     }
 }
@@ -76,19 +64,19 @@ export default function BackupAndRestore(){
             {/*<TouchableOpacity onPress={() => settings.mode = 2} style={styles.acceptButton}><Text style={styles.acceptButtonText}>Dark Mode</Text></TouchableOpacity>*/}
             <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                    logger.log("Create Local Backup")
+                    Logger.log("Create Local Backup")
                     trip.loadTrips((trips:trip[]) => {
                         singleExpense.loadSingleExpenses((singleExpenses:singleExpense[]) => {
-                            logger.log("Loaded trips and single expenses")
-                            logger.log("Trips: " + JSON.stringify(trips))
-                            logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
+                            Logger.log("Loaded trips and single expenses")
+                            Logger.log("Trips: " + JSON.stringify(trips))
+                            Logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
 
                             let backup = {
                                 trips: trips,
                                 singleExpenses: singleExpenses
                             }
 
-                            GenerateDownloadFileScreen(JSON.stringify(backup))
+                            generateFile(JSON.stringify(backup))
 
                         })
                     })
@@ -101,17 +89,26 @@ export default function BackupAndRestore(){
                             let json = JSON.parse(content || "{}")
 
                             for (const singleTrip of json.trips) {
-                                let newTrip = trip.loadFromString(singleTrip);
-                                newTrip.saveTrip();
+                                try {
+                                    let newTrip = trip.loadFromString(JSON.stringify(singleTrip));
+                                    newTrip.saveTrip();
+                                }catch (err) {
+                                    Logger.error(err);
+                                }
                             }
 
                             for (const singleExpenseEntry of json.singleExpenses) {
-                                let newTrip = singleExpense.loadFromString(singleExpenseEntry);
-                                newTrip.saveSingleExpense();
+                                try {
+                                    let newTrip = singleExpense.loadFromString(JSON.stringify(singleExpenseEntry));
+                                    newTrip.saveSingleExpense();
+                                }catch (err) {
+                                    Logger.error(err);
+                                }
+
                             }
 
                         } catch (err) {
-                            logger.error(err);
+                            Logger.error(err);
                             Toast.show("Invalid file format", Toast.SHORT);
                         }
                     });

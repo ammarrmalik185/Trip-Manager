@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
+import {Text, TouchableOpacity} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import {trip} from "../types/trip.ts";

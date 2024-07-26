@@ -1,9 +1,9 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import { trip } from "../types/trip.ts";
+import {trip} from "../types/trip.ts";
 import pages from "../types/pages.ts";
-import React, { useState } from "react";
-import { palette } from "../styles/colors.ts";
+import React, {useState} from "react";
+import {palette} from "../styles/colors.ts";
 import DatePicker from "../components/DatePicker.tsx";
 
 export default function TripEdit({route, navigation} : any) {

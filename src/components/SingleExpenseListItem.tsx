@@ -1,7 +1,6 @@
-import { Button, Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import {trip} from "../types/trip.ts";
 import {singleExpense} from "../types/singleExpense.ts";
 
 export function SingleExpensesListItem({item, navigation}: {item: singleExpense, navigation: any}){

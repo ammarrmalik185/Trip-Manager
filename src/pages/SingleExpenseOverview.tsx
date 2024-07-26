@@ -1,14 +1,7 @@
-import {FlatList, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import React from "react";
-import {TripLogListItem} from "../components/TripLogListItem.tsx";
-import log from "../types/log.ts";
-import {trip} from "../types/trip.ts";
-import {useFocusEffect} from "@react-navigation/native";
-import {singleExpense} from "../types/singleExpense.ts";
-import {TripListItem} from "../components/TripListItem.tsx";
-import {SingleExpensesListItem} from "../components/SingleExpenseListItem.tsx";
 import memberAmount from "../types/memberAmount.ts";
 
 export default function SingleExpenseOverview({route, navigation}:{route:any, navigation:any}){

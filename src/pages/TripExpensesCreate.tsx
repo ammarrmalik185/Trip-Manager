@@ -1,17 +1,14 @@
-import { FlatList, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {FlatList, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import { useState } from "react";
+import {useState} from "react";
 import expense from "../types/expense.ts";
 import member from "../types/member.ts";
 import pages from "../types/pages.ts";
-import { SelectList } from "react-native-dropdown-select-list";
+import {SelectList} from "react-native-dropdown-select-list";
 import Toast from 'react-native-simple-toast';
-import { palette } from "../styles/colors.ts";
-import { logger } from "../helpers/logger.ts";
-import { expenseTypes } from "../types/expensetypes.ts";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {palette} from "../styles/colors.ts";
+import {expenseTypes} from "../types/expensetypes.ts";
 import DatePicker from "../components/DatePicker.tsx";
-import memberAmount from "../types/memberAmount.ts";
 
 export default function TripExpensesCreate({navigation, route}: any){
     const [newExpense, setNewExpense] = useState(new expense());
