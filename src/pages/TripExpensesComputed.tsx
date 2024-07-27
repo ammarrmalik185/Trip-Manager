@@ -4,7 +4,7 @@ import styles from "../styles/styles.ts";
 import memberAmount from "../types/memberAmount.ts";
 import TripExpenseAmountListItem from "../components/TripExpenseAmountListItem.tsx";
 import member from "../types/member.ts";
-import SettlementCalculator from "../helpers/settlementCalculator.ts";
+import SettlementCalculator from "../helpers/SettlementCalculator.ts";
 import {expenseTypes} from "../types/expensetypes.ts";
 import Pages from "../types/pages.ts";
 

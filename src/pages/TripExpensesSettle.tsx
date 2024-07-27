@@ -1,8 +1,8 @@
 import {FlatList, View} from "react-native";
 import expense from "../types/expense.ts";
 import styles from "../styles/styles.ts";
-import SettlementCalculator from "../helpers/settlementCalculator.ts";
 import TripExpenseSettlementListItem from "../components/TripExpenseSettlementListItem.tsx";
+import SettlementCalculator from "../helpers/SettlementCalculator.ts";
 
 export default function TripExpensesSettle({navigation, route}: any){
 
