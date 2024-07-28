@@ -68,6 +68,7 @@ export class trip {
         trip.createFolder().then(() => {
             readDir(DocumentDirectoryPath + "/trips").then(result => {
                 let pending = 0;
+                if (result.length <= 0) onLoad([])
                 result.forEach(item => {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;

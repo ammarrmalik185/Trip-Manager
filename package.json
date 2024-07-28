@@ -1,6 +1,6 @@
 {
   "name": "react_app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -20,10 +20,11 @@
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
-    "dotenv": "^16.4.5",
     "react": "18.2.0",
     "react-native": "0.73.1",
+    "react-native-config": "^1.5.2",
     "react-native-document-picker": "^9.3.0",
+    "react-native-dotenv": "^3.4.11",
     "react-native-dropdown-select-list": "^2.0.5",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.17.1",
