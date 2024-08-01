@@ -11,6 +11,8 @@ import FirebaseManager from "../helpers/FirebaseManager.ts";
 import {useEffect, useState} from "react";
 import {palette} from "../styles/colors.ts";
 
+const onlineEnabled = false;
+
 const generateFile = async (content: string) => {
     const fileName = 'trip-manager-backup.json';
     const filePath = `${DocumentDirectoryPath}/${fileName}`;
@@ -111,7 +113,7 @@ export default function BackupAndRestore(){
         <View style={styles.main}>
             <View style={styles.container}>
 
-                <View style={styles.item}>
+                {onlineEnabled && <View style={styles.item}>
                     <Text style={styles.acceptButtonText}>Online Backup</Text>
                     {FirebaseManager.auth.currentUser && <View>
                         <Text style={styles.dateDisplay}>Current Status: <Text style={{color: palette.primary}}>Logged In</Text></Text>
@@ -164,7 +166,7 @@ export default function BackupAndRestore(){
                                 <Text style={styles.acceptButtonText}>Login</Text>
                             </TouchableOpacity>
                    </View>}
-                </View>
+                </View>}
 
                 <View style={styles.item}>
                     <Text style={styles.acceptButtonText}>Local Backup</Text>

@@ -89,7 +89,7 @@ function App(): React.JSX.Element {
                   <Drawer.Screen name={pages.TripStack} component={TripStack} options={{title: 'Trips'}}/>
                   <Drawer.Screen name={pages.SingleExpensesStack} component={SingleExpensesStack} options={{title: 'Single Expenses'}}/>
                   <Drawer.Screen name={pages.BackupAndRestore} component={BackupAndRestore} options={{title: 'Backup and Restore'}}/>
-                  <Drawer.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>
+                  {/*<Drawer.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>*/}
               </Drawer.Navigator>
           </NavigationContainer>
       </GestureHandlerRootView>

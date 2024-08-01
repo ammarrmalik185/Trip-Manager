@@ -13,7 +13,12 @@
           "package_name": "com.react_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "53438958900-qnbvdmu7mro8nvoil0sbjdak9771i5cg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB6r-f3TpmNzjpnJGVSYwDq3NBYuSeCuPE"
@@ -21,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53438958900-24a0qmhnevia9g4vufr1jih47if0dhit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

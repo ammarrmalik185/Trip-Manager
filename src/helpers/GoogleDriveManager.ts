@@ -14,7 +14,7 @@ class GoogleDriveManager {
 
     constructor() {
         this.driveApi = new GoogleDriveAPI({
-            clientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com', // From Google Cloud Console
+            clientId: process.env.GOOGLE_SIGNIN_WEBCLIENT_ID, // From Google Cloud Console
             scope: 'https://www.googleapis.com/auth/drive.file',
         });
     }

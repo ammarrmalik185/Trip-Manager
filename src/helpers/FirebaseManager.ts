@@ -30,17 +30,18 @@ class FirebaseManager {
   storage;
 
   constructor() {
+    this.initGoogleSignin();
     this.basePath = 'userData';
     this.database = database();
     this.auth = auth();
     this.storage = storage();
-    this.initGoogleSignin();
+
   }
 
   initGoogleSignin() {
-    Logger.log("Setting up google login: " + process.env.GOOGLE_SIGNIN_WEBCLIENT_ID)
+    Logger.log("Setting up google login: " + process.env.GOOGLE_SIGNIN_WEBCLIENT_ID!)
     GoogleSignin.configure({
-      webClientId: process.env.GOOGLE_SIGNIN_WEBCLIENT_ID, // Replace with your web client ID from Firebase console
+      webClientId: process.env.GOOGLE_SIGNIN_WEBCLIENT_ID!,
     });
   }
 
@@ -52,7 +53,7 @@ class FirebaseManager {
         Logger.log("2")
         const googleCredential = auth.GoogleAuthProvider.credential(result.idToken);
         Logger.log("3")
-        await auth().signInWithCredential(googleCredential);
+        await this.auth.signInWithCredential(googleCredential);
         Logger.log('User signed in with Google');
       } catch (error: any) {
         Logger.error('Firebase Google Sign-In Error: ' + error.message);
