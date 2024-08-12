@@ -6,7 +6,7 @@ enum logMode{
     file
 }
 
-let currentLogModes : logMode[] = [logMode.file, logMode.console];
+let currentLogModes : logMode[] = [logMode.file];
 
 export let Logger = {
     log: (txt: string) => {

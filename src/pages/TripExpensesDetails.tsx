@@ -32,10 +32,11 @@ export default function TripExpensesDetails({route, navigation}: any){
         </View>
 
         <Text style={styles.expenseTitle}>{route.params.expense.title}</Text>
+
         <Text style={styles.subTitle}>{route.params.expense.category}</Text>
         <Text style={styles.dateDisplay}>Rs {route.params.expense.amount}</Text>
 
-        <Text style={styles.itemText}>{route.params.expense.description}</Text>
+        <Text style={styles.expenseContainerDescription}>{route.params.expense.description}</Text>
 
 
 

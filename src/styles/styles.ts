@@ -600,6 +600,14 @@ export default StyleSheet.create({
         textAlign: "center",
         margin: 5,
     },
+    expenseContainerDescription:{
+        color: palette.text,
+        fontSize: 15,
+        textAlign: "center",
+        marginHorizontal: 15,
+        marginVertical: 5
+
+    },
     expenseGreenContainerItem:{
         flexDirection: "row",
         alignItems: "center",
@@ -632,6 +640,54 @@ export default StyleSheet.create({
         color: palette.text,
         fontSize: 15,
         margin: 5,
+    },
+    settlementItem:{
+        paddingVertical: 10,
+        backgroundColor: palette.card,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderRadius: 10,
+    },
+    settlementCenterContainer:{
+        width: "40%"
+    },
+    settlementIconGroup:{
+       alignItems: "center",
+        justifyContent: "center",
+        width: "30%",
+    },
+    settlementUserImage:{
+        width: 60,
+        height: 60,
+        borderRadius: 100
+    },
+    settlementUserText:{
+        marginTop: 5,
+        fontSize: 12,
+        color: palette.text,
+        textAlign: "center"
+    },
+    settlementAmount:{
+        fontSize: 30,
+        fontWeight: "bold",
+        color: palette.text,
+        textAlign: "center"
+    },
+    settlementArrowImage:{
+        width: 90,
+        height: 30,
+        margin: 10,
+        resizeMode: "stretch",
+        alignSelf: "center"
+    },
+    settlementSendNotification:{
+        color: palette.text,
+        opacity: 0.8,
+        textDecorationStyle: "solid",
+        textDecorationLine: "underline",
+        textDecorationColor: palette.text,
+        textAlign: "center",
+        fontSize: 12
     }
 
 })

@@ -21,7 +21,7 @@ export default function TripLogsDetails({route, navigation}:any) {
             })} />
 
             <Text style={styles.title}>{route.params.log.title}</Text>
-            <Text style={styles.memberSubTitle}>{route.params.log.description}</Text>
+            <Text style={styles.expenseContainerDescription}>{route.params.log.description}</Text>
 
             <View style={styles.bottom}>
 
@@ -64,7 +64,7 @@ export default function TripLogsDetails({route, navigation}:any) {
                             source={require('../images/uiImages/settings.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Edit</Text>
+                        <Text style={styles.iconText}>Edit Log</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.iconTextGroup}>
@@ -72,7 +72,7 @@ export default function TripLogsDetails({route, navigation}:any) {
                             source={require('../images/uiImages/delete.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Delete</Text>
+                        <Text style={styles.iconText}>Delete Log</Text>
                     </TouchableOpacity>
                 </View>
             </View>

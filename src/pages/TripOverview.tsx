@@ -49,7 +49,8 @@ function TripOverview({route, navigation}:any) {
                         source={require('../images/uiImages/calender.png')}
                         style={styles.icon}
                     />
-                    <Text style={styles.iconText}>{route.params.trip.date.from.toLocaleDateString() || "No date"}</Text>
+                    <Text style={styles.iconText}>{route.params.trip.date.from.toLocaleTimeString() || "No date"}</Text>
+                    <Text style={styles.iconText}>{route.params.trip.date.from.toLocaleDateString() || ""}</Text>
                 </View>
             </View>
 
@@ -62,7 +63,7 @@ function TripOverview({route, navigation}:any) {
                             source={require('../images/uiImages/settings.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Edit</Text>
+                        <Text style={styles.iconText}>Edit Trip</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.iconTextGroup}>
@@ -70,7 +71,7 @@ function TripOverview({route, navigation}:any) {
                             source={require('../images/uiImages/delete.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Delete</Text>
+                        <Text style={styles.iconText}>Delete Trip</Text>
                     </TouchableOpacity>
                 </View>
 
