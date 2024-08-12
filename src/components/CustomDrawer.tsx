@@ -4,6 +4,7 @@ import React from "react";
 import {DrawerContentScrollView, DrawerItemList} from "@react-navigation/drawer";
 
 export default function CustomDrawer(props:any) {
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <View style={styles.item}>

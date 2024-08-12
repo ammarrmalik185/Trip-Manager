@@ -1,5 +1,6 @@
 import {StyleSheet} from "react-native";
 import {palette} from "./colors.ts";
+import extractGradient from "react-native-svg/lib/typescript/lib/extract/extractGradient";
 
 export default StyleSheet.create({
 
@@ -128,7 +129,7 @@ export default StyleSheet.create({
     },
     horizontalStack:{
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "space-evenly",
         alignItems: "center"
     },
     horizontalStackContained:{
@@ -159,10 +160,15 @@ export default StyleSheet.create({
         justifyContent: "center"
     },
     modal:{
+        position: "absolute",
         alignItems: "center",
         justifyContent: "center",
-        flex: 1,
-        backgroundColor: palette.background,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        zIndex: 100
     },
     modalView: {
         margin: 35,
@@ -183,6 +189,8 @@ export default StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+        minHeight: 100,
+        minWidth: 300
     },
 
     numericAssistedField:{
@@ -305,6 +313,17 @@ export default StyleSheet.create({
         marginHorizontal: 8,
         borderRadius: 10,
     },
+    declineButtonMax:{
+        backgroundColor: palette.secondary,
+        padding: 10,
+        marginVertical: 8,
+        marginHorizontal: 8,
+        borderRadius: 10,
+        shadowRadius: 4,
+        shadowColor: palette.secondary,
+        shadowOpacity: 0.25,
+        flex: 1
+    },
     acceptButtonText: {
         fontSize: 20,
         color: palette.text,
@@ -375,10 +394,11 @@ export default StyleSheet.create({
     },
     title: {
         fontSize: 35,
-        margin: 10,
-        marginBottom: 0,
+        margin: 40,
+        marginBottom: 20,
         color: palette.text,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: "bold"
     },
     subTitle:{
         fontSize: 20,
@@ -388,7 +408,9 @@ export default StyleSheet.create({
     },
     description:{
         color: palette.text,
-        maxHeight: 90
+        maxHeight: 90,
+        textAlign: "center",
+        padding: 20,
     },
     date: {
         fontSize: 15,
@@ -409,6 +431,61 @@ export default StyleSheet.create({
         textAlign:"center",
         color: palette.text,
         fontSize: 12
-    }
+    },
 
+
+    // New Styles
+    backgroundImage:{
+        flex: 1,
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        resizeMode: "cover",
+    },
+    gradient:{
+        position: "absolute",
+        height: "100%",
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
+    icon:{
+        width: 40,
+        height: 40,
+    },
+    iconTextGroup:{
+        alignItems: "center",
+        justifyContent: "center",
+        margin: 10
+    },
+    iconText:{
+        color: palette.text,
+        opacity: 0.7,
+        fontSize: 15
+    },
+    neutralButton:{
+        width: "40%",
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: 25,
+        borderRadius: 10,
+        margin: 5,
+    },
+    bottom:{
+        position: "absolute",
+        bottom: 20,
+        width: "100%",
+    },
+    modalText:{
+        color: palette.text,
+        fontSize: 20,
+        padding: 20,
+        paddingHorizontal: 40,
+        textAlign: "center"
+    },
+    modalSubtext:{
+        color: palette.text,
+        fontSize: 15,
+        textAlign: "center",
+        opacity: 0.9
+    }
 })

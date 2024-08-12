@@ -1,9 +1,9 @@
 const darkModeColors = {
-    primary: "#285c5a",     // Bright Teal for highlights and call-to-action buttons
+    primary: "#5c8166",     // Bright Teal for highlights and call-to-action buttons
     secondary: "#b34747",   // Soft Coral for secondary buttons and highlights
-    background: "#121212",  // Very Dark Grey for the main background
-    card: "#1e1e1e",        // Slightly Lighter Grey for card and panel backgrounds
-    text: "#e0e0e0",        // Light Grey for text
+    background: "#1C3043",  // Very Dark Grey for the main background
+    card: "#2C4C8F",        // Slightly Lighter Grey for card and panel backgrounds
+    text: "#ffffff",        // Light Grey for text
     border: "#323232",      // Dark Grey for borders (to provide subtle contrast),
     placeholder: "#e0e0e0"
 };

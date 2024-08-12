@@ -57,6 +57,7 @@ class FirebaseManager {
         Logger.log('User signed in with Google');
       } catch (error: any) {
         Logger.error('Firebase Google Sign-In Error: ' + error.message);
+        Logger.error('Firebase Google Sign-In Error: ' + JSON.stringify(error));
       }
   }
 

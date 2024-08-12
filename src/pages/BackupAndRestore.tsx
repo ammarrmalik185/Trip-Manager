@@ -11,7 +11,7 @@ import FirebaseManager from "../helpers/FirebaseManager.ts";
 import {useEffect, useState} from "react";
 import {palette} from "../styles/colors.ts";
 
-const onlineEnabled = false;
+const onlineEnabled = true;
 
 const generateFile = async (content: string) => {
     const fileName = 'trip-manager-backup.json';
