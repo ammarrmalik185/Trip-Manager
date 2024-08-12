@@ -53,8 +53,8 @@ function getModal(modalData: ModalData){
                     <Text style={styles.modalSubtext}>Selected: {modalData.buttons.filter((_, index) => multipleChoice[index]).join(", ")}</Text>
 
                     <View style={styles.horizontalStack}>
-                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, multipleChoice)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, multipleChoice)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                     </View>
                 </View>
             )
@@ -79,6 +79,8 @@ function getModal(modalData: ModalData){
                     <Text style={styles.modalSubtext}>Please enter "{modalData.confirmationString}" to confirm</Text>
                     <TextInput style={styles.inputField} value={confirmationString} onChangeText={setConfirmationString} />
                     <View style={styles.horizontalStack}>
+
+                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false)}><Text style={styles.acceptButtonText}>No</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.acceptButtonMax} onPress={() => {
                             if (confirmationString !== modalData.confirmationString) {
                                 Toast.show("Confirmation string does not match", Toast.SHORT);
@@ -86,17 +88,16 @@ function getModal(modalData: ModalData){
                             }
                             modalData.callback(true)
                         }}><Text style={styles.acceptButtonText}>Yes</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false)}><Text style={styles.acceptButtonText}>No</Text></TouchableOpacity>
                     </View>
                 </View>
             )
         case ModalType.SoftConfirmation:
             return (
-                <View>
+                <View style={{width: "100%"}}>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <View style={styles.horizontalStack}>
-                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true)}><Text style={styles.acceptButtonText}>Yes</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false)}><Text style={styles.acceptButtonText}>No</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true)}><Text style={styles.acceptButtonText}>Yes</Text></TouchableOpacity>
                     </View>
                 </View>
             )

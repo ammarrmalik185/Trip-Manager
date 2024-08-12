@@ -1,7 +1,7 @@
 import {Image, SafeAreaView, Text, View} from "react-native";
 import styles from "../styles/styles.ts";
 import React from "react";
-import {DrawerContentScrollView, DrawerItemList} from "@react-navigation/drawer";
+import {DrawerContentScrollView, DrawerItem, DrawerItemList} from "@react-navigation/drawer";
 
 export default function CustomDrawer(props:any) {
 
@@ -18,8 +18,6 @@ export default function CustomDrawer(props:any) {
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
             {/*<View style={{*/}
-            {/*    // borderTopWidth: 1,*/}
-            {/*    // borderTopColor: palette.border,*/}
             {/*    paddingVertical: 10,*/}
             {/*    position: 'absolute',*/}
             {/*    bottom: 0,*/}

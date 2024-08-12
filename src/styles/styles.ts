@@ -132,6 +132,11 @@ export default StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center"
     },
+    horizontalStackCentered:{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
     horizontalStackContained:{
         flexDirection: "row",
         justifyContent: "space-between",
@@ -456,12 +461,13 @@ export default StyleSheet.create({
     iconTextGroup:{
         alignItems: "center",
         justifyContent: "center",
-        margin: 10
+        margin: 10,
+        width: 90
     },
     iconText:{
         color: palette.text,
         opacity: 0.7,
-        fontSize: 15
+        fontSize: 12
     },
     neutralButton:{
         width: "40%",
@@ -487,5 +493,145 @@ export default StyleSheet.create({
         fontSize: 15,
         textAlign: "center",
         opacity: 0.9
+    },
+    memberImage:{
+        alignSelf: "center",
+        width: 200,
+        height: 200,
+        borderRadius: 100,
+        margin: 30,
+        resizeMode: "cover",
+    },
+    memberTitle:{
+        color: palette.text,
+        fontSize: 30,
+        textAlign: "center",
+    },
+    memberSubTitle:{
+        color: palette.text,
+        fontSize: 12,
+        opacity: 0.5,
+        textAlign: "center",
+    },
+    memberGreenSide:{
+        padding: 15,
+        width: "40%",
+        alignItems: "center"
+    },
+    memberGreenSideBackground:{
+        backgroundColor: palette.primary,
+        opacity: 0.5,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        ...StyleSheet.absoluteFillObject,
+    },
+    memberNeutralSideBackground:{
+        backgroundColor: palette.card,
+        opacity: 0.5,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        ...StyleSheet.absoluteFillObject,
+    },
+    memberNeutralSide:{
+        alignSelf: "center",
+        padding: 15,
+        width: "50%",
+
+        alignItems: "center"
+    },
+    memberRedSide:{
+        padding: 15,
+        width: "40%",
+        alignItems: "center"
+    },
+    memberRedSideBackground:{
+        backgroundColor: palette.secondary,
+        opacity: 0.5,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        ...StyleSheet.absoluteFillObject,
+    },
+    memberNeutralSideTextGreen:{
+        color: palette.primary,
+        fontSize: 30
+    },
+    memberNeutralSideTextRed:{
+        color: palette.secondary,
+        fontSize: 30
+    },
+    memberGreenSideText:{
+        color: palette.primary,
+        fontSize: 25,
+    },
+    memberRedSideText:{
+        color: palette.secondary,
+        fontSize: 25
+    },
+    expenseTitle:{
+        color: palette.text,
+        fontSize: 30,
+        textAlign: "center",
+        margin: 20,
+
+    },
+    expenseGreenBackground:{
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: palette.primary,
+        opacity: 0.5,
+        borderRadius: 10,
+    },
+    expenseRedBackground:{
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: palette.secondary,
+        opacity: 0.5,
+        borderRadius: 10,
+    },
+    expenseContainer:{
+        padding: 10,
+        margin: 10,
+        borderRadius: 10,
+        width: "90%",
+        alignSelf: "center",
+        height: "45%"
+    },
+    expenseContainerTitle:{
+        color: palette.text,
+        fontSize: 20,
+        textAlign: "center",
+        margin: 5,
+    },
+    expenseGreenContainerItem:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: 3,
+        marginHorizontal: 10,
+        backgroundColor: palette.primary,
+        borderRadius: 5,
+    },
+    expenseRedContainerItem:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: 3,
+        marginHorizontal: 10,
+        backgroundColor: palette.secondary,
+        borderRadius: 5,
+    },
+    expenseContainerItemPrice:{
+        width: "35%",
+        textAlign: "center",
+        backgroundColor: "rgba(32, 32, 32, 0.2)",
+        color: palette.text,
+        fontSize: 15,
+        borderRadius: 5,
+        height:"100%",
+        paddingVertical: 5
+    },
+    expenseContainerItemTitle:{
+        color: palette.text,
+        fontSize: 15,
+        margin: 5,
     }
+
 })

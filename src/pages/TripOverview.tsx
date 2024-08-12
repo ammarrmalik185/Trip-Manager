@@ -11,8 +11,8 @@ function TripOverview({route, navigation}:any) {
     const [modalVisible, setModalVisible] = React.useState(false);
     return (
         <View style={styles.main}>
-            <PopupModal state={modalVisible} modalData={new ModalData(ModalType.HardConfirmation, "Are you sure you want to delete this trip?", (params:any, params2:any) => {
-                if (params){
+            <PopupModal state={modalVisible} modalData={new ModalData(ModalType.HardConfirmation, "Are you sure you want to delete this trip?", (confirm:any) => {
+                if (confirm){
                     route.params.trip.deleteTrip().then(() => {
                         trip.allTrips = trip.allTrips.filter(item => item.id != route.params.trip.id);
                         navigation.navigate(pages.TripList)
