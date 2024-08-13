@@ -15,6 +15,7 @@ export default function TripExpensesDetails({route, navigation}: any){
         <PopupModal state={modalVisible} modalData={new ModalData(ModalType.SoftConfirmation, "Are you sure you want to delete this expense?", (confirm:any) => {
             if (confirm){
                 route.params.trip.expenses = route.params.trip.expenses.filter((exp: expense) => exp.id != route.params.expense.id);
+                route.params.trip.saveTrip()
                 navigation.navigate(pages.TripExpenses, {trip: route.params.trip})
             }
             setModalVisible(false);

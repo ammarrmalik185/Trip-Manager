@@ -27,6 +27,7 @@ export default function TripMembersDetails({route, navigation} : any){
                     if (canDelete) {
                         route.params.trip.expenses.forEach((prev: boolean, item: expense) => prev && item.calculate().find(calc => calc.member.id == route.params.member.id)?.amount == 0, true)
                         route.params.trip.members = route.params.trip.members.filter((mem: member) => mem.id != route.params.member.id);
+                        route.params.trip.saveTrip()
                         navigation.navigate(pages.TripMembers, {trip: route.params.trip})
                     } else {
                         Toast.show("Member involved in expenses, Cannot Delete", Toast.LONG);

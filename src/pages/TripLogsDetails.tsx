@@ -15,6 +15,7 @@ export default function TripLogsDetails({route, navigation}:any) {
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.SoftConfirmation, "Are you sure you want to delete this log?", (confirm: boolean) => {
                 if (confirm) {
                     route.params.trip.logs = route.params.trip.logs.filter((lg: log) => lg.id != route.params.log.id);
+                    route.params.trip.saveTrip()
                     navigation.navigate(pages.TripLogs, {trip: route.params.trip})
                 }
                 setModalVisible(false);
