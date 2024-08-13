@@ -457,6 +457,7 @@ export default StyleSheet.create({
     icon:{
         width: 40,
         height: 40,
+        resizeMode: "center"
     },
     iconTextGroup:{
         alignItems: "center",
@@ -688,6 +689,26 @@ export default StyleSheet.create({
         textDecorationColor: palette.text,
         textAlign: "center",
         fontSize: 12
+    },
+    header:{
+        flexDirection: "row",
+        alignItems: "center",
+        height: 40,
+    },
+    headerTitle:{
+        position: "absolute",
+        fontSize: 18,
+        left: 20,
+        right: 20,
+        fontWeight: 'bold',
+        color: palette.text,
+        textAlign: "center",
+    },
+    headerMenu:{
+        width: 20,
+        height: 20,
+        resizeMode: "center",
+        margin: 5
     }
 
 })

@@ -17,12 +17,6 @@ export default function CustomDrawer(props:any) {
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
-            {/*<View style={{*/}
-            {/*    paddingVertical: 10,*/}
-            {/*    position: 'absolute',*/}
-            {/*    bottom: 0,*/}
-            {/*    width: '100%',*/}
-            {/*}}><DrawerItem label={"⚙️ Settings"} onPress={() => {}}/></View>*/}
         </SafeAreaView>
     );
 }

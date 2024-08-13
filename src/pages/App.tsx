@@ -38,12 +38,15 @@ import SingleExpensesSettle from "./SingleExpensesSettle.tsx";
 import CustomDrawer from "../components/CustomDrawer.tsx";
 import Settings from "./Settings.tsx";
 import BackupAndRestore from "./BackupAndRestore.tsx";
+import CustomHeader from "../components/CustomHeader.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const TripStack = () => {
-    return <Stack.Navigator screenOptions={{ headerShown: false }}>
+    return <Stack.Navigator screenOptions={{headerTintColor: palette.text, header: ({ navigation, route, options }) => {
+            return <CustomHeader title={options.title || route.name} />;
+        }}}>
         <Stack.Screen name={pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
         <Stack.Screen name={pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
         <Stack.Screen name={pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}} />
@@ -72,7 +75,9 @@ const TripStack = () => {
 }
 
 const SingleExpensesStack = () => {
-    return <Stack.Navigator screenOptions={{ headerShown: false }}>
+    return <Stack.Navigator screenOptions={{headerTintColor: palette.text, header: ({ navigation, route, options }) => {
+            return <CustomHeader title={options.title || route.name} />;
+        }}}>
         <Stack.Screen name={pages.SingleExpensesList} component={SingleExpenseList} options={{title: 'Single Expenses'}}/>
         <Stack.Screen name={pages.SingleExpensesCreate} component={SingleExpenseCreate} options={{title: 'Single Expenses Create'}}/>
         <Stack.Screen name={pages.SingleExpenseOverview} component={SingleExpenseOverview} options={{title: 'Single Expenses Details'}}/>
@@ -81,15 +86,25 @@ const SingleExpensesStack = () => {
     </Stack.Navigator>
 }
 
+const ManagementStack = () => {
+    return <Stack.Navigator screenOptions={{headerTintColor: palette.text, header: ({ navigation, route, options }) => {
+            return <CustomHeader title={options.title || route.name}/>;
+        }}}>
+        <Stack.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>
+        <Stack.Screen name={pages.BackupAndRestore} component={BackupAndRestore} options={{title: 'Backup and Restore'}}/>
+    </Stack.Navigator>
+}
+
 function App(): React.JSX.Element {
   return (
       <GestureHandlerRootView>
           <NavigationContainer theme={CurrentTheme}>
-              <Drawer.Navigator screenOptions={{headerTintColor: palette.text}} drawerContent={props => <CustomDrawer {...props} />}>
+              <Drawer.Navigator
+                  screenOptions={{ headerShown: false }}
+                  drawerContent={props => <CustomDrawer {...props} />}>
                   <Drawer.Screen name={pages.TripStack} component={TripStack} options={{title: 'Trips'}}/>
                   <Drawer.Screen name={pages.SingleExpensesStack} component={SingleExpensesStack} options={{title: 'Single Expenses'}}/>
-                  <Drawer.Screen name={pages.BackupAndRestore} component={BackupAndRestore} options={{title: 'Backup and Restore'}}/>
-                  {/*<Drawer.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>*/}
+                  <Drawer.Screen name={pages.ManagementStack} component={ManagementStack} options={{title: 'Settings'}}/>
               </Drawer.Navigator>
           </NavigationContainer>
       </GestureHandlerRootView>

@@ -23,13 +23,14 @@ function TripOverview({route, navigation}:any) {
             <View style={styles.backgroundImage}>
                 <Image
                     style={styles.backgroundImage}
-                    source={require('../images/uiImages/trip.png')}
+                    source={require('../images/uiImages/trip.jpg')}
                 />
                 <LinearGradient
                     colors={['transparent', '#1C3043']}
+                    locations={[0, 0.8]}
                     style={styles.gradient}
                 />
-                <View style={{...styles.gradient, backgroundColor:'rgba(0,0,0,0.3)'}}/>
+                <View style={{...styles.gradient, backgroundColor:'rgba(0,0,0,0.4)'}}/>
             </View>
 
             <Text style={styles.title}>{route.params.trip.title}</Text>
@@ -92,7 +93,7 @@ function TripOverview({route, navigation}:any) {
                             source={require('../images/uiImages/Clock.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>{route.params.trip.logs.length} Logs</Text>
+                        <Text style={styles.iconText}>Logs</Text>
                         <TouchableOpacity onPress={() => navigation.navigate(pages.TripLogsCreate, {trip: route.params.trip})}>
                             <Text style={styles.fabText}>+</Text>
                         </TouchableOpacity>
