@@ -39,9 +39,10 @@ enum pages {
     SingleExpensesSettle = 'SingleExpensesSettle',
 
     // Management
-
+    ManagementStack = 'ManagementStack',
     BackupAndRestore = "BackupAndRestore",
     Settings = 'Settings',
+
 
 
 }
