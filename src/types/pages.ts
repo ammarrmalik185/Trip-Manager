@@ -28,6 +28,11 @@ enum pages {
     TripLogsCreate = 'TripLogsCreate',
     TripLogsEdit = 'TripLogsEdit',
 
+    // Managed Trips Stack
+    ManagedTripsStack = "ManagedTripsStack",
+
+    ManagedTrips = 'ManagedTrips',
+
     // Expense Stack
 
     SingleExpensesStack = "SingleExpensesStack",
