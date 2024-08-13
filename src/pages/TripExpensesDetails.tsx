@@ -37,33 +37,31 @@ export default function TripExpensesDetails({route, navigation}: any){
         <Text style={styles.dateDisplay}>Rs {route.params.expense.amount}</Text>
 
         <Text style={styles.expenseContainerDescription}>{route.params.expense.description}</Text>
-
-
-
-            <View style={styles.horizontalStack}>
-                <TouchableOpacity style={styles.iconTextGroup} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
-                    <Image
-                        source={require('../images/uiImages/settings.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>Edit Expense</Text>
-                </TouchableOpacity>
-                <View style={styles.iconTextGroup}>
-                    <Image
-                        source={require('../images/uiImages/calender.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>{route.params.expense.date.toLocaleTimeString()}</Text>
-                    <Text style={styles.iconText}>{route.params.expense.date.toLocaleDateString()}</Text>
-                </View>
-                <TouchableOpacity style={styles.iconTextGroup} onPress={() => setModalVisible(true)}>
-                    <Image
-                        source={require('../images/uiImages/delete.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>Delete Expense</Text>
-                </TouchableOpacity>
+        
+        <View style={styles.horizontalStack}>
+            <TouchableOpacity style={styles.iconTextGroup} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
+                <Image
+                    source={require('../images/uiImages/settings.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>Edit Expense</Text>
+            </TouchableOpacity>
+            <View style={styles.iconTextGroup}>
+                <Image
+                    source={require('../images/uiImages/calender.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>{route.params.expense.date.toLocaleTimeString()}</Text>
+                <Text style={styles.iconText}>{route.params.expense.date.toLocaleDateString()}</Text>
             </View>
+            <TouchableOpacity style={styles.iconTextGroup} onPress={() => setModalVisible(true)}>
+                <Image
+                    source={require('../images/uiImages/delete.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>Delete Expense</Text>
+            </TouchableOpacity>
+        </View>
 
         <View style={{...styles.bottom, height: "65%", bottom: 0}}>
             <View style={styles.expenseContainer}>
