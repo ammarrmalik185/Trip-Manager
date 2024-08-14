@@ -6,6 +6,7 @@ import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
 import {trip} from "../types/trip.ts";
 import LinearGradient from "react-native-linear-gradient";
 import React from "react";
+import {getExpenseImage} from "../types/expensetypes.ts";
 
 export default function TripExpensesDetails({route, navigation}: any){
 
@@ -23,7 +24,7 @@ export default function TripExpensesDetails({route, navigation}: any){
         <View style={styles.backgroundImage}>
             <Image
                 style={styles.backgroundImage}
-                source={require('../images/uiImages/expenses.png')}
+                source={getExpenseImage(route.params.expense.category)}
             />
             <LinearGradient
                 colors={['transparent', '#1C3043', '#1C3043']}
@@ -38,33 +39,31 @@ export default function TripExpensesDetails({route, navigation}: any){
         <Text style={styles.dateDisplay}>Rs {route.params.expense.amount}</Text>
 
         <Text style={styles.expenseContainerDescription}>{route.params.expense.description}</Text>
-
-
-
-            <View style={styles.horizontalStack}>
-                <TouchableOpacity style={styles.iconTextGroup} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
-                    <Image
-                        source={require('../images/uiImages/settings.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>Edit Expense</Text>
-                </TouchableOpacity>
-                <View style={styles.iconTextGroup}>
-                    <Image
-                        source={require('../images/uiImages/calender.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>{route.params.expense.date.toLocaleTimeString()}</Text>
-                    <Text style={styles.iconText}>{route.params.expense.date.toLocaleDateString()}</Text>
-                </View>
-                <TouchableOpacity style={styles.iconTextGroup} onPress={() => setModalVisible(true)}>
-                    <Image
-                        source={require('../images/uiImages/delete.png')}
-                        style={styles.icon}
-                    />
-                    <Text style={styles.iconText}>Delete Expense</Text>
-                </TouchableOpacity>
+        
+        <View style={styles.horizontalStack}>
+            <TouchableOpacity style={styles.iconTextGroup} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
+                <Image
+                    source={require('../images/uiImages/settings.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>Edit Expense</Text>
+            </TouchableOpacity>
+            <View style={styles.iconTextGroup}>
+                <Image
+                    source={require('../images/uiImages/calender.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>{route.params.expense.date.toLocaleTimeString()}</Text>
+                <Text style={styles.iconText}>{route.params.expense.date.toLocaleDateString()}</Text>
             </View>
+            <TouchableOpacity style={styles.iconTextGroup} onPress={() => setModalVisible(true)}>
+                <Image
+                    source={require('../images/uiImages/delete.png')}
+                    style={styles.icon}
+                />
+                <Text style={styles.iconText}>Delete Expense</Text>
+            </TouchableOpacity>
+        </View>
 
         <View style={{...styles.bottom, height: "65%", bottom: 0}}>
             <View style={styles.expenseContainer}>
@@ -72,7 +71,7 @@ export default function TripExpensesDetails({route, navigation}: any){
                 <Text style={styles.expenseContainerTitle}>Payers</Text>
                 {route.params.expense.payers.map((p:any) => {
                     return (
-                        <View style={styles.expenseGreenContainerItem}>
+                        <View key={p.member.id} style={styles.expenseGreenContainerItem}>
                             <Text style={styles.expenseContainerItemTitle}>{p.member.name}</Text>
                             <Text style={styles.expenseContainerItemPrice}>{p.amount}</Text>
                         </View>
@@ -84,7 +83,7 @@ export default function TripExpensesDetails({route, navigation}: any){
                 <Text style={styles.expenseContainerTitle}>Spenders</Text>
                 {route.params.expense.getCalculatedExpense().spenders.map((p:any) => {
                     return (
-                        <View style={styles.expenseRedContainerItem}>
+                        <View key={p.member.id} style={styles.expenseRedContainerItem}>
                             <Text style={styles.expenseContainerItemTitle}>{p.member.name}</Text>
                             <Text style={styles.expenseContainerItemPrice}>{p.amount.toFixed(0)}</Text>
                         </View>

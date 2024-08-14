@@ -19,7 +19,6 @@ export default function TripMembersDetails({route, navigation} : any){
         <View style={styles.main}>
 
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.SoftConfirmation, "Are you sure you want to delete this member?", (confirm: boolean) => {
-
                 if (confirm) {
                     let canDelete = route.params.trip.expenses.reduce((prev: boolean, item: expense) =>
                         prev && item.calculate().find(calc => calc.member.id == route.params.member.id)?.amount == 0, true)
@@ -32,9 +31,9 @@ export default function TripMembersDetails({route, navigation} : any){
                     } else {
                         Toast.show("Member involved in expenses, Cannot Delete", Toast.LONG);
                     }
+
                 }
                 setModalVisible(false);
-
             })}/>
 
             <Image source={require('../images/uiImages/defaultUserImage.jpg')} style={styles.memberImage}/>
@@ -72,7 +71,7 @@ export default function TripMembersDetails({route, navigation} : any){
                             source={require('../images/uiImages/settings.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Edit</Text>
+                        <Text style={styles.iconText}>Edit Member</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.iconTextGroup}>
@@ -80,7 +79,7 @@ export default function TripMembersDetails({route, navigation} : any){
                             source={require('../images/uiImages/delete.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Delete</Text>
+                        <Text style={styles.iconText}>Delete Member</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -9,13 +9,18 @@ const CustomHeader = ({ title } : any) => {
     return (
         <View style={styles.header}>
 
-            <ImageBackground style={styles.backgroundImage} source={require("../images/uiImages/trip.jpg")}/>
-            <View style={{...styles.backgroundImage, backgroundColor: "rgba(0,0,0,0.8)"}}/>
+            <ImageBackground style={styles.backgroundImage} source={require("../images/uiImages/tripImages/trip.jpg")}/>
+            <View style={{...styles.backgroundImage, backgroundColor: "rgba(0,0,0,0.7)"}}/>
 
             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
                 <Image style={styles.headerMenu} source={require("../images/uiImages/menu.png")}/>
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>{title}</Text>
+
+            <View style={styles.headerTitleStack}>
+                {/*<Image style={styles.appIconSmall} source={require("../images/ic_launcher.png")}/>*/}
+                <Text style={styles.headerTitle}>{title}</Text>
+            </View>
+
         </View>
     );
 };

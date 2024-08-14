@@ -16,7 +16,7 @@ class expense {
     constructor() {
         this.id = Math.random().toString(36);
         this.title = "";
-        this.category = "";
+        this.category = "Others";
         this.description = "";
         this.amount = 0;
         this.date = new Date();

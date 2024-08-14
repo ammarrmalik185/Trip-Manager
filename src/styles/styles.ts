@@ -127,9 +127,18 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    verticalStack:{
+        flexDirection: "column",
+        justifyContent: "space-evenly"
+    },
     horizontalStack:{
         flexDirection: "row",
         justifyContent: "space-evenly",
+        alignItems: "center"
+    },
+    horizontalStackSpaced:{
+        flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center"
     },
     horizontalStackCentered:{
@@ -156,10 +165,15 @@ export default StyleSheet.create({
         marginBottom: 10,
         alignSelf: "center"
     },
+    appIconSmall:{
+        width: 30,
+        height: 30,
+        alignSelf: "center"
+    },
     rightBox:{
         right: 5,
-        width: 70,
-        height: 90,
+        width: 80,
+        height: "100%",
         position: "absolute",
         alignItems: "center",
         justifyContent: "center"
@@ -503,6 +517,12 @@ export default StyleSheet.create({
         margin: 30,
         resizeMode: "cover",
     },
+    memberImageSmall:{
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        resizeMode: "cover",
+    },
     memberTitle:{
         color: palette.text,
         fontSize: 30,
@@ -696,19 +716,140 @@ export default StyleSheet.create({
         height: 40,
     },
     headerTitle:{
-        position: "absolute",
         fontSize: 18,
-        left: 20,
-        right: 20,
         fontWeight: 'bold',
         color: palette.text,
         textAlign: "center",
+        margin: 5
+    },
+    headerTitleStack:{
+        flexDirection: "row",
+        position: "absolute",
+        left: 20,
+        right: 20,
+        alignItems: "center",
+        justifyContent: "center"
     },
     headerMenu:{
         width: 20,
         height: 20,
         resizeMode: "center",
-        margin: 5
+        margin: 5,
+        marginLeft: 15
+    },
+
+    tripListItem:{
+        backgroundColor: palette.card,
+        borderRadius: 10,
+        padding: 10,
+        margin: 10,
+        paddingLeft: 20,
+    },
+    tripListHeader:{
+        color: palette.text,
+        fontSize: 30
+    },
+    tripListSubheader:{
+        color: palette.text,
+        fontSize: 15,
+        opacity: 0.5
+    },
+    tripListIcon:{
+        marginTop: 20,
+        width: 50,
+        height: 50,
+        alignItems: "center",
+        alignSelf: "center",
+        resizeMode: "contain"
+    },
+    tripListIconText:{
+        color: palette.text,
+        fontSize: 20,
+        textAlign: "center"
+    },
+    tripListBackground:{
+        ...StyleSheet.absoluteFillObject,
+        position: "absolute",
+        resizeMode: "cover",
+        overflow: "hidden",
+        borderRadius: 10,
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+    },
+    tripListBackgroundImage:{
+        ...StyleSheet.absoluteFillObject,
+        resizeMode: "cover",
+        width: "100%",
+        height: "100%",
+    },
+    logListItem:{
+        borderRadius: 10,
+        padding: 10,
+        margin: 10,
+        marginVertical: 0,
+        paddingVertical: 0,
+        paddingLeft: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+    },
+    logListText:{
+        color: palette.text,
+        fontSize: 15,
+    },
+    logListItemImage:{
+        width: 50,
+        height: 75,
+        resizeMode: "stretch",
+    },
+    logListItemSubimage:{
+        width: 20,
+        height: 20,
+        resizeMode: "stretch",
+    },
+    memberListHeader:{
+        marginLeft: 10,
+        color: palette.text,
+        fontSize: 20
+    },
+     memberListSubHeader:{
+        marginLeft: 10,
+        color: palette.text,
+        fontSize: 10,
+        opacity: 0.5
+    },
+
+    expenseAmountListItemImage:{
+        width: 50,
+        height: 50,
+        resizeMode: "cover",
+    },
+    expenseAmountListItemImageRound:{
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        resizeMode: "cover",
+    },
+    expenseAmountListItemView:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start"
+    },
+    expenseAmountListItemText: {
+        right: 5,
+        height: "100%",
+        position: "absolute",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        textAlign: "right",
+        fontSize: 15,
+    },
+    expenseAmountListItemHeader:{
+        fontSize: 20,
+        color: palette.text,
+        marginLeft: 10
     }
 
 })
