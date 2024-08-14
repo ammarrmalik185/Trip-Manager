@@ -1,4 +1,4 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
@@ -69,6 +69,7 @@ export default function TripExpensesDetails({route, navigation}: any){
             <View style={styles.expenseContainer}>
                 <View style={styles.expenseGreenBackground}/>
                 <Text style={styles.expenseContainerTitle}>Payers</Text>
+                <ScrollView>
                 {route.params.expense.payers.map((p:any) => {
                     return (
                         <View key={p.member.id} style={styles.expenseGreenContainerItem}>
@@ -77,10 +78,12 @@ export default function TripExpensesDetails({route, navigation}: any){
                         </View>
                     )
                 })}
+                </ScrollView>
             </View>
             <View style={styles.expenseContainer}>
                 <View style={styles.expenseRedBackground}/>
                 <Text style={styles.expenseContainerTitle}>Spenders</Text>
+                <ScrollView>
                 {route.params.expense.getCalculatedExpense().spenders.map((p:any) => {
                     return (
                         <View key={p.member.id} style={styles.expenseRedContainerItem}>
@@ -89,6 +92,7 @@ export default function TripExpensesDetails({route, navigation}: any){
                         </View>
                     )
                 })}
+                </ScrollView>
             </View>
         </View>
 

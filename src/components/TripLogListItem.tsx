@@ -20,16 +20,20 @@ export function TripLogListItem({item, navigation, trip}: {item: log, navigation
         {/*<Text style={styles.logListText}>{item.date.toLocaleTimeString()}</Text>*/}
         <View style={styles.verticalStack}>
             <View style={styles.horizontalStack}>
-                <Text style={styles.logListText}>{formatter.format(item.date)}</Text>
-                <Text style={styles.logListText}>  |  </Text>
                 <Text style={styles.logListText}>{item.title}</Text>
+                <Text style={styles.iconText}>  |  </Text>
+                <View style={styles.logHorizontalStack}>
+                    <Image style={styles.logListItemSubimage} source={require("../images/uiImages/location.png")}/>
+                    <Text style={styles.iconText}>{item.location}</Text>
+                </View>
             </View>
             <View style={styles.horizontalStack}>
-                <Image style={styles.logListItemSubimage} source={require("../images/uiImages/location.png")}/>
-                <Text style={styles.logListText}>{item.location}</Text>
-                <Text style={styles.logListText}>  |  </Text>
-                <Image style={styles.logListItemSubimage} source={require("../images/uiImages/odo.png")}/>
-                <Text style={styles.logListText}>{item.distance_traveled} kms</Text>
+                <Text style={styles.logListText}>{formatter.format(item.date)}</Text>
+                <Text style={styles.iconText}>  |  </Text>
+                <View style={styles.logHorizontalStack}>
+                    <Image style={styles.logListItemSubimage} source={require("../images/uiImages/odo.png")}/>
+                    <Text style={styles.iconText}>{item.distance_traveled} kms</Text>
+                </View>
             </View>
         </View>
 

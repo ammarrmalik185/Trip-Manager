@@ -482,7 +482,8 @@ export default StyleSheet.create({
     iconText:{
         color: palette.text,
         opacity: 0.7,
-        fontSize: 12
+        fontSize: 12,
+        textAlign: "center",
     },
     neutralButton:{
         width: "40%",
@@ -615,6 +616,10 @@ export default StyleSheet.create({
         alignSelf: "center",
         height: "45%"
     },
+   /* expenseContainerScrollView:{
+        overflow: "scroll",
+        backgroundColor: "black",
+    },*/
     expenseContainerTitle:{
         color: palette.text,
         fontSize: 20,
@@ -787,7 +792,6 @@ export default StyleSheet.create({
     logListItem:{
         borderRadius: 10,
         padding: 10,
-        margin: 10,
         marginVertical: 0,
         paddingVertical: 0,
         paddingLeft: 20,
@@ -798,6 +802,7 @@ export default StyleSheet.create({
     logListText:{
         color: palette.text,
         fontSize: 15,
+        width: "60%",
     },
     logListItemImage:{
         width: 50,
@@ -807,7 +812,15 @@ export default StyleSheet.create({
     logListItemSubimage:{
         width: 20,
         height: 20,
+        marginRight: 5,
         resizeMode: "stretch",
+    },
+    logHorizontalStack:{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        width: "30%",
+        marginRight: 10
     },
     memberListHeader:{
         marginLeft: 10,
