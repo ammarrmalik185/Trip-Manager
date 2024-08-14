@@ -53,11 +53,11 @@ export function getExpenseIconImage(category: string) {
         case "Maintenance":
             return require('../images/uiImages/expenseImages/maintainance_icon.png');
         case "Tolls":
-            return require('../images/uiImages/expenseImages/travel_icon.png');
+            return require('../images/uiImages/expenseImages/tolls_icon.png');
         case "Food":
             return require('../images/uiImages/expenseImages/food_icon.png');
         case "Travel":
-            return require('../images/uiImages/expenseImages/tolls_icon.png');
+            return require('../images/uiImages/expenseImages/travel_icon.png');
         case "Shopping":
             return require('../images/uiImages/expenseImages/shopping_icon.png');
         case "Utilities":
