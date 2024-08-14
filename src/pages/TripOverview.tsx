@@ -23,7 +23,7 @@ function TripOverview({route, navigation}:any) {
             <View style={styles.backgroundImage}>
                 <Image
                     style={styles.backgroundImage}
-                    source={require('../images/uiImages/trip.jpg')}
+                    source={require('../images/uiImages/tripImages/trip.jpg')}
                 />
                 <LinearGradient
                     colors={['transparent', '#1C3043']}

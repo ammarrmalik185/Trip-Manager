@@ -6,6 +6,7 @@ import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
 import {trip} from "../types/trip.ts";
 import LinearGradient from "react-native-linear-gradient";
 import React from "react";
+import {getExpenseImage} from "../types/expensetypes.ts";
 
 export default function TripExpensesDetails({route, navigation}: any){
 
@@ -22,7 +23,7 @@ export default function TripExpensesDetails({route, navigation}: any){
         <View style={styles.backgroundImage}>
             <Image
                 style={styles.backgroundImage}
-                source={require('../images/uiImages/expenses.png')}
+                source={getExpenseImage(route.params.expense.category)}
             />
             <LinearGradient
                 colors={['transparent', '#1C3043', '#1C3043']}
@@ -69,7 +70,7 @@ export default function TripExpensesDetails({route, navigation}: any){
                 <Text style={styles.expenseContainerTitle}>Payers</Text>
                 {route.params.expense.payers.map((p:any) => {
                     return (
-                        <View style={styles.expenseGreenContainerItem}>
+                        <View key={p.member.id} style={styles.expenseGreenContainerItem}>
                             <Text style={styles.expenseContainerItemTitle}>{p.member.name}</Text>
                             <Text style={styles.expenseContainerItemPrice}>{p.amount}</Text>
                         </View>
@@ -81,7 +82,7 @@ export default function TripExpensesDetails({route, navigation}: any){
                 <Text style={styles.expenseContainerTitle}>Spenders</Text>
                 {route.params.expense.getCalculatedExpense().spenders.map((p:any) => {
                     return (
-                        <View style={styles.expenseRedContainerItem}>
+                        <View key={p.member.id} style={styles.expenseRedContainerItem}>
                             <Text style={styles.expenseContainerItemTitle}>{p.member.name}</Text>
                             <Text style={styles.expenseContainerItemPrice}>{p.amount.toFixed(0)}</Text>
                         </View>
