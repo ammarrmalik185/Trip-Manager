@@ -735,6 +735,7 @@ export default StyleSheet.create({
         height: 20,
         resizeMode: "center",
         margin: 5,
+        marginLeft: 15
     },
 
     tripListItem:{
@@ -746,7 +747,7 @@ export default StyleSheet.create({
     },
     tripListHeader:{
         color: palette.text,
-        fontSize: 45
+        fontSize: 30
     },
     tripListSubheader:{
         color: palette.text,
@@ -796,7 +797,7 @@ export default StyleSheet.create({
     },
     logListText:{
         color: palette.text,
-        fontSize: 20,
+        fontSize: 15,
     },
     logListItemImage:{
         width: 50,
@@ -816,7 +817,7 @@ export default StyleSheet.create({
      memberListSubHeader:{
         marginLeft: 10,
         color: palette.text,
-        fontSize: 15,
+        fontSize: 10,
         opacity: 0.5
     },
 
