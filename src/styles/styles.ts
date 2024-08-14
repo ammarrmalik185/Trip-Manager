@@ -820,6 +820,18 @@ export default StyleSheet.create({
         fontSize: 10,
         opacity: 0.5
     },
+    memberListGreenSideText:{
+        fontSize: 20,
+        color: palette.primary,
+        alignSelf: "flex-end",
+        textAlign: "right"
+    },
+    memberListRedSideText:{
+        fontSize: 20,
+        color: palette.secondary,
+        alignSelf: "flex-end",
+        textAlign: "right"
+    },
 
     expenseAmountListItemImage:{
         width: 50,
