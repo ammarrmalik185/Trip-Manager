@@ -39,8 +39,10 @@ export default function TripMembersDetails({route, navigation} : any){
 
             <Image source={require('../images/uiImages/defaultUserImage.jpg')} style={styles.memberImage}/>
             <Text style={styles.memberTitle}>{route.params.member.name}</Text>
-            <Text style={styles.memberSubTitle}>ammarrmalik185@hotmail.com</Text>
-            <Text style={styles.memberSubTitle}>+923349464896</Text>
+            <Text style={styles.memberSubTitle}>{route.params.member.email}</Text>
+            <Text style={styles.memberSubTitle}>{route.params.member.phone}</Text>
+
+            <Text style={styles.expenseContainerDescription}>{route.params.member.description}</Text>
 
             <View style={styles.bottom}>
 

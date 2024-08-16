@@ -1,4 +1,4 @@
-import {Text, TouchableOpacity, View} from "react-native";
+import {Image, Text, TouchableOpacity, View} from "react-native";
 import {Logger} from "../helpers/Logger.ts";
 import {trip} from "../types/trip.ts";
 import {singleExpense} from "../types/singleExpense.ts";
@@ -114,7 +114,7 @@ export default function BackupAndRestore(){
             <View style={styles.container}>
 
                 {onlineEnabled && <View style={styles.item}>
-                    <Text style={styles.acceptButtonText}>Online Backup</Text>
+                    <Text style={styles.expenseTitle}>Online Backup</Text>
                     {FirebaseManager.auth.currentUser && <View>
                         <Text style={styles.dateDisplay}>Current Status: <Text style={{color: palette.primary}}>Logged In</Text></Text>
                         <TouchableOpacity style={styles.acceptButton} onPress={() => {
@@ -157,9 +157,9 @@ export default function BackupAndRestore(){
                             <Text style={styles.acceptButtonText}>Logout</Text>
                         </TouchableOpacity>
                     </View>}
-                    {!FirebaseManager.auth.currentUser && <View>
+                    {!FirebaseManager.auth.currentUser && <View style={styles.center}>
                         <Text style={styles.dateDisplay}>Current Status: <Text style={{color:palette.secondary}}>Not Logged In</Text></Text>
-                           <TouchableOpacity style={styles.acceptButton} onPress={() => {
+                           <TouchableOpacity style={styles.neutralButtonNormal} onPress={() => {
                                 FirebaseManager.signInWithGoogle()
                                 // FirebaseManager.auth.signInWithEmailAndPassword("ammarrmalik185@hotmail.com", "123456").catch(console.error);
                             }}>
@@ -169,32 +169,35 @@ export default function BackupAndRestore(){
                 </View>}
 
                 <View style={styles.item}>
-                    <Text style={styles.acceptButtonText}>Local Backup</Text>
-                    <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                        Logger.log("Create Local Backup")
-                        trip.loadTrips((trips:trip[]) => {
-                            singleExpense.loadSingleExpenses((singleExpenses:singleExpense[]) => {
-                                Logger.log("Loaded trips and single expenses for local backup")
-                                Logger.log("Trips: " + JSON.stringify(trips))
-                                Logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
+                    <Text style={styles.expenseTitle}>Local Backup</Text>
+                    <View style={{height: 30}}></View>
+                    <View style={styles.horizontalStack}>
+                        <TouchableOpacity style={styles.neutralButton} onPress={() => {
+                            Logger.log("Create Local Backup")
+                            trip.loadTrips((trips:trip[]) => {
+                                singleExpense.loadSingleExpenses((singleExpenses:singleExpense[]) => {
+                                    Logger.log("Loaded trips and single expenses for local backup")
+                                    Logger.log("Trips: " + JSON.stringify(trips))
+                                    Logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
 
-                                let backup = {
-                                    trips: trips,
-                                    singleExpenses: singleExpenses
-                                }
+                                    let backup = {
+                                        trips: trips,
+                                        singleExpenses: singleExpenses
+                                    }
 
-                                generateFile(JSON.stringify(backup))
+                                    generateFile(JSON.stringify(backup))
 
+                                })
                             })
-                        })
-                    }}>
-                        <Text style={styles.acceptButtonText}>Create Local Backup</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                        pickFile().then(recoverBackupFromString);
-                    }}>
-                        <Text style={styles.acceptButtonText}>Restore From Local Backup</Text>
-                    </TouchableOpacity>
+                        }}>
+                            <Text style={styles.acceptButtonText}>Create Local Backup</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.neutralButton} onPress={() => {
+                            pickFile().then(recoverBackupFromString);
+                        }}>
+                            <Text style={styles.acceptButtonText}>Restore From File</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>

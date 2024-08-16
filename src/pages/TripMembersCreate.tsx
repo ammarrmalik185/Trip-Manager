@@ -6,10 +6,21 @@ import {palette} from "../styles/colors.ts";
 
 export default function TripMembersCreate({navigation, route}:any) {
     const [newMember, setMember] = useState<member>(new member());
+
     return (
         <View style={styles.main}>
             <Text style={styles.inputLabel}>Name</Text>
             <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} onChangeText={txt => newMember.name = txt}/>
+
+            <Text style={styles.inputLabel}>Description</Text>
+            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputFieldMultiLine} onChangeText={txt => newMember.description = txt}/>
+
+            <Text style={styles.inputLabel}>Email</Text>
+            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} onChangeText={txt => newMember.email = txt}/>
+
+            <Text style={styles.inputLabel}>Phone</Text>
+            <TextInput placeholderTextColor={palette.placeholder} style={styles.inputField} onChangeText={txt => newMember.phone = txt}/>
+
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
                 route.params.trip.members.push(newMember)

@@ -1,9 +1,11 @@
 import * as fs from "react-native-fs";
 import {DocumentDirectoryPath} from "react-native-fs";
+import Toast from "react-native-simple-toast";
 
 enum logMode{
     console,
-    file
+    file,
+    toast
 }
 
 let currentLogModes : logMode[] = [logMode.file];
@@ -34,6 +36,8 @@ export let Logger = {
                 case logMode.console:
                     console.error(text)
                     break;
+                case logMode.toast:
+                    Toast.show(text, Toast.SHORT)
             }
         }
     }

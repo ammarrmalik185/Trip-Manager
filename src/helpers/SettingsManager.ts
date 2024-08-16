@@ -4,7 +4,7 @@ import {Logger} from "./Logger.ts";
 export class SettingsManager {
     static settings : any = {
         hardConfirmationForDeleteTrip: true,
-        openMostRecentTripOnAppOpen: true,
+        openMostRecentTripOnAppOpen: false,
         currencySymbol: "Rs"
     };
 
@@ -28,7 +28,7 @@ export class SettingsManager {
         AsyncStorage.getItem('settings').then(data => {
             if (data){
                 for (let item in JSON.parse(data)){
-                    if (SettingsManager.settings[item]){
+                    if (SettingsManager.settings[item] != null){
                         SettingsManager.settings[item] = JSON.parse(data)[item];
                     }
                 }

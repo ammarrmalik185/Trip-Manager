@@ -16,8 +16,8 @@ export function TripMemberListItem({item, navigation, trip}: {item: member, navi
             <Image style={styles.memberImageSmall} source={require("../images/uiImages/defaultUserImage.jpg")}/>
             <View style={{width: "70%"}}>
                 <Text style={styles.memberListHeader}>{item.name}</Text>
-                <Text style={styles.memberListSubHeader}>ammarrmalik185@hotmail.com</Text>
-                <Text style={styles.memberListSubHeader}>+923349564896</Text>
+                <Text style={styles.memberListSubHeader}>{item.email}</Text>
+                <Text style={styles.memberListSubHeader}>{item.phone}</Text>
             </View>
             <View>
                 <Text style={styles.memberListGreenSideText}>+{paid}</Text>

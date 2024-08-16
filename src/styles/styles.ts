@@ -502,6 +502,16 @@ export default StyleSheet.create({
         borderRadius: 10,
         margin: 5,
     },
+    neutralButtonStatic:{
+        width: "40%",
+        height: 100,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: 25,
+        borderRadius: 10,
+        margin: 5,
+    },
     neutralButtonNormal:{
         width: "80%",
         backgroundColor: 'rgba(0,0,0,0.5)',
@@ -779,7 +789,7 @@ export default StyleSheet.create({
     },
     tripListHeader:{
         color: palette.text,
-        fontSize: 30
+        fontSize: 25
     },
     tripListSubheader:{
         color: palette.text,

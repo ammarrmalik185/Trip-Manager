@@ -10,7 +10,7 @@ const CustomHeader = ({ title } : any) => {
         <View style={styles.header}>
 
             <ImageBackground style={styles.backgroundImage} source={require("../images/uiImages/tripImages/trip.jpg")}/>
-            <View style={{...styles.backgroundImage, backgroundColor: "rgba(0,0,0,0.7)"}}/>
+            <View style={{...styles.backgroundImage, backgroundColor: "rgba(0,0,0,0.8)"}}/>
 
             <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
                 <Image style={styles.headerMenu} source={require("../images/uiImages/menu.png")}/>
