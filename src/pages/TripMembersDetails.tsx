@@ -7,6 +7,7 @@ import Toast from "react-native-simple-toast";
 import memberAmount from "../types/memberAmount.ts";
 import React from "react";
 import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export default function TripMembersDetails({route, navigation} : any){
     const [modalVisible, setModalVisible] = React.useState(false);
@@ -47,7 +48,7 @@ export default function TripMembersDetails({route, navigation} : any){
                     <View style={styles.memberNeutralSide}>
                         <View style={styles.memberNeutralSideBackground}/>
                         <Text style={styles.itemText}>Total</Text>
-                        <Text style={total > 0 ? styles.memberNeutralSideTextGreen : styles.memberNeutralSideTextRed}>Rs {total}</Text>
+                        <Text style={total > 0 ? styles.memberNeutralSideTextGreen : styles.memberNeutralSideTextRed}>{SettingsManager.settings.currencySymbol} {total}</Text>
                     </View>
 
                     <View style={styles.horizontalStackCentered}>

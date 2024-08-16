@@ -4,6 +4,7 @@ import settlement from "../types/settlements.ts";
 import {palette} from "../styles/colors.ts";
 import LinearGradient from "react-native-linear-gradient";
 import React from "react";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export default function TripExpenseSettlementListItem({item}: {item: settlement}){
     return (
@@ -17,7 +18,7 @@ export default function TripExpenseSettlementListItem({item}: {item: settlement}
                     <Text style={styles.settlementUserText}>{item.spender.name}</Text>
                 </View>
                 <View style={styles.settlementCenterContainer}>
-                    <Text style={styles.settlementAmount}>Rs {Math.round(item.amount)}</Text>
+                    <Text style={styles.settlementAmount}>{SettingsManager.settings.currencySymbol} {Math.round(item.amount)}</Text>
                     <Image source={require('../images/uiImages/arrow.png')} style={styles.settlementArrowImage}/>
                     <Text style={styles.settlementSendNotification}>{"Send Notification"}</Text>
                 </View>

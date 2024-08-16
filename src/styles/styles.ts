@@ -96,6 +96,13 @@ export default StyleSheet.create({
         color: palette.text
     },
     // containers
+    horizontalLine:{
+        width: "80%",
+        backgroundColor: "rgba(255,255,255, 0.5)",
+        height: 1,
+        alignSelf: "center",
+        marginVertical: 10
+    },
 
     main:{
         flex: 1,
@@ -123,6 +130,9 @@ export default StyleSheet.create({
         marginHorizontal: 16,
         borderRadius: 10,
     },
+    switch:{
+        color: palette.text
+    },
     center:{
         justifyContent: 'center',
         alignItems: 'center',
@@ -149,7 +159,7 @@ export default StyleSheet.create({
     horizontalStackContained:{
         flexDirection: "row",
         justifyContent: "space-between",
-        backgroundColor: palette.border,
+        backgroundColor: palette.card,
         marginVertical: 5,
         borderRadius: 15,
         padding: 10,
@@ -491,6 +501,23 @@ export default StyleSheet.create({
         padding: 25,
         borderRadius: 10,
         margin: 5,
+    },
+    neutralButtonNormal:{
+        width: "80%",
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        padding: 25,
+        borderRadius: 10,
+        margin: 5,
+    },
+    neutralButtonSingleExpense:{
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        borderRadius: 10,
+        margin: 5,
+        height: "8%",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "80%",
+        alignSelf: "center"
     },
     bottom:{
         position: "absolute",
@@ -875,6 +902,14 @@ export default StyleSheet.create({
         fontSize: 20,
         color: palette.text,
         marginLeft: 10
+    },
+    singleExpenseContainer:{
+        padding: 10,
+        margin: 10,
+        borderRadius: 10,
+        width: "90%",
+        alignSelf: "center",
+        height: "40%"
     }
 
 })

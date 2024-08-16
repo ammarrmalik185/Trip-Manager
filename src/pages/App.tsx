@@ -39,9 +39,11 @@ import CustomDrawer from "../components/CustomDrawer.tsx";
 import Settings from "./Settings.tsx";
 import BackupAndRestore from "./BackupAndRestore.tsx";
 import CustomHeader from "../components/CustomHeader.tsx";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+SettingsManager.getSettings();
 
 const TripStack = () => {
     return <Stack.Navigator screenOptions={{headerTintColor: palette.text, header: ({ navigation, route, options }) => {

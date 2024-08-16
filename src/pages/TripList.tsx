@@ -5,6 +5,7 @@ import {trip} from "../types/trip.ts";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import {useFocusEffect} from "@react-navigation/native";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 function TripList({navigation}:any): React.JSX.Element {
     const [trips, setTrips] = React.useState<trip[]>([]);
@@ -16,6 +17,10 @@ function TripList({navigation}:any): React.JSX.Element {
                 return new Date(b.date.from).getTime() - new Date(a.date.from).getTime();
             });
             setTrips(sortedTrips);
+            if (SettingsManager.settings.openMostRecentTripOnAppOpen && SettingsManager.settingHelpers.appJustOpen){
+                if (sortedTrips.length > 0) navigation.navigate(pages.TripOverview, {trip: sortedTrips[0]});
+            }
+            SettingsManager.settingHelpers.appJustOpen = false;
         });
       }, [setTrips])
     );

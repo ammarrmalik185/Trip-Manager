@@ -57,7 +57,7 @@ export default function TripLogsDetails({route, navigation}:any) {
                     </View>
                 </View>
 
-                <View style={{width: "80%", backgroundColor: "rgba(255,255,255, 0.5)", height: 1, alignSelf: "center", marginVertical: 10}}></View>
+                <View style={styles.horizontalLine}></View>
 
                 <View  style={{...styles.horizontalStack, marginHorizontal: 40}} >
                     <TouchableOpacity onPress={() => {navigation.navigate(pages.TripLogsEdit, {log: route.params.log, trip: route.params.trip})}} style={styles.iconTextGroup}>

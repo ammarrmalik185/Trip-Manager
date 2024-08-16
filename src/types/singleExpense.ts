@@ -41,6 +41,7 @@ export class singleExpense {
             title: this.title,
             description: this.description,
             date: this.date,
+            category: this.category,
             payers: this.payers,
             spenders: this.spenders,
             members: this.members,
@@ -105,6 +106,7 @@ export class singleExpense {
         newSingleExpense.id = data.id;
         newSingleExpense.title = data.title;
         newSingleExpense.description = data.description;
+        newSingleExpense.category = data.category;
         newSingleExpense.date = new Date(data.date)
         newSingleExpense.members = [];
         newSingleExpense.payers = data.payers;

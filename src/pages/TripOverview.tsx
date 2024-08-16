@@ -6,12 +6,13 @@ import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
 import {trip} from "../types/trip.ts";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 function TripOverview({route, navigation}:any) {
     const [modalVisible, setModalVisible] = React.useState(false);
     return (
         <View style={styles.main}>
-            <PopupModal state={modalVisible} modalData={new ModalData(ModalType.HardConfirmation, "Are you sure you want to delete this trip?", (confirm:any) => {
+            <PopupModal state={modalVisible} modalData={new ModalData(SettingsManager.settings.hardConfirmationForDeleteTrip ? ModalType.HardConfirmation : ModalType.SoftConfirmation, "Are you sure you want to delete this trip?", (confirm:any) => {
                 if (confirm){
                     route.params.trip.deleteTrip().then(() => {
                         trip.allTrips = trip.allTrips.filter(item => item.id != route.params.trip.id);
@@ -103,7 +104,7 @@ function TripOverview({route, navigation}:any) {
                             source={require('../images/uiImages/Money.png')}
                             style={styles.icon}
                         />
-                        <Text style={styles.iconText}>Rs. {route.params.trip.expenses.reduce((acc:any, expense:any) => acc + expense.amount, 0)}</Text>
+                        <Text style={styles.iconText}>{SettingsManager.settings.currencySymbol} {route.params.trip.expenses.reduce((acc:any, expense:any) => acc + expense.amount, 0)}</Text>
                         <TouchableOpacity onPress={() => {
                             if (route.params.trip.members.length > 0){
                                 navigation.navigate(pages.TripExpensesCreate, {trip: route.params.trip})

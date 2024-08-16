@@ -7,6 +7,7 @@ import {trip} from "../types/trip.ts";
 import LinearGradient from "react-native-linear-gradient";
 import React from "react";
 import {getExpenseImage} from "../types/expensetypes.ts";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export default function TripExpensesDetails({route, navigation}: any){
 
@@ -36,10 +37,10 @@ export default function TripExpensesDetails({route, navigation}: any){
         <Text style={styles.expenseTitle}>{route.params.expense.title}</Text>
 
         <Text style={styles.subTitle}>{route.params.expense.category}</Text>
-        <Text style={styles.dateDisplay}>Rs {route.params.expense.amount}</Text>
+        <Text style={styles.dateDisplay}>{SettingsManager.settings.currencySymbol} {route.params.expense.amount}</Text>
 
         <Text style={styles.expenseContainerDescription}>{route.params.expense.description}</Text>
-        
+
         <View style={styles.horizontalStack}>
             <TouchableOpacity style={styles.iconTextGroup} onPress={() => {navigation.navigate(pages.TripExpensesEdit, {expense: route.params.expense, trip: route.params.trip})}}>
                 <Image
@@ -95,10 +96,5 @@ export default function TripExpensesDetails({route, navigation}: any){
                 </ScrollView>
             </View>
         </View>
-
-
-        {/*<Text style={styles.dateDisplay}>Payers: {route.params.expense.payers.map((p:any) => p.member.name).join(", ")}</Text>*/}
-        {/*<Text style={styles.dateDisplay}>Spenders: {route.params.expense.spenders.map((p:any) => p.member.name).join(", ")}</Text>*/}
-
     </View>;
 }

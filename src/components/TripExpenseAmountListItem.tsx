@@ -3,6 +3,7 @@ import styles from "../styles/styles.ts";
 import memberAmount from "../types/memberAmount.ts";
 import {getExpenseIconImage, getExpenseImage} from "../types/expensetypes.ts";
 import LinearGradient from "react-native-linear-gradient";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export default function TripExpenseAmountListItem({item, onClick}: {item: memberAmount, onClick: any}){
     return (
@@ -16,9 +17,9 @@ export default function TripExpenseAmountListItem({item, onClick}: {item: member
             <View style={styles.expenseAmountListItemView}>
                 <Image style={styles.expenseAmountListItemImage} source={getExpenseIconImage(item.member.name)}/>
                 <Text style={styles.expenseAmountListItemHeader}>{item.member.name}</Text>
-                {item.amount < 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight, color: "red"}}>Rs {Math.round(item.amount)}</Text></View>}
-                {item.amount > 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight, color: "green"}}>Rs {Math.round(item.amount)}</Text></View>}
-                {item.amount == 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight}}>Rs {Math.round(item.amount)}</Text></View>}
+                {item.amount < 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight, color: "red"}}>{SettingsManager.settings.currencySymbol} {Math.round(item.amount)}</Text></View>}
+                {item.amount > 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight, color: "green"}}>{SettingsManager.settings.currencySymbol} {Math.round(item.amount)}</Text></View>}
+                {item.amount == 0 && <View style={styles.expenseAmountListItemText}><Text style={{...styles.itemsHeaderRight}}>{SettingsManager.settings.currencySymbol} {Math.round(item.amount)}</Text></View>}
             </View>
         </TouchableOpacity>
     );
