@@ -5,7 +5,7 @@ import Toast from "react-native-simple-toast";
 import React from "react";
 import LinearGradient from "react-native-linear-gradient";
 import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
-import {trip} from "../types/trip.ts";
+import {getTripThemeImage, trip} from "../types/trip.ts";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 function TripOverview({route, navigation}:any) {
@@ -24,7 +24,7 @@ function TripOverview({route, navigation}:any) {
             <View style={styles.backgroundImage}>
                 <Image
                     style={styles.backgroundImage}
-                    source={require('../images/uiImages/tripImages/trip.jpg')}
+                    source={getTripThemeImage(route.params.trip.theme)}
                 />
                 <LinearGradient
                     colors={['transparent', '#1C3043']}
