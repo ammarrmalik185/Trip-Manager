@@ -260,8 +260,8 @@ export default StyleSheet.create({
     },
     fabLeft:{
         position: 'absolute',
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
@@ -272,8 +272,8 @@ export default StyleSheet.create({
     },
     fabTop:{
         position: 'absolute',
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
@@ -422,12 +422,12 @@ export default StyleSheet.create({
         color: palette.text
     },
     title: {
-        fontSize: 35,
+        fontSize: 30,
         margin: 40,
         marginBottom: 20,
         color: palette.text,
         textAlign: 'center',
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     subTitle:{
         fontSize: 20,
@@ -920,6 +920,36 @@ export default StyleSheet.create({
         width: "90%",
         alignSelf: "center",
         height: "40%"
+    },
+    map:{
+        width: "90%",
+        height: 200,
+        margin: 20,
+        borderRadius: 10,
+        alignSelf: "center"
+    },
+    mapLarge:{
+        width: "80%",
+        height: "100%",
+        alignSelf: "center"
+    },
+    mapLegendHeader:{
+        color: palette.text,
+        fontSize: 10,
+        textAlign: "center",
+        marginBottom: 10
+    },
+    mapLegendText:{
+        color: palette.text,
+        fontSize: 8,
+    },
+    mapLegend:{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        backgroundColor: "rgba(0,0,0,0.7)",
+        margin: 10,
+        padding: 10,
+        borderRadius: 10
     }
-
 })

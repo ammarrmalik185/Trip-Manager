@@ -40,6 +40,7 @@ import Settings from "./Settings.tsx";
 import BackupAndRestore from "./BackupAndRestore.tsx";
 import CustomHeader from "../components/CustomHeader.tsx";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
+import TripLogsFullscreenMap from "./TripLogsFullscreenMap.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -70,6 +71,7 @@ const TripStack = () => {
         <Stack.Screen name={pages.TripExpensesComputed} component={TripExpensesComputed} options={{title: 'Computed Expenses'}} />
 
         <Stack.Screen name={pages.TripLogs} component={TripLogs} options={{title: 'Trip Logs'}} />
+        <Stack.Screen name={pages.TripLogsFullscreenMap} component={TripLogsFullscreenMap} options={{title: 'Trip Logs Map'}} />
         <Stack.Screen name={pages.TripLogsCreate} component={TripLogsCreate} options={{title: 'Create trip log'}} />
         <Stack.Screen name={pages.TripLogsEdit} component={TripLogsEdit} options={{title: 'Edit log'}} />
         <Stack.Screen name={pages.TripLogsDetails} component={TripLogsDetails} options={{title: 'Edit Log Details'}} />

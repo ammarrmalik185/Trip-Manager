@@ -115,6 +115,9 @@ export class trip {
             let newMember = new member();
             newMember.id = item.id;
             newMember.name = item.name;
+            newMember.description = item.description;
+            newMember.email = item.email;
+            newMember.phone = item.phone;
             newTrip.members.push(newMember);
         })
 
@@ -123,6 +126,7 @@ export class trip {
             newLog.id = item.id;
             newLog.date = new Date(item.date);
             newLog.description = item.description;
+            newLog.geoLocation = item.geoLocation;
             newLog.distance_traveled = item.distance_traveled;
             newLog.location = item.location;
             newLog.title = item.title;
@@ -154,5 +158,4 @@ export class trip {
     static createFolder(): Promise<void>{
         return mkdir(DocumentDirectoryPath + "/trips/");
     }
-
 }

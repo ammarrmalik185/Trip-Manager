@@ -8,7 +8,7 @@ enum logMode{
     toast
 }
 
-let currentLogModes : logMode[] = [logMode.file];
+let currentLogModes : logMode[] = [];
 
 export let Logger = {
     log: (txt: string) => {

@@ -1,3 +1,5 @@
+import TripLogsFullscreenMap from "../pages/TripLogsFullscreenMap.tsx";
+
 enum pages {
 
     // Trip Stack
@@ -24,6 +26,7 @@ enum pages {
     TripExpensesComputed = 'TripExpensesComputed',
 
     TripLogs = 'TripLogs',
+    TripLogsFullscreenMap = 'TripLogsFullscreenMap',
     TripLogsDetails = 'TripLogsDetails',
     TripLogsCreate = 'TripLogsCreate',
     TripLogsEdit = 'TripLogsEdit',

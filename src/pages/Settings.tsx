@@ -62,6 +62,22 @@ export default function Settings({navigation, route} : any){
                 />
             </View>
 
+             <View style={styles.horizontalStack}>
+                <Text style={styles.iconText}>Auto get location for logs</Text>
+                <Switch
+                    trackColor={{ false: palette.text, true: palette.text }}
+                    thumbColor={SettingsManager.settings.autoGetLocation ? palette.primary : palette.secondary}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={value => {
+                        console.log(value)
+                        SettingsManager.settings.autoGetLocation = value;
+                        SettingsManager.saveSettings();
+                        setRefresh(!refresh);
+                    }}
+                    value={SettingsManager.settings.autoGetLocation}
+                />
+            </View>
+
             <View style={styles.horizontalStack}>
                 <Text style={styles.iconText}>Currency Symbol: </Text>
                 <SelectList

@@ -5,6 +5,8 @@ export class SettingsManager {
     static settings : any = {
         hardConfirmationForDeleteTrip: true,
         openMostRecentTripOnAppOpen: false,
+        autoGetLocation: true,
+        showMapInLogEdit: true,
         currencySymbol: "Rs"
     };
 
@@ -12,7 +14,7 @@ export class SettingsManager {
         appJustOpen: true,
         currencyTypes: [
             "Rs",
-            "$",
+            "$" ,
             "¥" ,
             "₹" ,
             "€" ,
