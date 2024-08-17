@@ -4,12 +4,62 @@ import member from "./member.ts";
 import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import {Logger} from "../helpers/Logger.ts";
 
+export enum TripTheme{
+    Default = 1,
+    Mountains,
+    Beach,
+    City,
+    Forest,
+    Desert,
+    Snow,
+    Historical,
+    Highways,
+}
+
+export const tripThemes = [
+    { key: 1, value: "Default" },
+    { key: 2, value: "Mountains" },
+    { key: 3, value: "Beach" },
+    { key: 4, value: "City" },
+    { key: 5, value: "Forest" },
+    { key: 6, value: "Desert" },
+    { key: 7, value: "Snow" },
+    { key: 8, value: "Historical" },
+    { key: 9, value: "Highways" },
+]
+
+export function getTripThemeImage(theme: TripTheme){
+    theme = theme || TripTheme.Default;
+    // theme = TripTheme.Snow;
+    switch (theme){
+        case TripTheme.Beach:
+            return require('../images/uiImages/tripImages/beach.jpg');
+        case TripTheme.City:
+            return require('../images/uiImages/tripImages/city.jpg');
+        case TripTheme.Desert:
+            return require('../images/uiImages/tripImages/desert.jpg');
+        case TripTheme.Forest:
+            return require('../images/uiImages/tripImages/forest.webp');
+        case TripTheme.Historical:
+            return require('../images/uiImages/tripImages/historical.jpeg');
+        case TripTheme.Highways:
+            return require('../images/uiImages/tripImages/highway.jpg');
+        case TripTheme.Mountains:
+            return require('../images/uiImages/tripImages/mountains.jpg');
+        case TripTheme.Snow:
+            return require('../images/uiImages/tripImages/snow.jpg');
+        default:
+            return require('../images/uiImages/tripImages/trip.jpg');
+    }
+}
+
 export class trip {
 
     id: string = "";
     title: string = "";
     description: string = "";
     destination: string = "";
+    theme: TripTheme = TripTheme.Default;
     date: { from: Date, to: Date } = { from: new Date(), to: new Date() };
 
     members: member[] = [];
@@ -23,6 +73,7 @@ export class trip {
         this.title = "";
         this.description = "";
         this.destination = "";
+        this.theme = TripTheme.Default;
         this.date = { from: new Date(), to: new Date() };
         this.members = [];
         this.expenses = [];
@@ -37,6 +88,7 @@ export class trip {
             description: this.description,
             destination: this.destination,
             date: this.date,
+            theme: this.theme,
             members: this.members,
             expenses: this.expenses,
             logs: this.logs
@@ -103,6 +155,7 @@ export class trip {
         newTrip.id = data.id;
         newTrip.title = data.title;
         newTrip.description = data.description;
+        newTrip.theme = data.theme;
         newTrip.destination = data.destination;
         newTrip.date = data.date;
         newTrip.date.from = new Date(newTrip.date.from)
