@@ -12,8 +12,8 @@ import {SettingsManager} from "../helpers/SettingsManager.ts";
 export default function TripMembersDetails({route, navigation} : any){
     const [modalVisible, setModalVisible] = React.useState(false);
 
-    let paid = route.params.trip.expenses.reduce((prev: number, item: expense) => prev + (item.calculate().find(calc => calc.member.id == route.params.member.id)?.amount || 0), 0).toFixed(0);
-    let spent = route.params.trip.expenses.reduce((prev: number, item: expense) => prev + (item.payers.find(pay => pay.member.id == route.params.member.id)?.amount || 0), 0).toFixed(0);
+    let paid = route.params.trip.expenses.reduce((prev: number, item: expense) => prev + (item.payers.find(calc => calc.member.id == route.params.member.id)?.amount || 0), 0).toFixed(0);
+    let spent = route.params.trip.expenses.reduce((prev: number, item: expense) => prev + (item.getCalculatedExpense().spenders.find(pay => pay.member.id == route.params.member.id)?.amount || 0), 0).toFixed(0);
     let total = paid - spent;
 
     return (

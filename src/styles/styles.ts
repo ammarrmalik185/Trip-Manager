@@ -10,10 +10,10 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: palette.border,
         height: 40,
-        margin: 12,
+        margin: 20,
         padding: 10,
         marginTop: 5,
-        backgroundColor: palette.card,
+        backgroundColor: palette.background,
         color: palette.text,
         borderRadius: 10,
         marginBottom: 5,
@@ -36,10 +36,10 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: palette.border,
         height: 80,
-        margin: 12,
+        margin: 20,
         padding: 10,
         marginTop: 5,
-        backgroundColor: palette.card,
+        backgroundColor: palette.background,
         color: palette.text,
         borderRadius: 10,
     },
@@ -82,8 +82,8 @@ export default StyleSheet.create({
         borderColor: palette.border,
         flex: 1,
         width: "auto",
-        margin: 12,
-        backgroundColor: palette.card
+        margin: 20,
+        backgroundColor: palette.background
     },
     dropDownContainerData:{
         width: "auto",
@@ -317,8 +317,10 @@ export default StyleSheet.create({
     acceptButton: {
         backgroundColor: palette.primary,
         padding: 10,
-        marginVertical: 8,
+        marginVertical: 15,
         marginHorizontal: 8,
+        width: "40%",
+        alignSelf: "center",
         borderRadius: 10,
         shadowRadius: 4,
         shadowColor: palette.secondary,
@@ -428,12 +430,14 @@ export default StyleSheet.create({
         color: palette.text,
         textAlign: 'center',
         fontWeight: "bold",
+        maxHeight: 200
     },
     subTitle:{
         fontSize: 20,
         color: palette.text,
         opacity: 0.7,
-        textAlign: 'center'
+        textAlign: 'center',
+        maxHeight: 200
     },
     description:{
         color: palette.text,
@@ -564,6 +568,8 @@ export default StyleSheet.create({
     memberTitle:{
         color: palette.text,
         fontSize: 30,
+        alignSelf: "center",
+        width: "90%",
         textAlign: "center",
     },
     memberSubTitle:{
@@ -789,7 +795,8 @@ export default StyleSheet.create({
     },
     tripListHeader:{
         color: palette.text,
-        fontSize: 25
+        fontSize: 25,
+        width: "85%"
     },
     tripListSubheader:{
         color: palette.text,
@@ -856,8 +863,13 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        width: "30%",
+        width: "35%",
         marginRight: 10
+    },
+    logHorizontalStackText:{
+        color: palette.text,
+        fontSize: 12,
+        width: "70%",
     },
     memberListHeader:{
         marginLeft: 10,
@@ -911,7 +923,8 @@ export default StyleSheet.create({
     expenseAmountListItemHeader:{
         fontSize: 20,
         color: palette.text,
-        marginLeft: 10
+        marginLeft: 10,
+        maxWidth: "70%"
     },
     singleExpenseContainer:{
         padding: 10,

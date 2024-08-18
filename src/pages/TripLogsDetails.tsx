@@ -66,36 +66,39 @@ export default function TripLogsDetails({route, navigation}:any) {
             })} />
 
             <View style={{height: "30%"}}>
-                <Text style={styles.title}>{route.params.log.title}</Text>
-                <Text style={styles.description}>{route.params.log.description}</Text>
-                <View style={styles.horizontalStack}>
-                    <View style={styles.iconTextGroup}>
-                        <Image
-                            source={require('../images/uiImages/location.png')}
-                            style={styles.icon}
-                        />
-                        <Text style={styles.iconText}>{route.params.log.location != "" ? route.params.log.location : "No Location"}</Text>
-                    </View>
-                    <View style={styles.iconTextGroup}>
-                        <Image
-                            source={require('../images/uiImages/calender.png')}
-                            style={styles.icon}
-                        />
-                        <Text style={styles.iconText}>{route.params.log.date.toLocaleTimeString()}</Text>
-                        <Text style={styles.iconText}>{route.params.log.date.toLocaleDateString()}</Text>
-                    </View>
-                    <View style={styles.iconTextGroup}>
-                        <Image
-                            source={require('../images/uiImages/odo.png')}
-                            style={styles.icon}
-                        />
-                        <Text style={styles.iconText}>{route.params.log.distance_traveled} kms</Text>
+                <Text style={{...styles.title, marginBottom: 5, paddingBottom: 0, maxHeight: "30%"}}>{route.params.log.title}</Text>
+                <Text style={{...styles.description, marginTop: 0, paddingTop: 0, maxHeight: "30%"}}>{route.params.log.description}</Text>
+                <View style={{...styles.bottom}}>
+                    <View style={styles.horizontalStack}>
+                        <View style={styles.iconTextGroup}>
+                            <Image
+                                source={require('../images/uiImages/location.png')}
+                                style={styles.icon}
+                            />
+                            <Text style={styles.iconText}>{route.params.log.location != "" ? route.params.log.location : "No Location"}</Text>
+                        </View>
+                        <View style={styles.iconTextGroup}>
+                            <Image
+                                source={require('../images/uiImages/calender.png')}
+                                style={styles.icon}
+                            />
+                            <Text style={styles.iconText}>{route.params.log.date.toLocaleTimeString()}</Text>
+                            <Text style={styles.iconText}>{route.params.log.date.toLocaleDateString()}</Text>
+                        </View>
+                        <View style={styles.iconTextGroup}>
+                            <Image
+                                source={require('../images/uiImages/odo.png')}
+                                style={styles.icon}
+                            />
+                            <Text style={styles.iconText}>{route.params.log.distance_traveled} kms</Text>
+                        </View>
                     </View>
                 </View>
             </View>
-            <View style={{height: "60%"}}>
+            {/*<View style={{height: 10}}/>*/}
+            <View style={{height: "55%"}}>
                 <View style={{...styles.horizontalStack, height: "100%"}}>
-                 <TouchableOpacity style={{opacity: prev ? 1 : 0.2}} onPress={() => {if (prev) navigation.navigate(pages.TripLogsDetails, {trip: route.params.trip, log: prev})}}><Text style={styles.itemText}>{"⟪"}</Text></TouchableOpacity>
+                 <TouchableOpacity style={{opacity: prev ? 1 : 0.2, padding: 10}} onPress={() => {if (prev) navigation.navigate(pages.TripLogsDetails, {trip: route.params.trip, log: prev})}}><Text style={styles.itemText}>{"⟪"}</Text></TouchableOpacity>
                     {route.params.log.geoLocation && <View style={styles.mapLarge}>
                         <LeafletView
                             mapCenterPosition={route.params.log.geoLocation}
@@ -120,12 +123,11 @@ export default function TripLogsDetails({route, navigation}:any) {
                             <Text style={styles.subTitle}>No Geo location</Text>
                         </View>
                     </View>}
-                 <TouchableOpacity style={{opacity: next ? 1 : 0.2}} onPress={() => {if (next) navigation.navigate(pages.TripLogsDetails, {trip: route.params.trip, log: next})}}><Text style={styles.itemText}>{"⟫"}</Text></TouchableOpacity>
+                 <TouchableOpacity style={{opacity: next ? 1 : 0.2, padding: 10}} onPress={() => {if (next) navigation.navigate(pages.TripLogsDetails, {trip: route.params.trip, log: next})}}><Text style={styles.itemText}>{"⟫"}</Text></TouchableOpacity>
                 </View>
             </View>
+            <View style={{height: "15%"}}>
                 <View style={{height: 20}}/>
-
-                {/*<View style={styles.horizontalLine}></View>*/}
 
                 <View  style={{...styles.horizontalStack, marginHorizontal: 40}} >
                     <TouchableOpacity onPress={() => {navigation.navigate(pages.TripLogsEdit, {log: route.params.log, trip: route.params.trip})}} style={styles.iconTextGroup}>
@@ -144,6 +146,7 @@ export default function TripLogsDetails({route, navigation}:any) {
                         <Text style={styles.iconText}>Delete Log</Text>
                     </TouchableOpacity>
                 </View>
+            </View>
         </View>
     );
 }

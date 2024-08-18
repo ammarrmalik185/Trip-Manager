@@ -12,6 +12,17 @@ class member {
         this.email = "";
         this.phone = "";
     }
+
+    validate(){
+        return this.name != "";
+    }
+
+    getValidationError(){
+        if (this.name == "") {
+            return "Name cannot be empty";
+        }
+        return "Member details are not valid"
+    }
 }
 
 export default member;

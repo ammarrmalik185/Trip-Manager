@@ -1,5 +1,5 @@
 import {FlatList, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import {palette} from "../styles/colors.ts";
@@ -9,11 +9,25 @@ import {expenseTypes} from "../types/expensetypes.ts";
 import member from "../types/member.ts";
 import Toast from "react-native-simple-toast";
 import {singleExpense} from "../types/singleExpense.ts";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
+import memberAmount from "../types/memberAmount.ts";
 
 function SingleExpenseCreate({route, navigation}:any) {
     const [newExpense, setNewExpense] = useState(new singleExpense());
     const [refresh, setRefresh] = useState(false);
     const [spenders, setSpenders] = useState(newExpense.spenders);
+
+    useEffect(() => {
+        let newSpenders: memberAmount[] = [];
+        newExpense.members.forEach((member: member) => {
+            if (!spenders.find(s => s.member.id == member.id)){
+                newSpenders.push({member: member, amount: SettingsManager.settings.defaultExpenseSpenderNumber})
+            }else{
+                newSpenders.push(spenders.find(s => s.member.id == member.id) as memberAmount)
+            }
+        });
+        setSpenders(newSpenders);
+    }, [refresh, setRefresh])
 
     return (
         <ScrollView style={styles.main}>
@@ -121,7 +135,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                                 <TouchableOpacity style={styles.addButtonSmall} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount += 0.1;
+                                        spender.amount += 0.1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         setSpenders([...spenders])
                                     }else{
                                         setSpenders([...spenders, {member: data.item as member, amount: 0.1}])
@@ -132,7 +146,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                                 <TouchableOpacity style={styles.addButton} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount += 1;
+                                        spender.amount += 1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         setSpenders([...spenders])
                                     }else{
                                         setSpenders([...spenders, {member: data.item as member, amount: 1}])
@@ -143,7 +157,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                                 <TouchableOpacity style={styles.subtractButton} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount -= 1;
+                                        spender.amount -= 1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         if (spender.amount < 0) spender.amount = 0;
                                         setSpenders([...spenders])
                                     }else{
@@ -155,7 +169,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                                 <TouchableOpacity style={styles.subtractButtonSmall} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount -= 0.1;
+                                        spender.amount -= 0.1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         if (spender.amount < 0) spender.amount = 0;
                                         setSpenders([...spenders])
                                     }else{
@@ -199,8 +213,7 @@ function SingleExpenseCreate({route, navigation}:any) {
                         navigation.navigate(pages.SingleExpenseOverview, {singleExpense: newExpense});
                     }).catch(console.error);
                 } else {
-                    Toast.show("Expense is not valid", Toast.LONG);
-                    console.error("Not Valid")
+                    Toast.show(newExpense.getValidationError(), Toast.LONG);
                 }
 
             }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>

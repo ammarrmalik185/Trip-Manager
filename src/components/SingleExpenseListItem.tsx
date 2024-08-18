@@ -7,6 +7,7 @@ import LinearGradient from "react-native-linear-gradient";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export function SingleExpensesListItem({item, navigation}: {item: singleExpense, navigation: any}){
+    item.calculateTotal();
     return  <TouchableOpacity style={styles.tripListItem} onPress={() => {
         navigation.navigate(pages.SingleExpenseOverview, {singleExpense: item})
     }}>

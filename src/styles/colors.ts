@@ -4,7 +4,7 @@ const darkModeColors = {
     background: "#1C3043",  // Very Dark Grey for the main background
     card: "#203565",        // Slightly Lighter Grey for card and panel backgrounds
     text: "#ffffff",        // Light Grey for text
-    border: "#323232",      // Dark Grey for borders (to provide subtle contrast),
+    border: "#777777",      // Dark Grey for borders (to provide subtle contrast),
     placeholder: "#e0e0e0"
 };
 

@@ -79,9 +79,14 @@ export default function TripLogsCreate({navigation, route}:any) {
             </View>
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                route.params.trip.logs.push(newLog)
-                route.params.trip.saveTrip()
-                navigation.navigate(pages.TripLogs, {trip: route.params.trip})
+                if (newLog.validate()){
+                    route.params.trip.logs.push(newLog)
+                    route.params.trip.saveTrip()
+                    navigation.navigate(pages.TripLogs, {trip: route.params.trip})
+                }else{
+                    Toast.show(newLog.getValidationError(), ToastAndroid.LONG)
+                }
+
             }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>
 
         </ScrollView>

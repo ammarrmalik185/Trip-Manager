@@ -5,9 +5,13 @@ export class SettingsManager {
     static settings : any = {
         hardConfirmationForDeleteTrip: true,
         openMostRecentTripOnAppOpen: false,
+
         autoGetLocation: true,
         showMapInLogEdit: true,
-        currencySymbol: "Rs"
+
+        currencySymbol: "Rs",
+        defaultExpenseSpenderNumber: 0,
+        incrementDecrementMultiplier: 1,
     };
 
     static settingHelpers:any = {

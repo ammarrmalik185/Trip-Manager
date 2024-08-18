@@ -4,6 +4,7 @@ import {useState} from "react";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import {palette} from "../styles/colors.ts";
+import Toast from "react-native-simple-toast";
 
 export default function TripMembersEdit({route, navigation}: any){
     const [oldMember, setOldMember] = useState<member>(route.params.member);
@@ -37,11 +38,16 @@ export default function TripMembersEdit({route, navigation}: any){
                 newMember.email = email;
                 newMember.phone = phone
 
-                route.params.trip.members = route.params.trip.members.filter((exp: member) => exp.id != oldMember.id);
-                route.params.trip.members.push(newMember)
-                route.params.trip.saveTrip()
+                if (newMember.validate()){
+                    route.params.trip.members = route.params.trip.members.filter((exp: member) => exp.id != oldMember.id);
+                    route.params.trip.members.push(newMember)
+                    route.params.trip.saveTrip()
 
-                navigation.navigate(pages.TripMembers, {trip: route.params.trip})
+                    navigation.navigate(pages.TripMembers, {trip: route.params.trip})
+                }else {
+                    Toast.show(newMember.getValidationError(), Toast.LONG)
+                }
+
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>
         </View>

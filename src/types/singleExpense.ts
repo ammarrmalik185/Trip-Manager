@@ -150,12 +150,25 @@ export class singleExpense {
         });
 
         return result;
-
     }
 
     validate(): boolean {
         return this.payers.reduce((v, i) => v + i.amount, 0) != 0 &&
-            this.spenders.reduce((v, i) => v + i.amount, 0) != 0;
+            this.spenders.reduce((v, i) => v + i.amount, 0) != 0 &&
+            this.title != "";
+    }
+
+    getValidationError(): string {
+        if (this.payers.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Payers total amount cannot be 0";
+        }
+        if (this.spenders.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Spenders total amount cannot be 0";
+        }
+        if (this.title == "") {
+            return "Title cannot be empty";
+        }
+        return "Expense details are not valid";
     }
 
     calculateTotal(){

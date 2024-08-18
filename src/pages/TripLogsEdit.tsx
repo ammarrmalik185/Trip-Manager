@@ -89,11 +89,16 @@ export default function TripLogsEdit({route, navigation}: any) {
                 newLog.distance_traveled = distance;
                 newLog.location = location;
 
-                route.params.trip.logs = route.params.trip.logs.filter((lg: log) => lg.id != oldLog.id);
-                route.params.trip.logs.push(newLog);
-                route.params.trip.saveTrip()
+                if (newLog.validate()){
+                    route.params.trip.logs = route.params.trip.logs.filter((lg: log) => lg.id != oldLog.id);
+                    route.params.trip.logs.push(newLog);
+                    route.params.trip.saveTrip()
 
-                navigation.navigate(pages.TripLogs, {trip: route.params.trip})
+                    navigation.navigate(pages.TripLogs, {trip: route.params.trip})
+                }else{
+                    Toast.show(newLog.getValidationError(), ToastAndroid.LONG)
+                }
+
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>
 

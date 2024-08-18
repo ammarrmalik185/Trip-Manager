@@ -13,6 +13,7 @@ import {Logger} from "../helpers/Logger.ts";
 export default function SingleExpenseOverview({route, navigation}:{route:any, navigation:any}){
 
     const [modalVisible, setModalVisible] = React.useState(false);
+    route.params.singleExpense.calculateTotal();
 
     return (<View style={styles.main}>
         <PopupModal state={modalVisible} modalData={new ModalData(ModalType.SoftConfirmation, "Are you sure you want to delete this expense?", (confirm:any) => {

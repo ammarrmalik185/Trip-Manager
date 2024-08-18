@@ -6,8 +6,8 @@ import member from "../types/member.ts";
 import expense from "../types/expense.ts";
 
 export function TripMemberListItem({item, navigation, trip}: {item: member, navigation: any, trip: trip}){
-    let paid = trip.expenses.reduce((prev: number, expenseItem: expense) => prev + (expenseItem.calculate().find(calc => calc.member.id == item.id)?.amount || 0), 0).toFixed(0);
-    let spent = trip.expenses.reduce((prev: number, expenseItem: expense) => prev + (expenseItem.payers.find(pay => pay.member.id == item.id)?.amount || 0), 0).toFixed(0);
+    let paid = trip.expenses.reduce((prev: number, expenseItem: expense) => prev + (expenseItem.payers.find(calc => calc.member.id == item.id)?.amount || 0), 0).toFixed(0);
+    let spent = trip.expenses.reduce((prev: number, expenseItem: expense) => prev + (expenseItem.getCalculatedExpense().spenders.find(pay => pay.member.id == item.id)?.amount || 0), 0).toFixed(0);
 
     return  <TouchableOpacity style={styles.item} onPress={() => {
         navigation.navigate(pages.TripMembersDetails, {trip: trip, member: item})

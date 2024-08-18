@@ -3,6 +3,7 @@ import styles from "../styles/styles.ts";
 import {useState} from "react";
 import member from "../types/member.ts";
 import {palette} from "../styles/colors.ts";
+import Toast from "react-native-simple-toast";
 
 export default function TripMembersCreate({navigation, route}:any) {
     const [newMember, setMember] = useState<member>(new member());
@@ -23,9 +24,14 @@ export default function TripMembersCreate({navigation, route}:any) {
 
 
             <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                route.params.trip.members.push(newMember)
-                route.params.trip.saveTrip()
-                navigation.goBack()
+                if (newMember.validate()){
+                    route.params.trip.members.push(newMember)
+                    route.params.trip.saveTrip()
+                    navigation.goBack()
+                }else{
+                    Toast.show(newMember.getValidationError(), Toast.LONG)
+                }
+
             }}><Text style={styles.acceptButtonText}>Add</Text></TouchableOpacity>
         </View>
     )

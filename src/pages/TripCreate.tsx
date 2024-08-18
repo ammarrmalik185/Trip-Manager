@@ -9,8 +9,8 @@ import {SelectList} from "react-native-dropdown-select-list";
 import {expenseTypes} from "../types/expensetypes.ts";
 import LinearGradient from "react-native-linear-gradient";
 
-function TripCreate({route, navigation}:any) {
-    const [newTrip, setTrip] = useState<trip>(new trip());
+function TripCreate({navigation}:any) {
+    const [newTrip] = useState<trip>(new trip());
     const [refresh, setRefresh] = useState(false);
 
     return (
@@ -54,7 +54,7 @@ function TripCreate({route, navigation}:any) {
                     }}
                     save="key"
 
-                    boxStyles={{color: palette.text, backgroundColor: palette.card, borderRadius: 10, margin: 10}}
+                    boxStyles={{backgroundColor: palette.card, borderRadius: 10, margin: 10}}
                     dropdownTextStyles={styles.dropDownInfoText}
                     dropdownStyles={styles.dropDownContainerData}
                     inputStyles={styles.dropDownInfoText}

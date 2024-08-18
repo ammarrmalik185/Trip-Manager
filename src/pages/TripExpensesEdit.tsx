@@ -163,7 +163,7 @@ export default function TripExpensesEdit({route, navigation} : any){
 
                 navigation.navigate(pages.TripExpensesDetails, {trip: route.params.trip, expense: newExpense})
             } else {
-                Toast.show("Expense not valid", Toast.SHORT)
+                Toast.show(newExpense.getValidationError(), Toast.LONG);
             }
 
         }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>

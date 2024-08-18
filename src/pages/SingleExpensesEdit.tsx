@@ -1,7 +1,7 @@
 import {FlatList, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {singleExpense} from "../types/singleExpense.ts";
 import {palette} from "../styles/colors.ts";
 import {SelectList} from "react-native-dropdown-select-list";
@@ -9,6 +9,8 @@ import {expenseTypes} from "../types/expensetypes.ts";
 import DatePicker from "../components/DatePicker.tsx";
 import member from "../types/member.ts";
 import Toast from "react-native-simple-toast";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
+import memberAmount from "../types/memberAmount.ts";
 
 export default function SingleExpensesEdit({route, navigation}:{route:any, navigation:any}){
 
@@ -120,7 +122,7 @@ export default function SingleExpensesEdit({route, navigation}:{route:any, navig
                                 <TouchableOpacity style={styles.addButtonSmall} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount += 0.1;
+                                        spender.amount += 0.1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         setSpenders([...spenders])
                                     }else{
                                         setSpenders([...spenders, {member: data.item as member, amount: 0.1}])
@@ -130,7 +132,7 @@ export default function SingleExpensesEdit({route, navigation}:{route:any, navig
                                 <TouchableOpacity style={styles.addButton} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount += 1;
+                                        spender.amount += 1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         setSpenders([...spenders])
                                     }else{
                                         setSpenders([...spenders, {member: data.item as member, amount: 1}])
@@ -140,7 +142,7 @@ export default function SingleExpensesEdit({route, navigation}:{route:any, navig
                                 <TouchableOpacity style={styles.subtractButton} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount -= 1;
+                                        spender.amount -= 1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         if (spender.amount < 0) spender.amount = 0;
                                         setSpenders([...spenders])
                                     }else{
@@ -151,7 +153,7 @@ export default function SingleExpensesEdit({route, navigation}:{route:any, navig
                                 <TouchableOpacity style={styles.subtractButtonSmall} onPress={() => {
                                     let spender = spenders.find(item => item.member.id == data.item.id);
                                     if(spender){
-                                        spender.amount -= 0.1;
+                                        spender.amount -= 0.1 * SettingsManager.settings.incrementDecrementMultiplier;
                                         if (spender.amount < 0) spender.amount = 0;
                                         setSpenders([...spenders])
                                     }else{
@@ -205,7 +207,7 @@ export default function SingleExpensesEdit({route, navigation}:{route:any, navig
                     newExpense.calculateTotal();
                     newExpense.saveSingleExpense().then(() => navigation.navigate(pages.SingleExpenseOverview, {singleExpense: newExpense}));
                 } else {
-                    Toast.show("Expense not valid", Toast.SHORT)
+                    Toast.show(newExpense.getValidationError(), Toast.SHORT);
                 }
 
             }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>

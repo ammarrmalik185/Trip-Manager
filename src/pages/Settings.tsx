@@ -1,4 +1,4 @@
-import {Switch, Text, TouchableOpacity, View} from "react-native";
+import {Switch, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import React, {useState} from "react";
@@ -17,7 +17,6 @@ export default function Settings({navigation, route} : any){
         <View style={styles.main}>
 
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.HardConfirmation, "Are you sure you want to delete all data? This process is not reversible. Remember to make a backup", (value: boolean) => {
-                console.log("Deleting all data");
                 if (value) {
                     trip.allTrips.forEach((t: trip) => {
                         t.deleteTrip();
@@ -30,6 +29,9 @@ export default function Settings({navigation, route} : any){
             }, [], "Delete all my data")}/>
 
             <Text style={styles.title}>Preferences</Text>
+
+            <View style={{height: 20}}/>
+            <Text style={styles.subTitle}>Trips</Text>
 
             <View style={styles.horizontalStack}>
                 <Text style={styles.iconText}>Hard Confirmation for delete trip</Text>
@@ -53,7 +55,6 @@ export default function Settings({navigation, route} : any){
                     thumbColor={SettingsManager.settings.openMostRecentTripOnAppOpen ? palette.primary : palette.secondary}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={value => {
-                        console.log(value)
                         SettingsManager.settings.openMostRecentTripOnAppOpen = value;
                         SettingsManager.saveSettings();
                         setRefresh(!refresh);
@@ -62,6 +63,9 @@ export default function Settings({navigation, route} : any){
                 />
             </View>
 
+            <View style={{height: 20}}/>
+            <Text style={styles.subTitle}>Logs</Text>
+
              <View style={styles.horizontalStack}>
                 <Text style={styles.iconText}>Auto get location for logs</Text>
                 <Switch
@@ -69,7 +73,6 @@ export default function Settings({navigation, route} : any){
                     thumbColor={SettingsManager.settings.autoGetLocation ? palette.primary : palette.secondary}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={value => {
-                        console.log(value)
                         SettingsManager.settings.autoGetLocation = value;
                         SettingsManager.saveSettings();
                         setRefresh(!refresh);
@@ -78,6 +81,23 @@ export default function Settings({navigation, route} : any){
                 />
             </View>
 
+            <View style={styles.horizontalStack}>
+                <Text style={styles.iconText}>Show map in log edit</Text>
+                <Switch
+                    trackColor={{ false: palette.text, true: palette.text }}
+                    thumbColor={SettingsManager.settings.showMapInLogEdit ? palette.primary : palette.secondary}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={value => {
+                        SettingsManager.settings.showMapInLogEdit = value;
+                        SettingsManager.saveSettings();
+                        setRefresh(!refresh);
+                    }}
+                    value={SettingsManager.settings.showMapInLogEdit}
+                />
+            </View>
+
+            <View style={{height: 20}}/>
+            <Text style={styles.subTitle}>Expenses</Text>
             <View style={styles.horizontalStack}>
                 <Text style={styles.iconText}>Currency Symbol: </Text>
                 <SelectList
@@ -95,6 +115,23 @@ export default function Settings({navigation, route} : any){
 
                     defaultOption={SettingsManager.settings.currencySymbol}
                 />
+            </View>
+            <View style={styles.horizontalStack}>
+                <Text style={styles.iconText}>Default Spender Amount</Text>
+                <TextInput style={styles.inputField} value={SettingsManager.settings.defaultExpenseSpenderNumber.toString()} onChangeText={(text) => {
+                    SettingsManager.settings.defaultExpenseSpenderNumber = parseInt(text) || 0;
+                    SettingsManager.saveSettings();
+                    setRefresh(!refresh);
+                }}/>
+            </View>
+
+            <View style={styles.horizontalStack}>
+                <Text style={styles.iconText}>Increment/Decrement button multiplier</Text>
+                <TextInput style={styles.inputField} value={SettingsManager.settings.incrementDecrementMultiplier.toString()} onChangeText={(text) => {
+                    SettingsManager.settings.incrementDecrementMultiplier = parseInt(text) || 0;
+                    SettingsManager.saveSettings();
+                    setRefresh(!refresh);
+                }}/>
             </View>
 
             <View style={styles.horizontalLine}></View>

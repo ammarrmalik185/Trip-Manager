@@ -16,6 +16,17 @@ class log {
         this.date = new Date();
         this.geoLocation = undefined;
     }
+
+    validate(): boolean {
+        return this.title != "";
+    }
+
+    getValidationError(): string {
+        if (this.title == "") {
+            return "Title cannot be empty";
+        }
+        return "Log details are not valid"
+    }
 }
 
 export default log;

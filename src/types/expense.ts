@@ -52,6 +52,19 @@ class expense {
         this.spenders.reduce((v, i) => v + i.amount, 0) != 0;
     }
 
+    getValidationError(): string {
+        if (this.payers.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Payers total amount cannot be zero";
+        }
+        if (this.spenders.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Spenders total amount cannot be zero";
+        }
+        if (this.title == "") {
+            return "Title cannot be empty";
+        }
+        return "Expense not valid";
+    }
+
     calculateTotal(){
         this.amount = this.payers.reduce((v, i) => v + i.amount, 0);
     }
