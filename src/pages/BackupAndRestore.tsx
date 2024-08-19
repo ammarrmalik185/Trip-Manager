@@ -1,6 +1,6 @@
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import {Logger} from "../helpers/Logger.ts";
-import {trip} from "../types/trip.ts";
+import {trip, TripTheme} from "../types/trip.ts";
 import {singleExpense} from "../types/singleExpense.ts";
 import {DocumentDirectoryPath, readFile, writeFile} from "react-native-fs";
 import styles from "../styles/styles.ts";
@@ -10,6 +10,10 @@ import DocumentPicker from 'react-native-document-picker';
 import FirebaseManager from "../helpers/FirebaseManager.ts";
 import {useEffect, useState} from "react";
 import {palette} from "../styles/colors.ts";
+import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
+import memberAmount from "../types/memberAmount.ts";
+import SettlementCalculator from "../helpers/SettlementCalculator.ts";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 const onlineEnabled = true;
 
@@ -23,7 +27,6 @@ const generateFile = async (content: string) => {
         await writeFile(filePath, content, 'utf8');
         generated = true;
     } catch (error) {
-        console.error(error)
         Logger.error(error);
         Toast.show('Failed to generate backup file', Toast.SHORT);
     }
@@ -38,11 +41,38 @@ const generateFile = async (content: string) => {
             await Share.open(shareOptions);
         } catch (error){
             Logger.log("Saving Failed: " + error)
-            Toast.show('Saving Failed', Toast.SHORT);
         }
     }
 
 };
+
+const generateTextFile = async (content: string) => {
+    const fileName = 'trip-manager.md';
+    const filePath = `${DocumentDirectoryPath}/${fileName}`;
+
+    let generated = false;
+
+    try {
+        await writeFile(filePath, content, 'utf8');
+        generated = true;
+    } catch (error) {
+        Logger.error(error);
+        Toast.show('Failed to generate backup file', Toast.SHORT);
+    }
+
+    if (generated){
+        try {
+            const shareOptions = {
+                title: 'Download your file',
+                url: `file://${filePath}`,
+                type: 'text/markdown',
+            };
+            await Share.open(shareOptions);
+        } catch (error){
+            Logger.log("Saving Failed: " + error)
+        }
+    }
+}
 
 const pickFile = async () => {
     try {
@@ -96,6 +126,7 @@ const recoverBackupFromString = (content: string | undefined) => {
 export default function BackupAndRestore(){
 
     const [refresh, setRefresh] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(()=>{
         FirebaseManager.onAuthStateChanged((user: any) => {
@@ -111,6 +142,41 @@ export default function BackupAndRestore(){
 
     return (
         <View style={styles.main}>
+            <PopupModal state={modalVisible} modalData={new ModalData(ModalType.Information, "Note: This file cannot be used to restore data", () => {
+
+                let textArr : string[] = [];
+                trip.loadTrips((trips:trip[]) => {
+                    for (const singleTrip of trips.sort((a, b) => b.date.from.getTime() - a.date.from.getTime())){
+                        textArr.push(`## ${singleTrip.title}\n`);
+                        textArr.push(`Destination: ${singleTrip.destination}\n`);
+                        textArr.push(`Date: ${singleTrip.date.from.toLocaleDateString()}\n`);
+                        textArr.push("### Members\n");
+                        for (const member of singleTrip.members) {
+                            textArr.push(`- ${member.name}\n`);
+                        }
+                        textArr.push("### Expenses\n");
+                        for (const expense of singleTrip.expenses.sort((a, b) => a.date.getTime() - b.date.getTime())){
+                            expense.calculateTotal();
+                            let paid = expense.payers.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
+                            let spent = expense.getCalculatedExpense().spenders.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
+                            textArr.push(`${expense.date.toLocaleTimeString()} ${expense.date.toLocaleDateString()} - ${expense.title} paid by: ${paid}(${expense.amount}) -> spent by: ${spent}\n`)
+                        }
+                        textArr.push("### Logs\n");
+                        for (const log of singleTrip.logs.sort((a, b) => a.date.getTime() - b.date.getTime())) {
+                            textArr.push(`${log.date.toLocaleTimeString()} ${log.date.toLocaleDateString()} - ${log.title}\n`)
+                        }
+                        textArr.push("\n");
+                        textArr.push('### Settlements\n')
+                        for (const settlement of new SettlementCalculator(singleTrip.expenses.map(e => e.getCalculatedExpense())).settlements) {
+                            textArr.push(`${settlement.spender.name} owes ${settlement.payer.name} ${SettingsManager.settings.currencySymbol} ${settlement.amount.toFixed(0)}\n`)
+                        }
+                    }
+                    generateTextFile(textArr.join(""));
+                })
+
+                setModalVisible(false)
+
+            }, [], "")}/>
             <View style={styles.container}>
 
                 {onlineEnabled && <View style={styles.item}>
@@ -121,10 +187,6 @@ export default function BackupAndRestore(){
                             Logger.log("Create Firebase Backup")
                             trip.loadTrips((trips:trip[]) => {
                                 singleExpense.loadSingleExpenses((singleExpenses:singleExpense[]) => {
-
-                                    Logger.log("Loaded trips and single expenses for firebase backup")
-                                    Logger.log("Trips: " + JSON.stringify(trips))
-                                    Logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
 
                                     let backup = {
                                         trips: trips,
@@ -143,7 +205,6 @@ export default function BackupAndRestore(){
 
                         <TouchableOpacity style={styles.acceptButton} onPress={() => {
                             FirebaseManager.getJsonUserdata().then(v => {
-                                console.log(v)
                                 recoverBackupFromString(v)
                             })}
                         }>
@@ -176,9 +237,6 @@ export default function BackupAndRestore(){
                             Logger.log("Create Local Backup")
                             trip.loadTrips((trips:trip[]) => {
                                 singleExpense.loadSingleExpenses((singleExpenses:singleExpense[]) => {
-                                    Logger.log("Loaded trips and single expenses for local backup")
-                                    Logger.log("Trips: " + JSON.stringify(trips))
-                                    Logger.log("Single Expenses: " + JSON.stringify(singleExpenses))
 
                                     let backup = {
                                         trips: trips,
@@ -197,7 +255,13 @@ export default function BackupAndRestore(){
                         }}>
                             <Text style={styles.acceptButtonText}>Restore From File</Text>
                         </TouchableOpacity>
+
                     </View>
+                    <TouchableOpacity style={{...styles.neutralButtonNormal, alignSelf: "center"}} onPress={() => {
+                        setModalVisible(true);
+                    }}>
+                        <Text style={styles.acceptButtonText}>Get human readable file</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
