@@ -53,7 +53,7 @@ export default function TripEdit({route, navigation} : any) {
                     setSelected={setTheme}
                     save="key"
 
-                    boxStyles={{color: palette.text, backgroundColor: palette.card, borderRadius: 10, margin: 10}}
+                    boxStyles={styles.inputField}
                     dropdownTextStyles={styles.dropDownInfoText}
                     dropdownStyles={styles.dropDownContainerData}
                     inputStyles={styles.dropDownInfoText}

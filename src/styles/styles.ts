@@ -77,6 +77,11 @@ export default StyleSheet.create({
     datePickerText:{
         color: palette.text
     },
+    datePickerYearContainer:{
+        backgroundColor: palette.card,
+        borderRadius: 20,
+        color: palette.text
+    },
     dropDownContainer:{
         borderWidth: 1,
         borderColor: palette.border,

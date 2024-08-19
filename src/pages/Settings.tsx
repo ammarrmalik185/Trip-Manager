@@ -1,4 +1,4 @@
-import {Switch, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ScrollView, Switch, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import React, {useState} from "react";
@@ -14,7 +14,7 @@ export default function Settings({navigation, route} : any){
     const [modalVisible, setModalVisible] = React.useState(false);
 
     return (
-        <View style={styles.main}>
+        <ScrollView style={styles.main}>
 
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.HardConfirmation, "Are you sure you want to delete all data? This process is not reversible. Remember to make a backup", (value: boolean) => {
                 if (value) {
@@ -144,6 +144,6 @@ export default function Settings({navigation, route} : any){
                 }} style={styles.neutralButtonStatic}><Text style={styles.acceptButtonText}>Delete all data</Text></TouchableOpacity>
             </View>
 
-        </View>
+        </ScrollView>
     )
 }
