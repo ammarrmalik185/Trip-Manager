@@ -5,6 +5,7 @@ import React from "react";
 import {TripLogListItem} from "../components/TripLogListItem.tsx";
 import log from "../types/log.ts";
 import TripLogsFullscreenMap from "./TripLogsFullscreenMap.tsx";
+import {BackgroundGeolocationManager} from "../helpers/BackgroundGeolocationManager.ts";
 
 export default function TripLogs({route, navigation}:{route:any, navigation:any}){
     return (
@@ -20,6 +21,9 @@ export default function TripLogs({route, navigation}:{route:any, navigation:any}
             </TouchableOpacity>
             <TouchableOpacity style={styles.fabTop} onPress={() => navigation.navigate(pages.TripLogsFullscreenMap, {trip: route.params.trip})}>
                 <Text style={styles.fabText}>🗺️</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.fabLeft} onPress={() => BackgroundGeolocationManager.startBackgroundTracking(route.params.trip)}>
+                <Text style={styles.fabText}>🗺</Text>
             </TouchableOpacity>
         </View>
     );

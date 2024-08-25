@@ -3,6 +3,7 @@ import log from "./log.ts";
 import member from "./member.ts";
 import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import {Logger} from "../helpers/Logger.ts";
+import {geoLog} from "./geoLog.ts";
 
 export enum TripTheme{
     Default = 1,
@@ -65,6 +66,7 @@ export class trip {
     members: member[] = [];
     expenses: expense[] = [];
     logs: log[] = [];
+    geoLogs: geoLog[] = [];
 
     static allTrips: trip[] = [];
 
@@ -77,6 +79,7 @@ export class trip {
         this.date = { from: new Date(), to: new Date() };
         this.members = [];
         this.expenses = [];
+        this.geoLogs = [];
         this.logs = [];
     }
 
@@ -91,6 +94,7 @@ export class trip {
             theme: this.theme,
             members: this.members,
             expenses: this.expenses,
+            geoLogs: this.geoLogs,
             logs: this.logs
         });
 
@@ -163,6 +167,7 @@ export class trip {
         newTrip.members = [];
         newTrip.expenses = [];
         newTrip.logs = [];
+        newTrip.geoLogs = [];
 
         data.members.forEach((item: any) => {
             let newMember = new member();
@@ -199,6 +204,16 @@ export class trip {
             newExpense.spenders = item.spenders;
 
             newTrip.expenses.push(newExpense);
+        })
+
+        if (data.geoLogs == undefined) data.geoLogs = [];
+        data.geoLogs.forEach((item: any) => {
+            let newGeoLog = new geoLog();
+            newGeoLog.id = item.id;
+            newGeoLog.date = new Date(item.date);
+            newGeoLog.location = item.location;
+
+            newTrip.geoLogs.push(newGeoLog);
         })
 
         return newTrip;

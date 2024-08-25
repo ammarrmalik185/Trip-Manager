@@ -117,4 +117,12 @@ dependencies {
     }
 }
 
+allprojects {
+    repositories {
+         maven {
+            url("${project(':react-native-background-fetch').projectDir}/libs")
+        }
+    }
+}
+
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
