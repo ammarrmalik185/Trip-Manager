@@ -106,7 +106,7 @@ export default function BackupAndRestore(){
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.Information, "Note: This file cannot be used to restore data", () => {
 
                 generateHumanReadableFileContent().then((content) => {
-                    FileManager.saveFile("trip-manager.md", content).then(() => {
+                    FileManager.writeFile("trip-manager.md", content).then(() => {
                         FileManager.shareFile("trip-manager.md", "text/markdown")
                     });
                 })
@@ -178,7 +178,7 @@ export default function BackupAndRestore(){
                                         trips: trips,
                                         singleExpenses: singleExpenses
                                     }
-                                    FileManager.saveFile("trip-manager-backup.json",JSON.stringify(backup)).then(() => {
+                                    FileManager.writeFile("trip-manager-backup.json",JSON.stringify(backup)).then(() => {
                                         FileManager.shareFile("trip-manager-backup.json", "application/json")
                                     })
                                 })

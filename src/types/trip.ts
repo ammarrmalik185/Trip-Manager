@@ -1,8 +1,8 @@
 import expense from "./expense.ts";
 import log from "./log.ts";
 import member from "./member.ts";
-import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import {Logger} from "../helpers/Logger.ts";
+import {FileManager} from "../helpers/FileManager.ts";
 
 export enum TripTheme{
     Default = 1,
@@ -17,39 +17,29 @@ export enum TripTheme{
 }
 
 export const tripThemes = [
-    { key: 1, value: "Default" },
-    { key: 2, value: "Mountains" },
-    { key: 3, value: "Beach" },
-    { key: 4, value: "City" },
-    { key: 5, value: "Forest" },
-    { key: 6, value: "Desert" },
-    { key: 7, value: "Snow" },
-    { key: 8, value: "Historical" },
-    { key: 9, value: "Highways" },
+    { key: TripTheme.Default, value: "Default" },
+    { key: TripTheme.Mountains, value: "Mountains" },
+    { key: TripTheme.Beach, value: "Beach" },
+    { key: TripTheme.City, value: "City" },
+    { key: TripTheme.Forest, value: "Forest" },
+    { key: TripTheme.Desert, value: "Desert" },
+    { key: TripTheme.Snow, value: "Snow" },
+    { key: TripTheme.Historical, value: "Historical" },
+    { key: TripTheme.Highways, value: "Highways" },
 ]
 
 export function getTripThemeImage(theme: TripTheme){
     theme = theme || TripTheme.Default;
-    // theme = TripTheme.Snow;
     switch (theme){
-        case TripTheme.Beach:
-            return require('../images/uiImages/tripImages/beach.jpg');
-        case TripTheme.City:
-            return require('../images/uiImages/tripImages/city.jpg');
-        case TripTheme.Desert:
-            return require('../images/uiImages/tripImages/desert.jpg');
-        case TripTheme.Forest:
-            return require('../images/uiImages/tripImages/forest.webp');
-        case TripTheme.Historical:
-            return require('../images/uiImages/tripImages/historical.jpeg');
-        case TripTheme.Highways:
-            return require('../images/uiImages/tripImages/highway.jpg');
-        case TripTheme.Mountains:
-            return require('../images/uiImages/tripImages/mountains.jpg');
-        case TripTheme.Snow:
-            return require('../images/uiImages/tripImages/snow.jpg');
-        default:
-            return require('../images/uiImages/tripImages/trip.jpg');
+        case TripTheme.Beach: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/beach.jpg');
+        case TripTheme.City: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/city.jpg');
+        case TripTheme.Desert: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/desert.jpg');
+        case TripTheme.Forest: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/forest.webp');
+        case TripTheme.Historical: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/historical.jpeg');
+        case TripTheme.Highways: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/highway.jpg');
+        case TripTheme.Mountains: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/mountains.jpg');
+        case TripTheme.Snow: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/snow.jpg');
+        default: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/trip.jpg');
     }
 }
 
@@ -81,8 +71,8 @@ export class trip {
     }
 
     saveTrip(): Promise<void>{
-        let path = DocumentDirectoryPath + "/trips/" + this.id + '.json';
-        let thisdata = JSON.stringify({
+        let path = `trips/${this.id}.json`;
+        let thisData = JSON.stringify({
             id: this.id,
             title: this.title,
             description: this.description,
@@ -94,56 +84,29 @@ export class trip {
             logs: this.logs
         });
 
-        Logger.log("Saving trip: " + thisdata)
-
-        return new Promise<void>((resolve, reject) => {
-            writeFile(path, thisdata, 'utf8').then((success) => {
-                resolve();
-            }).catch(() => {
-                reject();
-            });
-        });
-    }
-
-    getMember(id: string): member | undefined{
-        return this.members.find(mem => mem.id == id);
+        Logger.log("Saving trip: " + thisData)
+        return FileManager.writeFile(path, thisData);
     }
 
     deleteTrip(): Promise<void>{
-        let path = DocumentDirectoryPath + "/trips/" + this.id + '.json';
+        let path = `/trips/${this.id}.json`;
         trip.allTrips.filter(item => item.id != this.id);
-        return unlink(path);
+        return FileManager.deleteFile(path);
     }
 
     static loadTrips(onLoad:any = () => null): void {
         this.allTrips = [];
-        trip.createFolder().then(() => {
-            readDir(DocumentDirectoryPath + "/trips").then(result => {
-                let pending = 0;
-                if (result.length <= 0) onLoad([])
-                result.forEach(item => {
-                    if (item.isFile() && item.path.endsWith(".json")){
-                        pending += 1;
-                        readFile(item.path).then(result => {
-                            Logger.log(item.path);
-                            Logger.log(result);
-                            try {
-                                trip.allTrips.push(trip.loadFromString(result));
-                                pending -= 1;
-                                if (pending == 0) onLoad(trip.allTrips);
-                            } catch (err){
-                                pending -= 1;
-                                if (pending == 0) onLoad(trip.allTrips);
-                                Logger.error(err)
-                            }
-
-                        }).catch((err) => {
-                            pending -= 1;
-                            if (pending == 0) onLoad(trip.allTrips);
-                            Logger.error(err)
-                        })
+        FileManager.ensureDir("trips").then(() => {
+            FileManager.readDirectoryFiles("trips").then(files => {
+                files.forEach(file =>  {
+                    if (!file.path.endsWith(".json")) return;
+                    try {
+                        trip.allTrips.push(trip.loadFromString(file.content));
+                    } catch (err) {
+                        Logger.error(err)
                     }
                 })
+                onLoad(this.allTrips);
             })
         });
     }
@@ -206,9 +169,5 @@ export class trip {
 
     static getTrip(id: string): trip | undefined{
         return this.allTrips.find(trp => trp.id == id);
-    }
-
-    static createFolder(): Promise<void>{
-        return mkdir(DocumentDirectoryPath + "/trips/");
     }
 }

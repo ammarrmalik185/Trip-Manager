@@ -1,15 +1,26 @@
 import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import Share from "react-native-share";
 import DocumentPicker from "react-native-document-picker";
-import {Logger} from "./Logger.ts";
-import Toast from "react-native-simple-toast";
 import {DocumentPickerOptions} from "react-native-document-picker/src";
+
+export class File {
+    path: string;
+    content: string;
+
+    info: any;
+
+    constructor(path: string, content: string, info: any) {
+        this.path = path;
+        this.content = content;
+        this.info = info;
+    }
+}
 
 export class FileManager{
 
     static basePath :string = DocumentDirectoryPath + "/";
 
-    static async saveFile(filePath: string, data: string) {
+    static async writeFile(filePath: string, data: string) {
         try {
             await writeFile(FileManager.basePath + filePath, data, 'base64');
         } catch (error) {
@@ -39,11 +50,22 @@ export class FileManager{
 
     static async readDir(dirPath: string) {
         try {
-            return await readDir(FileManager.basePath + dirPath);
+            await readDir(FileManager.basePath + dirPath);
         } catch (error) {
             console.error(error);
             throw error;
         }
+    }
+
+    static async readDirectoryFiles(dirPath: string) {
+        let files = (await readDir(FileManager.basePath + dirPath)).filter(file => file.isFile());
+        let fileContents : File[] = [];
+        await Promise.all(files.map(async (file) => {
+            return readFile(file.path).then(content => {
+                fileContents.push(new File(file.path, content, file));
+            })
+        }))
+        return fileContents;
     }
 
     static async createDir(dirPath: string) {
