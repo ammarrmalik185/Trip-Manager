@@ -21,6 +21,7 @@
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
+    "@yz1311/react-native-intent-launcher": "^0.3.5",
     "react": "18.2.0",
     "react-native": "0.73.1",
     "react-native-background-fetch": "^4.2.5",

@@ -1,6 +1,6 @@
-import {Platform, ToastAndroid} from "react-native";
+import {Linking, Platform} from "react-native";
 import {check, Permission, PERMISSIONS, request, RESULTS} from "react-native-permissions";
-import Toast from "react-native-simple-toast";
+import IntentLauncher from '@yz1311/react-native-intent-launcher'
 
 export async function requestLocationPermission() {
   let permission;
@@ -22,19 +22,34 @@ export async function requestBGLocationPermission() {
     permission = PERMISSIONS.IOS.LOCATION_ALWAYS;
   }
 
-  return await requestPermission(permission);
+  var granted = await requestPermission(permission);
+  if (!granted){
+      openAppSettings();
+  }
+  return granted;
 }
 
-export async function requestPermission(permission: Permission) {
+
+const openAppSettings = () => {
+    if (Platform.OS === 'ios') {
+        Linking.openURL('app-settings:')
+    } else {
+        IntentLauncher.startActivity({
+            action: 'android.settings.APPLICATION_DETAILS_SETTINGS',
+            data: 'package:com.react_app',
+            category: "android.intent.category.DEFAULT",
+        })
+    }
+}
+
+export async function requestPermission(permission: Permission): Promise<boolean> {
    const result = await check(permission);
     if (result === RESULTS.DENIED) {
       const requestResult = await request(permission);
       if (requestResult !== RESULTS.GRANTED) {
-         Toast.show('Location permission is required to save location data.', ToastAndroid.SHORT);
          return false;
       }
     } else if (result !== RESULTS.GRANTED) {
-      Toast.show('Location permission is required to save location data.', ToastAndroid.SHORT);
       return false;
     }
     return true;
