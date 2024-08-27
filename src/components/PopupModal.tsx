@@ -14,11 +14,12 @@ function getModal(modalData: ModalData){
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     {modalData.buttons.map((buttonText:string, index:number) => {
                         return (
-                            <TouchableOpacity style={styles.acceptButton} onPress={() => modalData.callback(index)}>
+                            <TouchableOpacity style={styles.acceptButtonNormal} onPress={() => modalData.callback(true, index)}>
                                 <Text style={styles.acceptButtonText}>{buttonText}</Text>
                             </TouchableOpacity>
                         )
                     })}
+                    <TouchableOpacity style={styles.declineButton} onPress={() => modalData.callback(false, -1)}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
                 </View>
             )
         case ModalType.MultipleChoices:

@@ -211,9 +211,10 @@ export class trip {
             let newGeoLog = new geoLog();
             newGeoLog.id = item.id;
             newGeoLog.date = new Date(item.date);
-            newGeoLog.location = item.location;
-
-            newTrip.geoLogs.push(newGeoLog);
+            newGeoLog.geoLocation = item.geoLocation;
+            if (newGeoLog.geoLocation != undefined){
+                newTrip.geoLogs.push(newGeoLog);
+            }
         })
 
         return newTrip;

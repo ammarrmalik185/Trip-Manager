@@ -294,7 +294,7 @@ export default StyleSheet.create({
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
-        right: 30,
+        right: 35,
         bottom: 95,
         borderRadius: 30,
         elevation: 8
@@ -306,8 +306,8 @@ export default StyleSheet.create({
         backgroundColor: palette.primary,
         alignItems: 'center',
         justifyContent: 'center',
-        right: 30,
-        bottom: 130,
+        right: 35,
+        bottom: 140,
         borderRadius: 30,
         elevation: 8
     },
@@ -330,6 +330,22 @@ export default StyleSheet.create({
         shadowRadius: 4,
         shadowColor: palette.secondary,
         shadowOpacity: 0.25,
+    },
+     acceptButtonNormal: {
+        backgroundColor: palette.primary,
+        padding: 10,
+        marginVertical: 15,
+        marginHorizontal: 8,
+        width: "100%",
+        alignSelf: "center",
+        borderRadius: 10,
+        shadowRadius: 4,
+        shadowColor: palette.border,
+        shadowOpacity: 0.25,
+        shadowOffset:{
+            width: 0,
+            height: 2
+        }
     },
     acceptButtonMax: {
         backgroundColor: palette.primary,

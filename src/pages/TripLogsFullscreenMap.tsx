@@ -19,18 +19,21 @@ export default function TripLogsFullscreenMap({route, navigation} : any){
     }
 
     function getMapLine() : MapShape {
-        const points = mapMarkers.filter((m: MapMarker) => m.position).map((m: MapMarker) => {return {lat: m.position.lat - 0.0003, lng: m.position.lng}});
+
+        // loop route.params.trip.geoLogs and route.params.trip.logs sorted by date
+        // create a polyline with the points
+        // return the polyline
+        const markerPoints = route.params.trip.geoLogs.concat(route.params.trip.logs).sort((a: geoLog, b: geoLog) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        console.log("Markers: " + JSON.stringify(markerPoints))
+        const points = markerPoints.filter((m: geoLog) => m.geoLocation).map((m: geoLog) => {return {lat: m.geoLocation.lat - 0.0003, lng: m.geoLocation.lng}});
         return  {shapeType: MapShapeType.POLYLINE, color: palette.primary, positions: points, id: '1'}
     }
 
     function getMapPoints(): MapShape[]{
-        console.log("Getting locations")
-        console.log(route.params.trip.geoLogs)
-        return route.params.trip.geoLogs.filter((lg: geoLog) => lg.location).map((lg: geoLog) => {
-            console.log(lg.location)
+        return route.params.trip.geoLogs.filter((lg: geoLog) => lg.geoLocation).map((lg: geoLog) => {
             return {
                 shapeType: MapShapeType.CIRCLE,
-                center: lg.location,
+                center: lg.geoLocation,
                 radius: 5,
                 color: palette.secondary,
                 id: lg.id,

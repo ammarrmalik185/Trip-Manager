@@ -1,4 +1,4 @@
-import PushNotification from 'react-native-push-notification';
+import PushNotification, {Importance} from 'react-native-push-notification';
 import BackgroundFetch from 'react-native-background-fetch';
 import Geolocation from "react-native-geolocation-service";
 import {requestBGLocationPermission} from "./PermissionsHelper.ts";
@@ -20,20 +20,6 @@ export class BackgroundGeolocationManager {
             if (permissionGranted) {
                 BackgroundGeolocationManager.configure(currentTrip);
 
-                BackgroundFetch.status((status) => {
-                    switch (status) {
-                        case BackgroundFetch.STATUS_RESTRICTED:
-                            console.log("BackgroundFetch restricted");
-                            break;
-                        case BackgroundFetch.STATUS_DENIED:
-                            console.log("BackgroundFetch denied");
-                            break;
-                        case BackgroundFetch.STATUS_AVAILABLE:
-                            console.log("BackgroundFetch is enabled");
-                            break;
-                    }
-                });
-
                 BackgroundFetch.start();
 
                 PushNotification.localNotification({
@@ -42,7 +28,7 @@ export class BackgroundGeolocationManager {
                     message: "Your location is being tracked for the trip: " + currentTrip.title,
                     invokeApp: true,
                     autoCancel: false,
-                    actions: ["Stop"],
+                    // actions: ["Stop"],
                 });
             }
         });
@@ -54,24 +40,25 @@ export class BackgroundGeolocationManager {
             {
                 channelId: "location-tracking", // (required)
                 channelName: "Location Tracking", // (required)
-            },
-            (created: any) => Logger.log(`createChannel returned '${created}'`)
+            }, () => {}
         );
 
         PushNotification.createChannel(
             {
                 channelId: "location-tracked", // (required)
                 channelName: "Location Point Added", // (required)
-            },
-            (created: any) => Logger.log(`createChannel returned '${created}'`)
+                playSound: false,
+                vibrate: false,
+                importance: Importance.LOW
+            }, () => {}
         );
 
         BackgroundFetch.configure(
             {
-                minimumFetchInterval: 15,
+                minimumFetchInterval: 5,
                 stopOnTerminate: false,
-                startOnBoot: true,
                 enableHeadless: true,
+                forceAlarmManager: false,
             },
             async (taskId) => {
                 Geolocation.getCurrentPosition((position) => {

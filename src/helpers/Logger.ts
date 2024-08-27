@@ -8,12 +8,12 @@ enum logMode{
     toast
 }
 
-let currentLogModes : logMode[] = [logMode.console];
+let currentLogModes : logMode[] = [];
 
 export let Logger = {
     log: (txt: string) => {
         let time = new Date(Date.now());
-        let text = "[LOG][" + time.toDateString() + " " + time.toTimeString() + "] = " + txt;
+        let text = "[LOG][" + time.toDateString() + " " + time.toTimeString() + "] = " + JSON.stringify(txt);
         for (const currentLogMode of currentLogModes) {
             switch (currentLogMode){
                 case logMode.file:
@@ -27,7 +27,7 @@ export let Logger = {
     },
     error: (txt: unknown) => {
         let time = new Date(Date.now());
-        let text = "[ERROR][" + time.toDateString() + " " + time.toTimeString() + "] = " + txt;
+        let text = "[ERROR][" + time.toDateString() + " " + time.toTimeString() + "] = " + JSON.stringify(txt);
         for (const currentLogMode of currentLogModes) {
             switch (currentLogMode){
                 case logMode.file:
