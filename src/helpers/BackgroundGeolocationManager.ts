@@ -77,7 +77,7 @@ export class BackgroundGeolocationManager {
                 BackgroundFetch.finish(taskId);
             },
             (error) => {
-                console.error('Background Fetch failed:', error);
+                console.error('Background Fetch failed:', JSON.stringify(error));
             },
         );
 
