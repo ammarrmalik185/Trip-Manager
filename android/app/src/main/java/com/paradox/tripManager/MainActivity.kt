@@ -1,4 +1,4 @@
-package com.react_app
+package com.paradox.tripManager
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

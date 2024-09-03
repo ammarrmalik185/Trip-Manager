@@ -75,9 +75,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.react_app"
+    namespace "com.paradox.tripManager"
     defaultConfig {
-        applicationId "com.react_app"
+        applicationId "com.paradox.tripManager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

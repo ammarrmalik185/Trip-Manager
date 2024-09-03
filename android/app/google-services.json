@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:53438958900:android:196d49c96f25bff6dce961",
+        "mobilesdk_app_id": "1:53438958900:android:d27cb227e74aff6bdce961",
         "android_client_info": {
-          "package_name": "com.react_app"
+          "package_name": "com.paradox.tripManager"
         }
       },
       "oauth_client": [
@@ -28,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "53438958900-24a0qmhnevia9g4vufr1jih47if0dhit.apps.googleusercontent.com",
+              "client_id": "53438958900-qnbvdmu7mro8nvoil0sbjdak9771i5cg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
