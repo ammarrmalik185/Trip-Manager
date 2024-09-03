@@ -1,8 +1,9 @@
-import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import { trip } from "../types/trip.ts";
-import { useState } from "react";
+import {trip} from "../types/trip.ts";
+import {useState} from "react";
+import {SettingsManager} from "../helpers/SettingsManager.ts";
 
 export default function TripDetails({route, navigation}: {route: any, navigation: any}) {
     const [currentTrip, setCurrentTrip] = useState<trip>(route.params.trip);
@@ -20,7 +21,7 @@ export default function TripDetails({route, navigation}: {route: any, navigation
                 </View>
 
                 <View>
-                    <Text style={styles.subTitle}>Total Expenses: Rs. {currentTrip.expenses.reduce((acc, expense) => acc + expense.amount, 0)}</Text>
+                    <Text style={styles.subTitle}>Total Expenses: {SettingsManager.settings.currencySymbol} {currentTrip.expenses.reduce((acc, expense) => acc + expense.amount, 0)}</Text>
                 </View>
 
             </View>

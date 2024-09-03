@@ -4,6 +4,7 @@ import pages from "../types/pages.ts";
 import React from "react";
 import {TripLogListItem} from "../components/TripLogListItem.tsx";
 import log from "../types/log.ts";
+import TripLogsFullscreenMap from "./TripLogsFullscreenMap.tsx";
 
 export default function TripLogs({route, navigation}:{route:any, navigation:any}){
     return (
@@ -16,6 +17,9 @@ export default function TripLogs({route, navigation}:{route:any, navigation:any}
             />
             <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate(pages.TripLogsCreate, {trip: route.params.trip})}>
                 <Text style={styles.fabText}>+</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.fabTop} onPress={() => navigation.navigate(pages.TripLogsFullscreenMap, {trip: route.params.trip})}>
+                <Text style={styles.fabText}>🗺️</Text>
             </TouchableOpacity>
         </View>
     );

@@ -1,8 +1,57 @@
 import expense from "./expense.ts";
 import log from "./log.ts";
 import member from "./member.ts";
-import { DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile } from "react-native-fs";
-import { logger } from "../helpers/logger.ts";
+import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
+import {Logger} from "../helpers/Logger.ts";
+
+export enum TripTheme{
+    Default = 1,
+    Mountains,
+    Beach,
+    City,
+    Forest,
+    Desert,
+    Snow,
+    Historical,
+    Highways,
+}
+
+export const tripThemes = [
+    { key: 1, value: "Default" },
+    { key: 2, value: "Mountains" },
+    { key: 3, value: "Beach" },
+    { key: 4, value: "City" },
+    { key: 5, value: "Forest" },
+    { key: 6, value: "Desert" },
+    { key: 7, value: "Snow" },
+    { key: 8, value: "Historical" },
+    { key: 9, value: "Highways" },
+]
+
+export function getTripThemeImage(theme: TripTheme){
+    theme = theme || TripTheme.Default;
+    // theme = TripTheme.Snow;
+    switch (theme){
+        case TripTheme.Beach:
+            return require('../images/uiImages/tripImages/beach.jpg');
+        case TripTheme.City:
+            return require('../images/uiImages/tripImages/city.jpg');
+        case TripTheme.Desert:
+            return require('../images/uiImages/tripImages/desert.jpg');
+        case TripTheme.Forest:
+            return require('../images/uiImages/tripImages/forest.webp');
+        case TripTheme.Historical:
+            return require('../images/uiImages/tripImages/historical.jpeg');
+        case TripTheme.Highways:
+            return require('../images/uiImages/tripImages/highway.jpg');
+        case TripTheme.Mountains:
+            return require('../images/uiImages/tripImages/mountains.jpg');
+        case TripTheme.Snow:
+            return require('../images/uiImages/tripImages/snow.jpg');
+        default:
+            return require('../images/uiImages/tripImages/trip.jpg');
+    }
+}
 
 export class trip {
 
@@ -10,6 +59,7 @@ export class trip {
     title: string = "";
     description: string = "";
     destination: string = "";
+    theme: TripTheme = TripTheme.Default;
     date: { from: Date, to: Date } = { from: new Date(), to: new Date() };
 
     members: member[] = [];
@@ -23,6 +73,7 @@ export class trip {
         this.title = "";
         this.description = "";
         this.destination = "";
+        this.theme = TripTheme.Default;
         this.date = { from: new Date(), to: new Date() };
         this.members = [];
         this.expenses = [];
@@ -37,12 +88,13 @@ export class trip {
             description: this.description,
             destination: this.destination,
             date: this.date,
+            theme: this.theme,
             members: this.members,
             expenses: this.expenses,
             logs: this.logs
         });
 
-        console.log("Saving trip: " + thisdata)
+        Logger.log("Saving trip: " + thisdata)
 
         return new Promise<void>((resolve, reject) => {
             writeFile(path, thisdata, 'utf8').then((success) => {
@@ -54,8 +106,6 @@ export class trip {
     }
 
     getMember(id: string): member | undefined{
-        console.log(id);
-        console.log("Members: " + this.members)
         return this.members.find(mem => mem.id == id);
     }
 
@@ -70,80 +120,88 @@ export class trip {
         trip.createFolder().then(() => {
             readDir(DocumentDirectoryPath + "/trips").then(result => {
                 let pending = 0;
+                if (result.length <= 0) onLoad([])
                 result.forEach(item => {
                     if (item.isFile() && item.path.endsWith(".json")){
                         pending += 1;
-                        console.log(pending + " 76")
                         readFile(item.path).then(result => {
-                            logger.log(item.path);
-                            logger.log(result);
+                            Logger.log(item.path);
+                            Logger.log(result);
                             try {
-                                let data = JSON.parse(result);
-                                let newTrip = new trip();
-                                newTrip.id = data.id;
-                                newTrip.title = data.title;
-                                newTrip.description = data.description;
-                                newTrip.destination = data.destination;
-                                newTrip.date = data.date;
-                                newTrip.date.from = new Date(newTrip.date.from)
-                                newTrip.date.to = new Date(newTrip.date.to)
-                                newTrip.members = [];
-                                newTrip.expenses = [];
-                                newTrip.logs = [];
-
-                                data.members.forEach((item: any) => {
-                                    let newMember = new member();
-                                    newMember.id = item.id;
-                                    newMember.name = item.name;
-                                    newTrip.members.push(newMember);
-                                })
-
-                                data.logs.forEach((item: any) => {
-                                    let newLog = new log();
-                                    newLog.id = item.id;
-                                    newLog.date = new Date(item.date);
-                                    newLog.description = item.description;
-                                    newLog.distance_traveled = item.distance_traveled;
-                                    newLog.location = item.location;
-                                    newLog.title = item.title;
-
-                                    newTrip.logs.push(newLog);
-                                })
-
-                                data.expenses.forEach((item: any) => {
-                                    let newExpense = new expense();
-                                    newExpense.id = item.id;
-                                    newExpense.title = item.title;
-                                    newExpense.description = item.description;
-                                    newExpense.amount = item.amount;
-                                    newExpense.category = item.category;
-                                    newExpense.date = new Date(item.date);
-                                    newExpense.payers = item.payers;
-                                    newExpense.spenders = item.spenders;
-
-                                    newTrip.expenses.push(newExpense);
-                                })
-                                trip.allTrips.push(newTrip);
+                                trip.allTrips.push(trip.loadFromString(result));
                                 pending -= 1;
-                                console.log(pending + " 128")
                                 if (pending == 0) onLoad(trip.allTrips);
                             } catch (err){
                                 pending -= 1;
-                                console.log(pending + " 132")
                                 if (pending == 0) onLoad(trip.allTrips);
-                                logger.error(err)
+                                Logger.error(err)
                             }
 
                         }).catch((err) => {
                             pending -= 1;
-                            console.log(pending + " 139")
                             if (pending == 0) onLoad(trip.allTrips);
-                            logger.error(err)
+                            Logger.error(err)
                         })
                     }
                 })
             })
         });
+    }
+
+    static loadFromString(content: string) : trip{
+        let data = JSON.parse(content);
+        let newTrip = new trip();
+
+        newTrip.id = data.id;
+        newTrip.title = data.title;
+        newTrip.description = data.description;
+        newTrip.theme = data.theme;
+        newTrip.destination = data.destination;
+        newTrip.date = data.date;
+        newTrip.date.from = new Date(newTrip.date.from)
+        newTrip.date.to = new Date(newTrip.date.to)
+        newTrip.members = [];
+        newTrip.expenses = [];
+        newTrip.logs = [];
+
+        data.members.forEach((item: any) => {
+            let newMember = new member();
+            newMember.id = item.id;
+            newMember.name = item.name;
+            newMember.description = item.description;
+            newMember.email = item.email;
+            newMember.phone = item.phone;
+            newTrip.members.push(newMember);
+        })
+
+        data.logs.forEach((item: any) => {
+            let newLog = new log();
+            newLog.id = item.id;
+            newLog.date = new Date(item.date);
+            newLog.description = item.description;
+            newLog.geoLocation = item.geoLocation;
+            newLog.distance_traveled = item.distance_traveled;
+            newLog.location = item.location;
+            newLog.title = item.title;
+
+            newTrip.logs.push(newLog);
+        })
+
+        data.expenses.forEach((item: any) => {
+            let newExpense = new expense();
+            newExpense.id = item.id;
+            newExpense.title = item.title;
+            newExpense.description = item.description;
+            newExpense.amount = item.amount;
+            newExpense.category = item.category;
+            newExpense.date = new Date(item.date);
+            newExpense.payers = item.payers;
+            newExpense.spenders = item.spenders;
+
+            newTrip.expenses.push(newExpense);
+        })
+
+        return newTrip;
     }
 
     static getTrip(id: string): trip | undefined{
@@ -153,5 +211,4 @@ export class trip {
     static createFolder(): Promise<void>{
         return mkdir(DocumentDirectoryPath + "/trips/");
     }
-
 }

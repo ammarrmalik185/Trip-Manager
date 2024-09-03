@@ -1,14 +1,13 @@
-import { FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {FlatList, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import pages from "../types/pages.ts";
 import expense from "../types/expense.ts";
 import member from "../types/member.ts";
 import Toast from "react-native-simple-toast";
-import { palette } from "../styles/colors.ts";
-import { expenseTypes } from "../types/expensetypes.ts";
-import { SelectList } from "react-native-dropdown-select-list";
-import { logger } from "../helpers/logger.ts";
+import {palette} from "../styles/colors.ts";
+import {expenseTypes} from "../types/expensetypes.ts";
+import {SelectList} from "react-native-dropdown-select-list";
 import DatePicker from "../components/DatePicker.tsx";
 
 export default function TripExpensesEdit({route, navigation} : any){
@@ -164,7 +163,7 @@ export default function TripExpensesEdit({route, navigation} : any){
 
                 navigation.navigate(pages.TripExpensesDetails, {trip: route.params.trip, expense: newExpense})
             } else {
-                Toast.show("Expense not valid", Toast.SHORT)
+                Toast.show(newExpense.getValidationError(), Toast.LONG);
             }
 
         }}><Text style={styles.acceptButtonText}>Save</Text></TouchableOpacity>

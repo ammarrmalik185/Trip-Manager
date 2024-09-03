@@ -1,4 +1,3 @@
-import member from "./member.ts";
 import memberAmount from "./memberAmount.ts";
 
 class expense {
@@ -17,7 +16,7 @@ class expense {
     constructor() {
         this.id = Math.random().toString(36);
         this.title = "";
-        this.category = "";
+        this.category = "Others";
         this.description = "";
         this.amount = 0;
         this.date = new Date();
@@ -53,18 +52,30 @@ class expense {
         this.spenders.reduce((v, i) => v + i.amount, 0) != 0;
     }
 
+    getValidationError(): string {
+        if (this.payers.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Payers total amount cannot be zero";
+        }
+        if (this.spenders.reduce((v, i) => v + i.amount, 0) == 0) {
+            return "Spenders total amount cannot be zero";
+        }
+        if (this.title == "") {
+            return "Title cannot be empty";
+        }
+        return "Expense not valid";
+    }
+
     calculateTotal(){
         this.amount = this.payers.reduce((v, i) => v + i.amount, 0);
     }
 
     getCalculatedExpense() : calculatedExpense{
-        console.log(this.spenders)
+        this.calculateTotal();
         let totalWeight = this.spenders.reduce((currentValue, spender) => currentValue + spender.amount, 0);
         let value = {
             payers: this.payers,
             spenders: this.spenders.map((spend: memberAmount) => new memberAmount(spend.member, spend.amount * this.amount / totalWeight))
         }
-        console.log(this.spenders)
         return value;
     }
 

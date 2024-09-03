@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "53438958900",
+    "firebase_url": "https://iron-bear-trip-manager-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iron-bear-trip-manager",
+    "storage_bucket": "iron-bear-trip-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53438958900:android:d27cb227e74aff6bdce961",
+        "android_client_info": {
+          "package_name": "com.paradox.tripManager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53438958900-qnbvdmu7mro8nvoil0sbjdak9771i5cg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6r-f3TpmNzjpnJGVSYwDq3NBYuSeCuPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53438958900-qnbvdmu7mro8nvoil0sbjdak9771i5cg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
