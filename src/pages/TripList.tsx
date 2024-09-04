@@ -27,12 +27,17 @@ function TripList({navigation}:any): React.JSX.Element {
 
     return (
         <SafeAreaView style={styles.main}>
-            <FlatList
-                style={styles.flatList}
-                data = {trips}
-                renderItem={(data) => <TripListItem item={data.item} navigation={navigation}/>}
+            {trips.length !== 0 &&
+                <FlatList
+                    style={styles.flatList}
+                    data = {trips}
+                    renderItem={(data) => <TripListItem item={data.item} navigation={navigation}/>}
                     keyExtractor={item => item.id}
                     extraData={navigation}/>
+            }
+            { trips.length === 0 &&
+                <Text style={{color: "white", opacity: 0.5, fontSize: 20, textAlign: "center", margin: 40, marginTop: 150}}>No trips yet. Click the + button to add a new trip.</Text>
+            }
             <TouchableOpacity activeOpacity={0.5} style={styles.fab} onPress={() => {navigation.navigate(pages.TripCreate)}}>
                 <Text style={styles.fabText}>+</Text>
             </TouchableOpacity>

@@ -202,31 +202,28 @@ export default StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: "rgba(0,0,0,0.5)",
-        zIndex: 100
+        zIndex: 100,
+        height: "100%",
+        width: "100%"
     },
     modalView: {
-        margin: 35,
-        display: "flex",
-        marginTop: "auto",
-        marginBottom: "auto",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: palette.card,
-        color: palette.text,
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        margin: 20,
         borderRadius: 20,
+        backgroundColor: palette.card,
+        maxHeight: "100%",
         padding: 20,
-        shadowColor: palette.border,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-        minHeight: 100,
-        minWidth: 300
     },
-
+    modalScrollView: {
+        maxHeight: 500,
+        padding: 10,
+        backgroundColor: "rgba(0,0,0, 0.2)",
+        borderRadius: 10,
+        margin: 10
+    },
     numericAssistedField:{
         flexDirection: "row",
         alignItems: "center",
@@ -319,17 +316,12 @@ export default StyleSheet.create({
         fontSize: 15,
         color: palette.text,
     },
-    acceptButton: {
+    acceptButton:{
         backgroundColor: palette.primary,
         padding: 10,
-        marginVertical: 15,
+        marginVertical: 8,
         marginHorizontal: 8,
-        width: "40%",
-        alignSelf: "center",
         borderRadius: 10,
-        shadowRadius: 4,
-        shadowColor: palette.secondary,
-        shadowOpacity: 0.25,
     },
     acceptButtonMax: {
         backgroundColor: palette.primary,
