@@ -167,6 +167,7 @@ export default function TripExpensesCreate({navigation, route}: any){
                 newExpense.calculateTotal();
                 route.params.trip.expenses.push(newExpense);
                 route.params.trip.saveTrip();
+                navigation.pop();
                 navigation.navigate(pages.TripExpenses, {trip: route.params.trip})
             } else {
                 Toast.show(newExpense.getValidationError(), Toast.LONG);

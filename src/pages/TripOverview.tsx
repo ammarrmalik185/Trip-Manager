@@ -1,15 +1,23 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {BackHandler, Image, Text, TouchableOpacity, View} from "react-native";
 import pages from "../types/pages.ts";
 import styles from "../styles/styles.ts";
 import Toast from "react-native-simple-toast";
-import React from "react";
+import React, {useEffect} from "react";
 import LinearGradient from "react-native-linear-gradient";
 import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
 import {getTripThemeImage, trip} from "../types/trip.ts";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
+import {useIsFocused} from "@react-navigation/native";
 
 function TripOverview({route, navigation}:any) {
     const [modalVisible, setModalVisible] = React.useState(false);
+
+    const [refresh, setRefresh] = React.useState(false);
+    const isFocus = useIsFocused()
+    useEffect(() => {
+        console.log("TripOverview focused");
+        setRefresh(!refresh);
+    }, [isFocus]);
     return (
         <View style={styles.main}>
             <PopupModal state={modalVisible} modalData={new ModalData(SettingsManager.settings.hardConfirmationForDeleteTrip ? ModalType.HardConfirmation : ModalType.SoftConfirmation, "Are you sure you want to delete this trip?", (confirm:any) => {

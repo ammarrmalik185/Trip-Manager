@@ -82,6 +82,7 @@ export default function TripLogsCreate({navigation, route}:any) {
                 if (newLog.validate()){
                     route.params.trip.logs.push(newLog)
                     route.params.trip.saveTrip()
+                    navigation.pop();
                     navigation.navigate(pages.TripLogs, {trip: route.params.trip})
                 }else{
                     Toast.show(newLog.getValidationError(), ToastAndroid.LONG)

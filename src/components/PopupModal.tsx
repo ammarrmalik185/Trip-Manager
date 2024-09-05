@@ -1,12 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import {Text, TextInput, TouchableOpacity, View, Animated, ScrollView} from "react-native";
+import Modal from 'react-native-modal';
 import styles from "../styles/styles.ts";
 import Toast from "react-native-simple-toast";
 import DatePicker from 'react-native-date-picker'
 
 function getModal(modalData: ModalData){
     const [confirmationString, setConfirmationString] = React.useState("");
-    const [multipleChoice, setMultipleChoice] = React.useState(modalData.buttons.map(() => false));
+    const [multipleChoice, setMultipleChoice] = React.useState(modalData.buttons ? modalData.buttons.map(() => false) : []);
+    const [date, setDate] = React.useState(modalData.defaultValue ? modalData.defaultValue : new Date());
 
     switch (modalData.type){
         case ModalType.PickAButton:
@@ -14,7 +16,7 @@ function getModal(modalData: ModalData){
                 <View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <ScrollView style={styles.modalScrollView}>
-                    {modalData.buttons.map((buttonText:string, index:number) => {
+                    {modalData.buttons?.map((buttonText:string, index:number) => {
                         return (
                             <TouchableOpacity key={index} style={styles.acceptButton} onPress={() => modalData.callback(true, index)}>
                                 <Text style={styles.acceptButtonText}>{buttonText}</Text>
@@ -31,7 +33,7 @@ function getModal(modalData: ModalData){
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <Text style={styles.modalSubtext}>Select multiple options</Text>
                     <ScrollView style={styles.modalScrollView}>
-                        {modalData.buttons.map((buttonText:string, index:number) => {
+                        {modalData.buttons && modalData.buttons.map((buttonText:string, index:number) => {
                             if (multipleChoice[index]) {
                                 return (
                                     <TouchableOpacity key={index} style={styles.acceptButton} onPress={() => {
@@ -56,7 +58,7 @@ function getModal(modalData: ModalData){
                         })}
                     </ScrollView>
 
-                    <Text style={styles.modalSubtext}>Selected: {modalData.buttons.filter((_, index) => multipleChoice[index]).join(", ")}</Text>
+                    <Text style={styles.modalSubtext}>Selected: {modalData.buttons?.filter((_, index) => multipleChoice[index]).join(", ")}</Text>
 
                     <View style={styles.horizontalStack}>
                         <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
@@ -112,10 +114,10 @@ function getModal(modalData: ModalData){
                 <View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <Text style={styles.modalSubtext}>Pick a date</Text>
-                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="date" date={new Date(Date.now())}/>
+                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="date" date={modalData.defaultValue ? modalData.defaultValue : new Date()} onDateChange={setDate}/>
                     <View style={styles.horizontalStack}>
-                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, multipleChoice)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, null)}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, date)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                     </View>
                 </View>
             )
@@ -124,10 +126,10 @@ function getModal(modalData: ModalData){
                 <View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <Text style={styles.modalSubtext}>Pick a time</Text>
-                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="time" date={new Date(Date.now())}/>
+                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="time" date={date} onDateChange={setDate}/>
                     <View style={styles.horizontalStack}>
-                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, multipleChoice)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, null)}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, date)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                     </View>
                 </View>
             )
@@ -135,11 +137,10 @@ function getModal(modalData: ModalData){
             return (
                 <View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
-                    <Text style={styles.modalSubtext}>Pick a date and time</Text>
-                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="datetime" date={new Date(Date.now())}/>
+                    <DatePicker theme={"dark"} style={{alignSelf: "center"}} mode="datetime" date={date} onDateChange={setDate}/>
                     <View style={styles.horizontalStack}>
-                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, multipleChoice)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, null)}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.acceptButtonMax} onPress={() => modalData.callback(true, date)}><Text style={styles.acceptButtonText}>Confirm</Text></TouchableOpacity>
                     </View>
                 </View>
             )
@@ -149,6 +150,7 @@ function getModal(modalData: ModalData){
 export default function PopupModal({state, modalData}:{state:boolean, modalData:ModalData}){
 
     const slideAnim = useRef(new Animated.Value(1000)).current;
+    const fadeAnim = useRef(new Animated.Value(0)).current;
 
     const [internalState, setInternalState] = React.useState(false);
 
@@ -160,6 +162,11 @@ export default function PopupModal({state, modalData}:{state:boolean, modalData:
                 duration: 500,
                 useNativeDriver: true,
             }).start();
+            // Animated.timing(fadeAnim, {
+            //     toValue: 0.5,
+            //     duration: 500,
+            //     useNativeDriver: true,
+            // }).start()
         } else {
             Animated.timing(slideAnim, {
                 toValue: 1000,
@@ -169,21 +176,23 @@ export default function PopupModal({state, modalData}:{state:boolean, modalData:
                 console.log("Setting internal state to false")
                 setInternalState(false)
             })
+            // Animated.timing(fadeAnim, {
+            //     toValue: 0,
+            //     duration: 500,
+            //     useNativeDriver: true,
+            // }).start()
 
         }
     }, [state]);
 
-
-
-
     return (
-        <View style={{...styles.modal, display: internalState ? "flex" : "none"}}>
+        <Modal isVisible={internalState}>
             <Animated.View style={{width: "100%", height: "100%", transform: [{ translateY: slideAnim }]}}>
-                <ScrollView style={styles.modalView}>
+                <View style={styles.modalView}>
                     {getModal(modalData)}
-                </ScrollView>
+                </View>
             </Animated.View>
-        </View>
+        </Modal>
     );
 }
 
@@ -192,19 +201,20 @@ export class ModalData{
     type: ModalType;
     message:string;
 
-    buttons:string[];
-    confirmationString:string;
-
     callback:Function;
 
-    constructor(type:ModalType, message:string, callback:Function, buttons:string[] = [], confirmationString:string = ""){
+    buttons:string[] | undefined;
+    confirmationString:string | undefined;
+    defaultValue: any | undefined;
+
+    constructor(type:ModalType, message:string, callback:Function, buttons?:string[], confirmationString?:string, defaultValue?:any){
         this.type = type;
         this.message = message;
         this.buttons = buttons;
         this.confirmationString = confirmationString;
         this.callback = callback;
+        this.defaultValue = defaultValue;
     }
-
 }
 
 export enum ModalType{

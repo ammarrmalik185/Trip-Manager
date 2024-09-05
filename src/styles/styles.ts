@@ -194,27 +194,27 @@ export default StyleSheet.create({
         justifyContent: "center"
     },
     modal:{
-        position: "absolute",
-        alignItems: "center",
-        justifyContent: "center",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "rgba(0,0,0,0.5)",
-        zIndex: 100,
-        height: "100%",
-        width: "100%"
+        position: 'absolute', // Position the component absolutely
+        top: 0, // Set the top to 0
+        left: 0, // Set the left to 0
+        width: '100%', // Full width
+        height: '100%', // Full height
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional background color with transparency
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
     },
     modalView: {
         position: "absolute",
         bottom: 0,
         left: 0,
         right: 0,
-        margin: 20,
-        borderRadius: 20,
+        margin: 10,
+        borderRadius: 10,
         backgroundColor: palette.card,
         maxHeight: "100%",
+        shadowRadius: 4,
+        shadowColor: palette.secondary,
+        shadowOffset: {width: 0, height: 4},
         padding: 20,
     },
     modalScrollView: {

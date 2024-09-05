@@ -1,12 +1,26 @@
-import {FlatList, Text, TouchableOpacity, View} from "react-native";
+import {Alert, BackHandler, FlatList, Text, TouchableOpacity, View} from "react-native";
 import {TripExpenseListItem} from "../components/TripExpenseListItem.tsx";
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
 import Toast from 'react-native-simple-toast';
 import expense from "../types/expense.ts";
 
 export default function TripExpenses({route, navigation,}:{route:any, navigation:any}){
+
+    useEffect(() => {
+        const backAction = () => {
+            navigation.navigate(pages.TripOverview, {trip: route.params.trip});
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction,
+        );
+
+        return () => backHandler.remove();
+    }, []);
 
     return (
         <View style={styles.main}>

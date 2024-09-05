@@ -67,6 +67,7 @@ function TripCreate({navigation}:any) {
 
                 newTrip.saveTrip().then(() => {
                     trip.allTrips.push(newTrip);
+                    navigation.pop();
                     navigation.navigate(pages.TripOverview, {trip: newTrip});
                 }).catch(console.error);
 

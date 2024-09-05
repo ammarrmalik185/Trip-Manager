@@ -1,12 +1,11 @@
 import styles from "../styles/styles.ts";
 import {Modal, Text, TouchableOpacity, View} from "react-native";
-import DateTimePicker, {DateType} from "react-native-ui-datepicker";
-import {palette} from "../styles/colors.ts";
+import {DateType} from "react-native-ui-datepicker";
 import {useState} from "react";
+import PopupModal, {ModalData, ModalType} from "./PopupModal.tsx";
 
 export default function DatePicker({value, onValueChanged, title="Date and Time"} : {value: Date, onValueChanged: (date: Date) => void, title?: string}){
     const [datePickerVisible, setDatePickerVisible] = useState(false);
-    const [date, setDate] = useState(value as DateType);
 
     return (
         <View style={styles.inputSection}>
@@ -16,41 +15,13 @@ export default function DatePicker({value, onValueChanged, title="Date and Time"
             }}>
                 <Text style={styles.dateDisplay}>{value.toLocaleString()}</Text>
             </TouchableOpacity>
-            <Modal
-                // style={styles.modal}
-                visible={datePickerVisible}
-                onRequestClose={() => setDatePickerVisible(false)}>
-                <View style={styles.modal}>
-                    <View style={styles.modalView}>
-                        <DateTimePicker
 
-                            value={date}
-
-                            selectedTextStyle={styles.datePickerSelectedText}
-                            calendarTextStyle={styles.datePickerText}
-                            timePickerTextStyle={styles.datePickerText}
-                            todayTextStyle={styles.datePickerText}
-                            headerTextStyle={styles.datePickerText}
-                            weekDaysTextStyle={styles.datePickerText}
-                            headerButtonColor={palette.text}
-                            selectedItemColor={palette.primary}
-                            yearContainerStyle={styles.datePickerYearContainer}
-                            monthContainerStyle={styles.datePickerYearContainer}
-                            dayContainerStyle={styles.datePickerYearContainer}
-                            timePickerContainerStyle={styles.datePickerYearContainer}
-
-                            onValueChange={setDate}
-
-                        />
-                        <TouchableOpacity style={styles.acceptButton} onPress={() => {
-                            onValueChanged(new Date(date as Date));
-                            setDatePickerVisible(false)}
-                        }>
-                            <Text style={styles.acceptButtonText}>Done</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
+            <PopupModal state={datePickerVisible} modalData={new ModalData(ModalType.DateTime, "Select Date and Time", (success: boolean, data: Date) => {
+                if (success){
+                    onValueChanged(data);
+                }
+                setDatePickerVisible(false);
+            })}/>
         </View>
     );
 }

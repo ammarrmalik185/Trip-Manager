@@ -1,10 +1,12 @@
-import {FlatList, Text, TouchableOpacity, View} from "react-native";
+import {BackHandler, FlatList, Text, TouchableOpacity, View} from "react-native";
 import styles from "../styles/styles.ts";
 import pages from "../types/pages.ts";
-import React from "react";
+import React, {useEffect} from "react";
 import {TripMemberListItem} from "../components/TripMemberListItem.tsx";
+import {useIsFocused} from "@react-navigation/native";
 
 export default function TripMembers({route, navigation}:{route:any, navigation:any}) {
+
     return (
         <View style={styles.main}>
             <FlatList
