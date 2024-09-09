@@ -1,6 +1,5 @@
 import {StyleSheet} from "react-native";
 import {palette} from "./colors.ts";
-import extractGradient from "react-native-svg/lib/typescript/lib/extract/extractGradient";
 
 export default StyleSheet.create({
 
@@ -53,13 +52,13 @@ export default StyleSheet.create({
     inputSection: {
         margin: 0
     },
-    inputDynamicList:{
+    inputDynamicList: {
         borderRadius: 10,
         backgroundColor: palette.card,
         margin: 12,
         padding: 20
     },
-    inputDynamicListTitle:{
+    inputDynamicListTitle: {
         color: palette.text,
         fontWeight: "bold",
         textAlign: "center",
@@ -71,18 +70,18 @@ export default StyleSheet.create({
         height: 50,
         color: palette.text
     },
-    datePickerSelectedText:{
+    datePickerSelectedText: {
         color: palette.text,
     },
-    datePickerText:{
+    datePickerText: {
         color: palette.text
     },
-    datePickerYearContainer:{
+    datePickerYearContainer: {
         backgroundColor: palette.card,
         borderRadius: 20,
         color: palette.text
     },
-    dropDownContainer:{
+    dropDownContainer: {
         borderWidth: 1,
         borderColor: palette.border,
         flex: 1,
@@ -90,7 +89,7 @@ export default StyleSheet.create({
         margin: 20,
         backgroundColor: palette.background
     },
-    dropDownContainerData:{
+    dropDownContainerData: {
         width: "auto",
         marginHorizontal: 20,
         borderColor: palette.border,
@@ -101,7 +100,7 @@ export default StyleSheet.create({
         color: palette.text
     },
     // containers
-    horizontalLine:{
+    horizontalLine: {
         width: "80%",
         backgroundColor: "rgba(255,255,255, 0.5)",
         height: 1,
@@ -109,16 +108,16 @@ export default StyleSheet.create({
         marginVertical: 10
     },
 
-    main:{
+    main: {
         flex: 1,
         backgroundColor: palette.background
     },
-    detailsDisplay:{
+    detailsDisplay: {
         backgroundColor: palette.background,
         marginVertical: 20,
         marginHorizontal: 30
     },
-    buttonsContainer:{
+    buttonsContainer: {
         position: "absolute",
         left: 30,
         right: 30,
@@ -135,33 +134,33 @@ export default StyleSheet.create({
         marginHorizontal: 16,
         borderRadius: 10,
     },
-    switch:{
+    switch: {
         color: palette.text
     },
-    center:{
+    center: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    verticalStack:{
+    verticalStack: {
         flexDirection: "column",
         justifyContent: "space-evenly"
     },
-    horizontalStack:{
+    horizontalStack: {
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center"
     },
-    horizontalStackSpaced:{
+    horizontalStackSpaced: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center"
     },
-    horizontalStackCentered:{
+    horizontalStackCentered: {
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center"
     },
-    horizontalStackContained:{
+    horizontalStackContained: {
         flexDirection: "row",
         justifyContent: "space-between",
         backgroundColor: palette.card,
@@ -170,22 +169,22 @@ export default StyleSheet.create({
         padding: 10,
         alignItems: "center"
     },
-    imageItem:{
+    imageItem: {
         flexDirection: "row"
     },
-    appIconMedium:{
+    appIconMedium: {
         flexDirection: "row",
         width: 80,
         height: 80,
         marginBottom: 10,
         alignSelf: "center"
     },
-    appIconSmall:{
+    appIconSmall: {
         width: 30,
         height: 30,
         alignSelf: "center"
     },
-    rightBox:{
+    rightBox: {
         right: 5,
         width: 80,
         height: "100%",
@@ -193,7 +192,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    modal:{
+    modal: {
         position: 'absolute', // Position the component absolutely
         top: 0, // Set the top to 0
         left: 0, // Set the left to 0
@@ -224,7 +223,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         margin: 10
     },
-    numericAssistedField:{
+    numericAssistedField: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-evenly"
@@ -236,7 +235,7 @@ export default StyleSheet.create({
         marginTop: 15,
         marginBottom: 15
     },
-    fab:{
+    fab: {
         position: 'absolute',
         width: 50,
         height: 50,
@@ -248,7 +247,7 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabNegative:{
+    fabNegative: {
         position: 'absolute',
         width: 60,
         height: 60,
@@ -260,7 +259,7 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabLeft:{
+    fabLeft: {
         position: 'absolute',
         width: 50,
         height: 50,
@@ -272,7 +271,7 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabTop:{
+    fabTop: {
         position: 'absolute',
         width: 50,
         height: 50,
@@ -284,7 +283,7 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabTopSmall:{
+    fabTopSmall: {
         position: 'absolute',
         width: 30,
         height: 30,
@@ -296,7 +295,7 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabTopSmall2:{
+    fabTopSmall2: {
         position: 'absolute',
         width: 30,
         height: 30,
@@ -308,15 +307,15 @@ export default StyleSheet.create({
         borderRadius: 30,
         elevation: 8
     },
-    fabText:{
+    fabText: {
         fontSize: 30,
         color: palette.text,
     },
-    fabTextSmall:{
+    fabTextSmall: {
         fontSize: 15,
         color: palette.text,
     },
-    acceptButton:{
+    acceptButton: {
         backgroundColor: palette.primary,
         padding: 10,
         marginVertical: 8,
@@ -334,14 +333,14 @@ export default StyleSheet.create({
         shadowOpacity: 0.25,
         flex: 1
     },
-    declineButton:{
+    declineButton: {
         backgroundColor: palette.secondary,
         padding: 10,
         marginVertical: 8,
         marginHorizontal: 8,
         borderRadius: 10,
     },
-    declineButtonMax:{
+    declineButtonMax: {
         backgroundColor: palette.secondary,
         padding: 10,
         marginVertical: 8,
@@ -358,7 +357,7 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
 
-    addButtonInline:{
+    addButtonInline: {
         width: 40,
         height: 40,
         marginHorizontal: 5,
@@ -367,7 +366,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    addButton:{
+    addButton: {
         width: 40,
         height: 40,
         margin: 5,
@@ -376,7 +375,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    addButtonSmall:{
+    addButtonSmall: {
         width: 30,
         height: 30,
         margin: 5,
@@ -385,7 +384,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    subtractButton:{
+    subtractButton: {
         width: 40,
         height: 40,
         margin: 5,
@@ -394,7 +393,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    subtractButtonSmall:{
+    subtractButtonSmall: {
         width: 30,
         height: 30,
         margin: 5,
@@ -412,11 +411,11 @@ export default StyleSheet.create({
         color: palette.text
     },
     itemsHeaderRight: {
-       alignSelf: "center",
+        alignSelf: "center",
         fontSize: 20,
         color: palette.text
     },
-    itemText:{
+    itemText: {
         fontSize: 20,
         color: palette.text
     },
@@ -429,14 +428,14 @@ export default StyleSheet.create({
         fontWeight: "bold",
         maxHeight: 200
     },
-    subTitle:{
+    subTitle: {
         fontSize: 20,
         color: palette.text,
         opacity: 0.7,
         textAlign: 'center',
         maxHeight: 200
     },
-    description:{
+    description: {
         color: palette.text,
         maxHeight: 90,
         textAlign: "center",
@@ -446,64 +445,64 @@ export default StyleSheet.create({
         fontSize: 15,
         color: palette.text,
     },
-    dateDisplay:{
+    dateDisplay: {
         fontSize: 15,
         opacity: 0.7,
         color: palette.text,
         textAlign: "center"
     },
-    rightBoxMain:{
-        textAlign:"center",
+    rightBoxMain: {
+        textAlign: "center",
         color: palette.text,
         fontSize: 30
     },
-    rightBoxSub:{
-        textAlign:"center",
+    rightBoxSub: {
+        textAlign: "center",
         color: palette.text,
         fontSize: 12
     },
 
 
     // New Styles
-    backgroundImage:{
+    backgroundImage: {
         flex: 1,
         position: "absolute",
         width: "100%",
         height: "100%",
         resizeMode: "cover",
     },
-    gradient:{
+    gradient: {
         position: "absolute",
         height: "100%",
         left: 0,
         right: 0,
         bottom: 0,
     },
-    icon:{
+    icon: {
         width: 40,
         height: 40,
         resizeMode: "center"
     },
-    iconTextGroup:{
+    iconTextGroup: {
         alignItems: "center",
         justifyContent: "center",
         margin: 10,
         width: 90
     },
-    iconText:{
+    iconText: {
         color: palette.text,
         opacity: 0.7,
         fontSize: 12,
         textAlign: "center",
     },
-    neutralButton:{
+    neutralButton: {
         width: "40%",
         backgroundColor: 'rgba(0,0,0,0.5)',
         padding: 25,
         borderRadius: 10,
         margin: 5,
     },
-    neutralButtonStatic:{
+    neutralButtonStatic: {
         width: "40%",
         height: 100,
         justifyContent: "center",
@@ -513,14 +512,14 @@ export default StyleSheet.create({
         borderRadius: 10,
         margin: 5,
     },
-    neutralButtonNormal:{
+    neutralButtonNormal: {
         width: "80%",
         backgroundColor: 'rgba(0,0,0,0.5)',
         padding: 25,
         borderRadius: 10,
         margin: 5,
     },
-    neutralButtonSingleExpense:{
+    neutralButtonSingleExpense: {
         backgroundColor: 'rgba(0,0,0,0.5)',
         borderRadius: 10,
         margin: 5,
@@ -530,25 +529,25 @@ export default StyleSheet.create({
         width: "80%",
         alignSelf: "center"
     },
-    bottom:{
+    bottom: {
         position: "absolute",
         bottom: 20,
         width: "100%",
     },
-    modalText:{
+    modalText: {
         color: palette.text,
         fontSize: 20,
         padding: 20,
         paddingHorizontal: 40,
         textAlign: "center"
     },
-    modalSubtext:{
+    modalSubtext: {
         color: palette.text,
         fontSize: 15,
         textAlign: "center",
         opacity: 0.9
     },
-    memberImage:{
+    memberImage: {
         alignSelf: "center",
         width: 200,
         height: 200,
@@ -556,99 +555,99 @@ export default StyleSheet.create({
         margin: 30,
         resizeMode: "cover",
     },
-    memberImageSmall:{
+    memberImageSmall: {
         width: 50,
         height: 50,
         borderRadius: 100,
         resizeMode: "cover",
     },
-    memberTitle:{
+    memberTitle: {
         color: palette.text,
         fontSize: 30,
         alignSelf: "center",
         width: "90%",
         textAlign: "center",
     },
-    memberSubTitle:{
+    memberSubTitle: {
         color: palette.text,
         fontSize: 12,
         opacity: 0.5,
         textAlign: "center",
     },
-    memberGreenSide:{
+    memberGreenSide: {
         padding: 15,
         width: "40%",
         alignItems: "center"
     },
-    memberGreenSideBackground:{
+    memberGreenSideBackground: {
         backgroundColor: palette.primary,
         opacity: 0.5,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
         ...StyleSheet.absoluteFillObject,
     },
-    memberNeutralSideBackground:{
+    memberNeutralSideBackground: {
         backgroundColor: palette.card,
         opacity: 0.5,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         ...StyleSheet.absoluteFillObject,
     },
-    memberNeutralSide:{
+    memberNeutralSide: {
         alignSelf: "center",
         padding: 15,
         width: "50%",
 
         alignItems: "center"
     },
-    memberRedSide:{
+    memberRedSide: {
         padding: 15,
         width: "40%",
         alignItems: "center"
     },
-    memberRedSideBackground:{
+    memberRedSideBackground: {
         backgroundColor: palette.secondary,
         opacity: 0.5,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         ...StyleSheet.absoluteFillObject,
     },
-    memberNeutralSideTextGreen:{
+    memberNeutralSideTextGreen: {
         color: palette.primary,
         fontSize: 30
     },
-    memberNeutralSideTextRed:{
+    memberNeutralSideTextRed: {
         color: palette.secondary,
         fontSize: 30
     },
-    memberGreenSideText:{
+    memberGreenSideText: {
         color: palette.primary,
         fontSize: 25,
     },
-    memberRedSideText:{
+    memberRedSideText: {
         color: palette.secondary,
         fontSize: 25
     },
-    expenseTitle:{
+    expenseTitle: {
         color: palette.text,
         fontSize: 30,
         textAlign: "center",
         margin: 20,
 
     },
-    expenseGreenBackground:{
+    expenseGreenBackground: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: palette.primary,
         opacity: 0.5,
         borderRadius: 10,
     },
-    expenseRedBackground:{
+    expenseRedBackground: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: palette.secondary,
         opacity: 0.5,
         borderRadius: 10,
     },
-    expenseContainer:{
+    expenseContainer: {
         padding: 10,
         margin: 10,
         borderRadius: 10,
@@ -656,17 +655,17 @@ export default StyleSheet.create({
         alignSelf: "center",
         height: "45%"
     },
-   /* expenseContainerScrollView:{
-        overflow: "scroll",
-        backgroundColor: "black",
-    },*/
-    expenseContainerTitle:{
+    /* expenseContainerScrollView:{
+         overflow: "scroll",
+         backgroundColor: "black",
+     },*/
+    expenseContainerTitle: {
         color: palette.text,
         fontSize: 20,
         textAlign: "center",
         margin: 5,
     },
-    expenseContainerDescription:{
+    expenseContainerDescription: {
         color: palette.text,
         fontSize: 15,
         textAlign: "center",
@@ -674,7 +673,7 @@ export default StyleSheet.create({
         marginVertical: 5
 
     },
-    expenseGreenContainerItem:{
+    expenseGreenContainerItem: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -683,7 +682,7 @@ export default StyleSheet.create({
         backgroundColor: palette.primary,
         borderRadius: 5,
     },
-    expenseRedContainerItem:{
+    expenseRedContainerItem: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -692,61 +691,61 @@ export default StyleSheet.create({
         backgroundColor: palette.secondary,
         borderRadius: 5,
     },
-    expenseContainerItemPrice:{
+    expenseContainerItemPrice: {
         width: "35%",
         textAlign: "center",
         backgroundColor: "rgba(32, 32, 32, 0.2)",
         color: palette.text,
         fontSize: 15,
         borderRadius: 5,
-        height:"100%",
+        height: "100%",
         paddingVertical: 5
     },
-    expenseContainerItemTitle:{
+    expenseContainerItemTitle: {
         color: palette.text,
         fontSize: 15,
         margin: 5,
     },
-    settlementItem:{
+    settlementItem: {
         paddingVertical: 10,
         backgroundColor: palette.card,
         marginVertical: 8,
         marginHorizontal: 16,
         borderRadius: 10,
     },
-    settlementCenterContainer:{
+    settlementCenterContainer: {
         width: "40%"
     },
-    settlementIconGroup:{
-       alignItems: "center",
+    settlementIconGroup: {
+        alignItems: "center",
         justifyContent: "center",
         width: "30%",
     },
-    settlementUserImage:{
+    settlementUserImage: {
         width: 60,
         height: 60,
         borderRadius: 100
     },
-    settlementUserText:{
+    settlementUserText: {
         marginTop: 5,
         fontSize: 12,
         color: palette.text,
         textAlign: "center"
     },
-    settlementAmount:{
+    settlementAmount: {
         fontSize: 30,
         fontWeight: "bold",
         color: palette.text,
         textAlign: "center"
     },
-    settlementArrowImage:{
+    settlementArrowImage: {
         width: 90,
         height: 30,
         margin: 10,
         resizeMode: "stretch",
         alignSelf: "center"
     },
-    settlementSendNotification:{
+    settlementSendNotification: {
         color: palette.text,
         opacity: 0.8,
         textDecorationStyle: "solid",
@@ -755,19 +754,19 @@ export default StyleSheet.create({
         textAlign: "center",
         fontSize: 12
     },
-    header:{
+    header: {
         flexDirection: "row",
         alignItems: "center",
         height: 40,
     },
-    headerTitle:{
+    headerTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         color: palette.text,
         textAlign: "center",
         margin: 5
     },
-    headerTitleStack:{
+    headerTitleStack: {
         flexDirection: "row",
         position: "absolute",
         left: 20,
@@ -775,7 +774,7 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    headerMenu:{
+    headerMenu: {
         width: 20,
         height: 20,
         resizeMode: "center",
@@ -783,24 +782,24 @@ export default StyleSheet.create({
         marginLeft: 15
     },
 
-    tripListItem:{
+    tripListItem: {
         backgroundColor: palette.card,
         borderRadius: 10,
         padding: 10,
         margin: 10,
         paddingLeft: 20,
     },
-    tripListHeader:{
+    tripListHeader: {
         color: palette.text,
         fontSize: 25,
         width: "85%"
     },
-    tripListSubheader:{
+    tripListSubheader: {
         color: palette.text,
         fontSize: 15,
         opacity: 0.5
     },
-    tripListIcon:{
+    tripListIcon: {
         marginTop: 20,
         width: 50,
         height: 50,
@@ -808,12 +807,12 @@ export default StyleSheet.create({
         alignSelf: "center",
         resizeMode: "contain"
     },
-    tripListIconText:{
+    tripListIconText: {
         color: palette.text,
         fontSize: 20,
         textAlign: "center"
     },
-    tripListBackground:{
+    tripListBackground: {
         ...StyleSheet.absoluteFillObject,
         position: "absolute",
         resizeMode: "cover",
@@ -824,13 +823,13 @@ export default StyleSheet.create({
         top: 0,
         bottom: 0,
     },
-    tripListBackgroundImage:{
+    tripListBackgroundImage: {
         ...StyleSheet.absoluteFillObject,
         resizeMode: "cover",
         width: "100%",
         height: "100%",
     },
-    logListItem:{
+    logListItem: {
         borderRadius: 10,
         padding: 10,
         marginVertical: 0,
@@ -840,70 +839,70 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
     },
-    logListText:{
+    logListText: {
         color: palette.text,
         fontSize: 15,
         width: "60%",
     },
-    logListItemImage:{
+    logListItemImage: {
         width: 50,
         height: 75,
         resizeMode: "stretch",
     },
-    logListItemSubimage:{
+    logListItemSubimage: {
         width: 20,
         height: 20,
         marginRight: 5,
         resizeMode: "stretch",
     },
-    logHorizontalStack:{
+    logHorizontalStack: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
         width: "35%",
         marginRight: 10
     },
-    logHorizontalStackText:{
+    logHorizontalStackText: {
         color: palette.text,
         fontSize: 12,
         width: "70%",
     },
-    memberListHeader:{
+    memberListHeader: {
         marginLeft: 10,
         color: palette.text,
         fontSize: 20
     },
-     memberListSubHeader:{
+    memberListSubHeader: {
         marginLeft: 10,
         color: palette.text,
         fontSize: 10,
         opacity: 0.5
     },
-    memberListGreenSideText:{
+    memberListGreenSideText: {
         fontSize: 20,
         color: palette.primary,
         alignSelf: "flex-end",
         textAlign: "right"
     },
-    memberListRedSideText:{
+    memberListRedSideText: {
         fontSize: 20,
         color: palette.secondary,
         alignSelf: "flex-end",
         textAlign: "right"
     },
 
-    expenseAmountListItemImage:{
+    expenseAmountListItemImage: {
         width: 50,
         height: 50,
         resizeMode: "cover",
     },
-    expenseAmountListItemImageRound:{
+    expenseAmountListItemImageRound: {
         width: 50,
         height: 50,
         borderRadius: 100,
         resizeMode: "cover",
     },
-    expenseAmountListItemView:{
+    expenseAmountListItemView: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start"
@@ -917,13 +916,13 @@ export default StyleSheet.create({
         textAlign: "right",
         fontSize: 15,
     },
-    expenseAmountListItemHeader:{
+    expenseAmountListItemHeader: {
         fontSize: 20,
         color: palette.text,
         marginLeft: 10,
         maxWidth: "70%"
     },
-    singleExpenseContainer:{
+    singleExpenseContainer: {
         padding: 10,
         margin: 10,
         borderRadius: 10,
@@ -931,29 +930,29 @@ export default StyleSheet.create({
         alignSelf: "center",
         height: "40%"
     },
-    map:{
+    map: {
         width: "90%",
         height: 200,
         margin: 20,
         borderRadius: 10,
         alignSelf: "center"
     },
-    mapLarge:{
+    mapLarge: {
         width: "80%",
         height: "100%",
         alignSelf: "center"
     },
-    mapLegendHeader:{
+    mapLegendHeader: {
         color: palette.text,
         fontSize: 10,
         textAlign: "center",
         marginBottom: 10
     },
-    mapLegendText:{
+    mapLegendText: {
         color: palette.text,
         fontSize: 8,
     },
-    mapLegend:{
+    mapLegend: {
         position: "absolute",
         bottom: 0,
         left: 0,
@@ -961,5 +960,13 @@ export default StyleSheet.create({
         margin: 10,
         padding: 10,
         borderRadius: 10
-    }
+    },
+    noItemPrompt: {
+        color: "white",
+        opacity: 0.5,
+        fontSize: 20,
+        textAlign: "center",
+        margin: 40,
+        marginTop: 150
+    },
 })

@@ -15,7 +15,6 @@ function TripOverview({route, navigation}:any) {
     const [refresh, setRefresh] = React.useState(false);
     const isFocus = useIsFocused()
     useEffect(() => {
-        console.log("TripOverview focused");
         setRefresh(!refresh);
     }, [isFocus]);
     return (

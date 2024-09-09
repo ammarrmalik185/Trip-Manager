@@ -13,7 +13,6 @@ import TripList from "./TripList.tsx";
 import TripOverview from "./TripOverview.tsx";
 import TripCreate from "./TripCreate.tsx";
 import TripEdit from "./TripEdit.tsx";
-import TripDetails from "./TripDetails.tsx";
 import TripMembers from "./TripMembers.tsx";
 import TripMembersCreate from "./TripMembersCreate.tsx";
 import TripMembersEdit from "./TripMembersEdit.tsx";
@@ -53,7 +52,6 @@ const TripStack = () => {
         <Stack.Screen name={pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
         <Stack.Screen name={pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}} />
         <Stack.Screen name={pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}} />
-        <Stack.Screen name={pages.TripDetails} component={TripDetails} options={{title: 'Trip Details'}} />
 
         <Stack.Screen name={pages.TripOverview} component={TripOverview} options={{title: 'Trip Overview'}} />
 
