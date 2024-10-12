@@ -1,8 +1,8 @@
 import {calculatedExpense} from "./expense.ts";
 import member from "./member.ts";
-import {DocumentDirectoryPath, mkdir, readDir, readFile, unlink, writeFile} from "react-native-fs";
 import {Logger} from "../helpers/Logger.ts";
 import memberAmount from "./memberAmount.ts";
+import {FileManager} from "../helpers/FileManager.ts";
 
 export class singleExpense {
 
@@ -35,8 +35,8 @@ export class singleExpense {
     }
 
     saveSingleExpense(): Promise<void>{
-        let path = DocumentDirectoryPath + "/singleExpenses/" + this.id + '.json';
-        let thisdata = JSON.stringify({
+        let path = `singleExpenses/${this.id}.json`;
+        let thisData = JSON.stringify({
             id: this.id,
             title: this.title,
             description: this.description,
@@ -47,15 +47,10 @@ export class singleExpense {
             members: this.members,
         });
 
-        Logger.log("Saving Expense: " + thisdata)
+        Logger.log("Saving Expense: " + thisData)
 
-        return new Promise<void>((resolve, reject) => {
-            writeFile(path, thisdata, 'utf8').then((success) => {
-                resolve();
-            }).catch(() => {
-                reject();
-            });
-        });
+        return FileManager.writeFile(path, thisData);
+
     }
 
     getMember(id: string): member | undefined{
@@ -63,38 +58,25 @@ export class singleExpense {
     }
 
     deleteSingleExpense(): Promise<void>{
-        let path = DocumentDirectoryPath + "/singleExpenses/" + this.id + '.json';
+        let path = `/singleExpenses/${this.id}.json`;
         singleExpense.allSingleExpenses.filter(item => item.id != this.id);
-        return unlink(path);
+        return FileManager.deleteFile(path);
     }
 
     static loadSingleExpenses(onLoad:any = () => null): void {
         this.allSingleExpenses = [];
-        singleExpense.createFolder().then(() => {
-            readDir(DocumentDirectoryPath + "/singleExpenses").then(result => {
-                let pending = 0;
-                if (result.length <= 0) onLoad([])
-                result.forEach(item => {
-                    if (item.isFile() && item.path.endsWith(".json")){
-                        pending += 1;
-                        readFile(item.path).then(result => {
-                            Logger.log(item.path + ":" + result);
-                            try {
-                                singleExpense.allSingleExpenses.push(singleExpense.loadFromString(result));
-                                pending -= 1;
-                                if (pending == 0) onLoad(singleExpense.allSingleExpenses);
-                            } catch (err){
-                                pending -= 1;
-                                if (pending == 0) onLoad(singleExpense.allSingleExpenses);
-                                Logger.error(err)
-                            }
-
-                        }).catch((err) => {
-                            pending -= 1;
-                            if (pending == 0) onLoad(singleExpense.allSingleExpenses);
+        FileManager.ensureDir("singleExpenses").then(() => {
+            FileManager.ensureDir("singleExpenses").then(result => {
+                FileManager.readDirectoryFiles("singleExpenses").then(files => {
+                    files.forEach(file => {
+                        if (!file.path.endsWith(".json")) return;
+                        try {
+                            singleExpense.allSingleExpenses.push(singleExpense.loadFromString(file.content));
+                        } catch (err){
                             Logger.error(err)
-                        })
-                    }
+                        }
+                    })
+                    onLoad(this.allSingleExpenses);
                 })
             })
         });
@@ -124,10 +106,6 @@ export class singleExpense {
 
     static getTrip(id: string): singleExpense | undefined{
         return this.allSingleExpenses.find(trp => trp.id == id);
-    }
-
-    static createFolder(): Promise<void>{
-        return mkdir(DocumentDirectoryPath + "/singleExpenses/");
     }
 
     calculate(): memberAmount[]{

@@ -14,82 +14,9 @@ import PopupModal, {ModalData, ModalType} from "../components/PopupModal.tsx";
 import memberAmount from "../types/memberAmount.ts";
 import SettlementCalculator from "../helpers/SettlementCalculator.ts";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
+import {FileManager} from "../helpers/FileManager.ts";
 
 const onlineEnabled = true;
-
-const generateFile = async (content: string) => {
-    const fileName = 'trip-manager-backup.json';
-    const filePath = `${DocumentDirectoryPath}/${fileName}`;
-
-    let generated = false;
-
-    try {
-        await writeFile(filePath, content, 'utf8');
-        generated = true;
-    } catch (error) {
-        Logger.error(error);
-        Toast.show('Failed to generate backup file', Toast.SHORT);
-    }
-
-    if (generated){
-        try {
-            const shareOptions = {
-                title: 'Download your backup',
-                url: `file://${filePath}`,
-                type: 'application/json',
-            };
-            await Share.open(shareOptions);
-        } catch (error){
-            Logger.log("Saving Failed: " + error)
-        }
-    }
-
-};
-
-const generateTextFile = async (content: string) => {
-    const fileName = 'trip-manager.md';
-    const filePath = `${DocumentDirectoryPath}/${fileName}`;
-
-    let generated = false;
-
-    try {
-        await writeFile(filePath, content, 'utf8');
-        generated = true;
-    } catch (error) {
-        Logger.error(error);
-        Toast.show('Failed to generate backup file', Toast.SHORT);
-    }
-
-    if (generated){
-        try {
-            const shareOptions = {
-                title: 'Download your file',
-                url: `file://${filePath}`,
-                type: 'text/markdown',
-            };
-            await Share.open(shareOptions);
-        } catch (error){
-            Logger.log("Saving Failed: " + error)
-        }
-    }
-}
-
-const pickFile = async () => {
-    try {
-        const res = await DocumentPicker.pick({
-            type: [DocumentPicker.types.json],
-        });
-        const filePath = res[0].uri;
-        return await readFile(filePath, 'utf8');
-    } catch (err) {
-        if (DocumentPicker.isCancel(err)) {
-            Logger.log('User cancelled the picker');
-        } else {
-            Logger.error(err);
-            Toast.show('Failed to pick file', Toast.SHORT);
-        }
-    }
-}
 
 const recoverBackupFromString = (content: string | undefined) => {
     try {
@@ -123,6 +50,40 @@ const recoverBackupFromString = (content: string | undefined) => {
     }
 }
 
+const generateHumanReadableFileContent = () => {
+    return new Promise<string>((resolve, reject) => {
+        let textArr : string[] = [];
+        trip.loadTrips((trips:trip[]) => {
+            for (const singleTrip of trips.sort((a, b) => b.date.from.getTime() - a.date.from.getTime())){
+                textArr.push(`## ${singleTrip.title}\n`);
+                textArr.push(`Destination: ${singleTrip.destination}\n`);
+                textArr.push(`Date: ${singleTrip.date.from.toLocaleDateString()}\n`);
+                textArr.push("### Members\n");
+                for (const member of singleTrip.members) {
+                    textArr.push(`- ${member.name}\n`);
+                }
+                textArr.push("### Expenses\n");
+                for (const expense of singleTrip.expenses.sort((a, b) => a.date.getTime() - b.date.getTime())){
+                    expense.calculateTotal();
+                    let paid = expense.payers.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
+                    let spent = expense.getCalculatedExpense().spenders.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
+                    textArr.push(`${expense.date.toLocaleTimeString()} ${expense.date.toLocaleDateString()} - ${expense.title} paid by: ${paid}(${expense.amount}) -> spent by: ${spent}\n`)
+                }
+                textArr.push("### Logs\n");
+                for (const log of singleTrip.logs.sort((a, b) => a.date.getTime() - b.date.getTime())) {
+                    textArr.push(`${log.date.toLocaleTimeString()} ${log.date.toLocaleDateString()} - ${log.title}\n`)
+                }
+                textArr.push("\n");
+                textArr.push('### Settlements\n')
+                for (const settlement of new SettlementCalculator(singleTrip.expenses.map(e => e.getCalculatedExpense())).settlements) {
+                    textArr.push(`${settlement.spender.name} owes ${settlement.payer.name} ${SettingsManager.settings.currencySymbol} ${settlement.amount.toFixed(0)}\n`)
+                }
+            }
+            resolve(textArr.join(""))
+        })
+    });
+}
+
 export default function BackupAndRestore(){
 
     const [refresh, setRefresh] = useState(true);
@@ -144,37 +105,12 @@ export default function BackupAndRestore(){
         <View style={styles.main}>
             <PopupModal state={modalVisible} modalData={new ModalData(ModalType.Information, "Note: This file cannot be used to restore data", () => {
 
-                let textArr : string[] = [];
-                trip.loadTrips((trips:trip[]) => {
-                    for (const singleTrip of trips.sort((a, b) => b.date.from.getTime() - a.date.from.getTime())){
-                        textArr.push(`## ${singleTrip.title}\n`);
-                        textArr.push(`Destination: ${singleTrip.destination}\n`);
-                        textArr.push(`Date: ${singleTrip.date.from.toLocaleDateString()}\n`);
-                        textArr.push("### Members\n");
-                        for (const member of singleTrip.members) {
-                            textArr.push(`- ${member.name}\n`);
-                        }
-                        textArr.push("### Expenses\n");
-                        for (const expense of singleTrip.expenses.sort((a, b) => a.date.getTime() - b.date.getTime())){
-                            expense.calculateTotal();
-                            let paid = expense.payers.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
-                            let spent = expense.getCalculatedExpense().spenders.filter(p => p.amount != 0).reduce((s: string, p:memberAmount) => { return s + (`${p.member.name},`) },  "").slice(0, -1);
-                            textArr.push(`${expense.date.toLocaleTimeString()} ${expense.date.toLocaleDateString()} - ${expense.title} paid by: ${paid}(${expense.amount}) -> spent by: ${spent}\n`)
-                        }
-                        textArr.push("### Logs\n");
-                        for (const log of singleTrip.logs.sort((a, b) => a.date.getTime() - b.date.getTime())) {
-                            textArr.push(`${log.date.toLocaleTimeString()} ${log.date.toLocaleDateString()} - ${log.title}\n`)
-                        }
-                        textArr.push("\n");
-                        textArr.push('### Settlements\n')
-                        for (const settlement of new SettlementCalculator(singleTrip.expenses.map(e => e.getCalculatedExpense())).settlements) {
-                            textArr.push(`${settlement.spender.name} owes ${settlement.payer.name} ${SettingsManager.settings.currencySymbol} ${settlement.amount.toFixed(0)}\n`)
-                        }
-                    }
-                    generateTextFile(textArr.join(""));
+                generateHumanReadableFileContent().then((content) => {
+                    FileManager.writeFile("trip-manager.md", content).then(() => {
+                        FileManager.shareFile("trip-manager.md", "text/markdown")
+                    });
                 })
-
-                setModalVisible(false)
+                setModalVisible(false);
 
             }, [], "")}/>
             <View style={styles.container}>
@@ -242,16 +178,16 @@ export default function BackupAndRestore(){
                                         trips: trips,
                                         singleExpenses: singleExpenses
                                     }
-
-                                    generateFile(JSON.stringify(backup))
-
+                                    FileManager.writeFile("trip-manager-backup.json",JSON.stringify(backup)).then(() => {
+                                        FileManager.shareFile("trip-manager-backup.json", "application/json")
+                                    })
                                 })
                             })
                         }}>
                             <Text style={styles.acceptButtonText}>Create Local Backup</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.neutralButton} onPress={() => {
-                            pickFile().then(recoverBackupFromString);
+                            FileManager.pickSingleFile({type: [DocumentPicker.types.json]}).then(recoverBackupFromString);
                         }}>
                             <Text style={styles.acceptButtonText}>Restore From File</Text>
                         </TouchableOpacity>
