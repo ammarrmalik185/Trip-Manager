@@ -22,7 +22,7 @@ export class FileManager{
 
     static async writeFile(filePath: string, data: string) {
         try {
-            await writeFile(FileManager.basePath + filePath, data, 'base64');
+            await writeFile(FileManager.basePath + filePath, data, 'utf8');
         } catch (error) {
             console.error(error);
             throw error;
@@ -31,7 +31,7 @@ export class FileManager{
 
     static async readFile(filePath: string) {
         try {
-            const data = await readFile(FileManager.basePath + filePath, 'base64');
+            const data = await readFile(FileManager.basePath + filePath, 'utf8');
             return data;
         } catch (error) {
             console.error(error);
@@ -61,9 +61,9 @@ export class FileManager{
         let files = (await readDir(FileManager.basePath + dirPath)).filter(file => file.isFile());
         let fileContents : File[] = [];
         await Promise.all(files.map(async (file) => {
-            return readFile(file.path).then(content => {
+            return readFile(file.path, "utf8").then(content => {
                 fileContents.push(new File(file.path, content, file));
-            })
+            }).catch(console.error)
         }))
         return fileContents;
     }
@@ -100,7 +100,7 @@ export class FileManager{
 
     static async shareFile(filePath: string, mimeType: string) {
         return Share.open({
-            url: FileManager.basePath + filePath,
+            url: "file://" + FileManager.basePath + filePath,
             type: mimeType,
         });
     }

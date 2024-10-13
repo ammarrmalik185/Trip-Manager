@@ -12,17 +12,20 @@ export class SettingsManager {
         currencySymbol: "Rs",
         defaultExpenseSpenderNumber: 0,
         incrementDecrementMultiplier: 1,
+
+        theme: "dark",
     };
 
     static settingHelpers:any = {
         appJustOpen: true,
         currencyTypes: [
-            "Rs",
+            "₨",
             "$" ,
             "¥" ,
             "₹" ,
             "€" ,
-            "£"
+            "£" ,
+            "₸"
         ]
     }
 

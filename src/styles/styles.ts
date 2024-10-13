@@ -1,56 +1,79 @@
 import {StyleSheet} from "react-native";
 import {palette} from "./colors.ts";
+import styles from "react-native-webview/lib/WebView.styles";
 
 export default StyleSheet.create({
 
     // input fields
-
-    inputField: {
-        borderWidth: 1,
-        borderColor: palette.border,
-        height: 40,
-        margin: 20,
+    inputPopupView: {
+        borderRadius: 10,
         padding: 10,
-        marginTop: 5,
-        backgroundColor: palette.background,
+        margin: 15,
+        backgroundColor: "rgba(4,4,4,0.2)",
+    },
+    settingsInputPopupView:{
+        borderRadius: 10,
+        padding: 10,
+        width: 40,
+        backgroundColor: "rgba(4,4,4,0.2)",
+    },
+    settingsInputField:{
+        padding: 5,
+        width: 40,
+        backgroundColor: "rgba(4,4,4,0.2)",
+        color: palette.text,
+        textAlign: "center",
+        borderRadius: 10,
+        borderBottomColor: palette.text,
+        // borderBottomWidth: 1
+    },
+    inputField: {
+        // borderColor: palette.border,
+        height: 30,
+        margin: 10,
+        padding: 5,
+        // backgroundColor: palette.background,
+        fontSize: 15,
         color: palette.text,
         borderRadius: 10,
-        marginBottom: 5,
-
+        borderBottomColor: palette.text,
+        borderBottomWidth: 1
     },
     inputFieldMax: {
-        borderWidth: 1,
-        borderColor: palette.border,
+        // borderColor: palette.border,
         height: 40,
-        margin: 12,
+        margin: 10,
         padding: 10,
         marginTop: 5,
-        backgroundColor: palette.card,
+        // backgroundColor: palette.card,
         color: palette.text,
         borderRadius: 10,
         marginBottom: 5,
-        flex: 1
+        flex: 1,
+        borderBottomColor: palette.text,
+        borderBottomWidth: 1
     },
     inputFieldMultiLine: {
-        borderWidth: 1,
-        borderColor: palette.border,
-        height: 80,
-        margin: 20,
-        padding: 10,
-        marginTop: 5,
-        backgroundColor: palette.background,
+        height: 60,
+        margin: 10,
+        padding: 5,
         color: palette.text,
         borderRadius: 10,
+        borderBottomColor: palette.text,
+        borderBottomWidth: 1
     },
     inputLabel: {
         marginLeft: 20,
         marginTop: 12,
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 12,
         color: palette.text,
     },
     inputSection: {
-        margin: 0
+        margin: 5,
+        marginHorizontal: 20,
+        backgroundColor: palette.card,
+        borderRadius: 10,
+        padding: 5
     },
     inputDynamicList: {
         borderRadius: 10,
@@ -99,7 +122,48 @@ export default StyleSheet.create({
         fontSize: 12,
         color: palette.text
     },
+    logLocationButton:{
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        padding: 10,
+        margin: 20,
+        marginBottom: 0,
+        borderRadius: 10,
+        width: "40%",
+        alignItems: "center",
+    },
+    logLocationButtonText:{
+        fontSize: 15,
+        color: palette.text,
+        textAlign: "center"
+    },
+    removeButton: {
+        backgroundColor: palette.secondary,
+        padding: 5,
+        margin: 5,
+        height: 30,
+        width: 30,
+        borderRadius: 50,
+        textAlign: "center",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    removeButtonText:{
+        color: palette.text,
+        fontSize: 15,
+    },
     // containers
+    forumTitle: {
+        color: palette.text,
+        fontSize: 30,
+        textAlign: "center",
+        fontWeight: "bold",
+        margin: 20,
+    },
+    forumView:{
+        justifyContent: "center",
+        flex: 1,
+        marginBottom: 20,
+    },
     horizontalLine: {
         width: "80%",
         backgroundColor: "rgba(255,255,255, 0.5)",
@@ -110,7 +174,7 @@ export default StyleSheet.create({
 
     main: {
         flex: 1,
-        backgroundColor: palette.background
+        backgroundColor: palette.background,
     },
     detailsDisplay: {
         backgroundColor: palette.background,
@@ -217,9 +281,16 @@ export default StyleSheet.create({
         padding: 20,
     },
     modalScrollView: {
+        maxHeight: 350,
+        padding: 10,
+        // backgroundColor: "rgba(0,0,0, 0.2)",
+        borderRadius: 10,
+        margin: 10
+    },
+    modalButtonView: {
         maxHeight: 500,
         padding: 10,
-        backgroundColor: "rgba(0,0,0, 0.2)",
+        // backgroundColor: "rgba(0,0,0, 0.2)",
         borderRadius: 10,
         margin: 10
     },
@@ -230,7 +301,24 @@ export default StyleSheet.create({
     },
 
     // buttons
-
+    popupOptionButton:{
+        backgroundColor: palette.background,
+        padding: 5,
+        marginVertical: 4,
+        borderRadius: 10,
+    },
+    popupOptionButtonSelected:{
+        backgroundColor: palette.primary,
+        padding: 5,
+        marginVertical: 4,
+        borderRadius: 10,
+    },
+    popupOptionButtonDecline: {
+        backgroundColor: palette.secondary,
+        padding: 5,
+        marginVertical: 4,
+        borderRadius: 10,
+    },
     flatList: {
         marginTop: 15,
         marginBottom: 15
@@ -318,8 +406,8 @@ export default StyleSheet.create({
     acceptButton: {
         backgroundColor: palette.primary,
         padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 8,
+        marginVertical: 15,
+        marginHorizontal: 30,
         borderRadius: 10,
     },
     acceptButtonMax: {
@@ -336,8 +424,8 @@ export default StyleSheet.create({
     declineButton: {
         backgroundColor: palette.secondary,
         padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 8,
+        marginVertical: 15,
+        marginHorizontal: 30,
         borderRadius: 10,
     },
     declineButtonMax: {
@@ -495,9 +583,14 @@ export default StyleSheet.create({
         fontSize: 12,
         textAlign: "center",
     },
+    settingsText:{
+        color: palette.text,
+        fontSize: 15,
+        textAlign: "center",
+    },
     neutralButton: {
         width: "40%",
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.6)',
         padding: 25,
         borderRadius: 10,
         margin: 5,
@@ -935,6 +1028,11 @@ export default StyleSheet.create({
         height: 200,
         margin: 20,
         borderRadius: 10,
+        alignSelf: "center"
+    },
+    mapSmall: {
+        width: "100%",
+        height: 300,
         alignSelf: "center"
     },
     mapLarge: {

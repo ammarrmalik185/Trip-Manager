@@ -31,15 +31,15 @@ export const tripThemes = [
 export function getTripThemeImage(theme: TripTheme){
     theme = theme || TripTheme.Default;
     switch (theme){
-        case TripTheme.Beach: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/beach.jpg');
-        case TripTheme.City: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/city.jpg');
-        case TripTheme.Desert: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/desert.jpg');
-        case TripTheme.Forest: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/forest.webp');
-        case TripTheme.Historical: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/historical.jpeg');
-        case TripTheme.Highways: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/highway.jpg');
-        case TripTheme.Mountains: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/mountains.jpg');
-        case TripTheme.Snow: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/snow.jpg');
-        default: return ImageLoader.loadSRCImage('../images/uiImages/tripImages/trip.jpg');
+        case TripTheme.Beach: return require('../images/uiImages/tripImages/beach.jpg');
+        case TripTheme.City: return require('../images/uiImages/tripImages/city.jpg');
+        case TripTheme.Desert: return require('../images/uiImages/tripImages/desert.jpg');
+        case TripTheme.Forest: return require('../images/uiImages/tripImages/forest.webp');
+        case TripTheme.Historical: return require('../images/uiImages/tripImages/historical.jpeg');
+        case TripTheme.Highways: return require('../images/uiImages/tripImages/highway.jpg');
+        case TripTheme.Mountains: return require('../images/uiImages/tripImages/mountains.jpg');
+        case TripTheme.Snow: return require('../images/uiImages/tripImages/snow.jpg');
+        default: return require('../images/uiImages/tripImages/trip.jpg');
     }
 }
 

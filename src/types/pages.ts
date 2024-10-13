@@ -1,4 +1,4 @@
-import TripLogsFullscreenMap from "../pages/TripLogsFullscreenMap.tsx";
+import TripLogsFullscreenMap from "../pages/Trips/Logs/TripLogsFullscreenMap.tsx";
 
 enum pages {
 

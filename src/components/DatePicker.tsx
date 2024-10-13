@@ -10,7 +10,7 @@ export default function DatePicker({value, onValueChanged, title="Date and Time"
     return (
         <View style={styles.inputSection}>
             <Text style={styles.inputLabel}>{title}</Text>
-            <TouchableOpacity style={styles.inputField} onPress={() => {
+            <TouchableOpacity style={styles.inputPopupView} onPress={() => {
                 setDatePickerVisible(true);
             }}>
                 <Text style={styles.dateDisplay}>{value.toLocaleString()}</Text>

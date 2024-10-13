@@ -1,11 +1,22 @@
 import React, {useEffect, useRef} from "react";
-import {Text, TextInput, TouchableOpacity, View, Animated, ScrollView} from "react-native";
+import {Text, TextInput, TouchableOpacity, View, Animated, ScrollView, Image} from "react-native";
 import Modal from 'react-native-modal';
 import styles from "../styles/styles.ts";
 import Toast from "react-native-simple-toast";
 import DatePicker from 'react-native-date-picker'
+import {palette} from "../styles/colors.ts";
 
-function getModal(modalData: ModalData){
+function getModal(modalData: ModalData, reset: boolean){
+
+    useEffect(() => {
+        if (reset) {
+            //reset all values
+            setConfirmationString("");
+            setMultipleChoice([]);
+            setDate(new Date());
+        }
+    }, []);
+
     const [confirmationString, setConfirmationString] = React.useState("");
     const [multipleChoice, setMultipleChoice] = React.useState(modalData.buttons ? modalData.buttons.map(() => false) : []);
     const [date, setDate] = React.useState(modalData.defaultValue ? modalData.defaultValue : new Date());
@@ -18,7 +29,7 @@ function getModal(modalData: ModalData){
                     <ScrollView style={styles.modalScrollView}>
                     {modalData.buttons?.map((buttonText:string, index:number) => {
                         return (
-                            <TouchableOpacity key={index} style={styles.acceptButton} onPress={() => modalData.callback(true, index)}>
+                            <TouchableOpacity key={index} style={styles.popupOptionButtonSelected} onPress={() => modalData.callback(true, index)}>
                                 <Text style={styles.acceptButtonText}>{buttonText}</Text>
                             </TouchableOpacity>
                         )
@@ -32,11 +43,28 @@ function getModal(modalData: ModalData){
                 <View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <Text style={styles.modalSubtext}>Select multiple options</Text>
+
+                    <View style={styles.modalButtonView}>
+                        <TouchableOpacity style={styles.popupOptionButtonSelected} onPress={() => {
+                            let newChoices = multipleChoice;
+                            newChoices.forEach((_, index) => newChoices[index] = true);
+                            setMultipleChoice([...newChoices]);
+                        }}><Text style={styles.acceptButtonText}>All</Text></TouchableOpacity>
+
+                         <TouchableOpacity style={styles.popupOptionButtonDecline} onPress={() => {
+                            let newChoices = multipleChoice;
+                            newChoices.forEach((_, index) => newChoices[index] = false);
+                            setMultipleChoice([...newChoices]);
+                        }}><Text style={styles.acceptButtonText}>None</Text></TouchableOpacity>
+                    </View>
+
+
+
                     <ScrollView style={styles.modalScrollView}>
                         {modalData.buttons && modalData.buttons.map((buttonText:string, index:number) => {
                             if (multipleChoice[index]) {
                                 return (
-                                    <TouchableOpacity key={index} style={styles.acceptButton} onPress={() => {
+                                    <TouchableOpacity key={index} style={styles.popupOptionButtonSelected} onPress={() => {
                                         let newChoices = multipleChoice;
                                         newChoices[index] = false;
                                         setMultipleChoice([...newChoices]);
@@ -46,7 +74,7 @@ function getModal(modalData: ModalData){
                                 )
                             }else{
                                 return (
-                                    <TouchableOpacity key={index} style={styles.declineButton} onPress={() => {
+                                    <TouchableOpacity key={index} style={styles.popupOptionButton} onPress={() => {
                                         let newChoices = multipleChoice;
                                         newChoices[index] = true;
                                         setMultipleChoice([...newChoices]);
@@ -58,7 +86,7 @@ function getModal(modalData: ModalData){
                         })}
                     </ScrollView>
 
-                    <Text style={styles.modalSubtext}>Selected: {modalData.buttons?.filter((_, index) => multipleChoice[index]).join(", ")}</Text>
+                    <Text style={styles.modalSubtext}>{modalData.buttons?.reduce((curr: number, _, index: number) => multipleChoice[index] ? curr + 1 : curr,  0)} Selected</Text>
 
                     <View style={styles.horizontalStack}>
                         <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, [])}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
@@ -69,13 +97,38 @@ function getModal(modalData: ModalData){
         case ModalType.Information:
             return (
                 <View>
+                    <View style={styles.center}>
+                        <Image
+                            source={require('../images/uiImages/info.png')}
+                            style={styles.icon}
+                        />
+                    </View>
                     <Text style={styles.modalText}>{modalData.message}</Text>
                     <TouchableOpacity style={styles.acceptButton} onPress={() => modalData.callback()}><Text style={styles.acceptButtonText}>OK</Text></TouchableOpacity>
                 </View>
             )
+        case ModalType.Warning:
+            return (
+                <View>
+                    <View style={styles.center}>
+                        <Image
+                            source={require('../images/uiImages/warning.png')}
+                            style={styles.icon}
+                        />
+                    </View>
+                    <Text style={styles.modalText}>Warning: {modalData.message}</Text>
+                    <TouchableOpacity style={{...styles.acceptButton, backgroundColor: "rgb(189,158,58)"}} onPress={() => modalData.callback()}><Text style={styles.acceptButtonText}>OK</Text></TouchableOpacity>
+                </View>
+            );
         case ModalType.Error:
             return (
                 <View>
+                    <View style={styles.center}>
+                        <Image
+                            source={require('../images/uiImages/error.png')}
+                            style={styles.icon}
+                        />
+                    </View>
                     <Text style={styles.modalText}>Error: {modalData.message}</Text>
                     <TouchableOpacity style={styles.declineButton} onPress={() => modalData.callback()}><Text style={styles.acceptButtonText}>OK</Text></TouchableOpacity>
                 </View>
@@ -147,7 +200,9 @@ function getModal(modalData: ModalData){
     }
 }
 
-export default function PopupModal({state, modalData}:{state:boolean, modalData:ModalData}){
+export default function PopupModal({state, modalData}:{state:boolean, modalData:ModalData}) {
+
+    const [oldModalData, setOldModalData] = React.useState(modalData);
 
     const slideAnim = useRef(new Animated.Value(1000)).current;
     const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -162,34 +217,31 @@ export default function PopupModal({state, modalData}:{state:boolean, modalData:
                 duration: 500,
                 useNativeDriver: true,
             }).start();
-            // Animated.timing(fadeAnim, {
-            //     toValue: 0.5,
-            //     duration: 500,
-            //     useNativeDriver: true,
-            // }).start()
         } else {
             Animated.timing(slideAnim, {
                 toValue: 1000,
                 duration: 500,
                 useNativeDriver: true,
             }).start(()=> {
-                console.log("Setting internal state to false")
                 setInternalState(false)
             })
-            // Animated.timing(fadeAnim, {
-            //     toValue: 0,
-            //     duration: 500,
-            //     useNativeDriver: true,
-            // }).start()
 
         }
     }, [state]);
+
+    var reset = false;
+    if (modalData != oldModalData) {
+        reset = true;
+        setOldModalData(modalData);
+    }else{
+        reset = false;
+    }
 
     return (
         <Modal isVisible={internalState}>
             <Animated.View style={{width: "100%", height: "100%", transform: [{ translateY: slideAnim }]}}>
                 <View style={styles.modalView}>
-                    {getModal(modalData)}
+                    {getModal(modalData, reset)}
                 </View>
             </Animated.View>
         </Modal>
@@ -221,6 +273,7 @@ export enum ModalType{
     PickAButton,
     MultipleChoices,
     Information,
+    Warning,
     Error,
     HardConfirmation,
     SoftConfirmation,
