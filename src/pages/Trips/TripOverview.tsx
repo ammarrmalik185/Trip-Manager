@@ -134,18 +134,16 @@ function TripOverview({route, navigation}: any) {
                 </View>
 
 
-                <View style={styles.horizontalStack}>
-                    <TouchableOpacity style={styles.neutralButton}
-                                      onPress={() => navigation.navigate(pages.TripExpensesComputed, {trip: route.params.trip})}>
-                        <Text style={styles.acceptButtonText}>Computed</Text>
-                        <Text style={styles.acceptButtonText}>Expenses</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.neutralButton}
-                                      onPress={() => navigation.navigate(pages.TripExpensesSettle, {trip: route.params.trip})}>
-                        <Text style={styles.acceptButtonText}>Settle</Text>
-                        <Text style={styles.acceptButtonText}>Expenses</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={styles.horizontalStack}>
+                <TouchableOpacity style={styles.neutralButton} onPress={() => navigation.navigate(pages.TripExpensesComputed, {trip: route.params.trip})}>
+                    <Text style={styles.acceptButtonText} numberOfLines={1}>Computed</Text>
+                    <Text style={styles.acceptButtonText} numberOfLines={1}>Expenses</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.neutralButton} onPress={() => navigation.navigate(pages.TripExpensesSettle, {trip: route.params.trip})}>
+                    <Text style={styles.acceptButtonText} numberOfLines={1}>Settle</Text>
+                    <Text style={styles.acceptButtonText} numberOfLines={1}>Expenses</Text>
+                </TouchableOpacity>
+            </View>
             </View>
         </View>
     )

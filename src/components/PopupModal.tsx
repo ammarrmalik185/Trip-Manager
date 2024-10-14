@@ -46,15 +46,17 @@ function getModal(modalData: ModalData, reset: boolean){
 
                     <View style={styles.modalButtonView}>
                         <TouchableOpacity style={styles.popupOptionButtonSelected} onPress={() => {
-                            let newChoices = multipleChoice;
-                            newChoices.forEach((_, index) => newChoices[index] = true);
-                            setMultipleChoice([...newChoices]);
+                            if (modalData.buttons) {
+                                let newChoices = modalData.buttons.map(() => true);
+                                setMultipleChoice([...newChoices]);
+                            }
                         }}><Text style={styles.acceptButtonText}>All</Text></TouchableOpacity>
 
                          <TouchableOpacity style={styles.popupOptionButtonDecline} onPress={() => {
-                            let newChoices = multipleChoice;
-                            newChoices.forEach((_, index) => newChoices[index] = false);
-                            setMultipleChoice([...newChoices]);
+                            if (modalData.buttons) {
+                                let newChoices = modalData.buttons.map(() => false);
+                                setMultipleChoice([...newChoices]);
+                            }
                         }}><Text style={styles.acceptButtonText}>None</Text></TouchableOpacity>
                     </View>
 
