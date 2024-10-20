@@ -40,6 +40,7 @@ import BackupAndRestore from "./Management/BackupAndRestore.tsx";
 import CustomHeader from "../components/CustomHeader.tsx";
 import {SettingsManager} from "../helpers/SettingsManager.ts";
 import TripLogsFullscreenMap from "./Trips/Logs/TripLogsFullscreenMap.tsx";
+import Help from "./Help/Help.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -58,30 +59,20 @@ const TripStack = () => {
         <Stack.Screen name={pages.TripOverview} component={TripOverview} options={{title: 'Trip Overview'}}/>
 
         <Stack.Screen name={pages.TripMembers} component={TripMembers} options={{title: 'Trip Members'}}/>
-        <Stack.Screen name={pages.TripMembersCreate} component={TripMembersCreate}
-                      options={{title: 'Add Trip Member'}}/>
-        <Stack.Screen name={pages.TripMembersEdit} component={TripMembersEdit}
-                      options={{title: 'Edit Member Details'}}/>
-        <Stack.Screen name={pages.TripMembersDetails} component={TripMembersDetails}
-                      options={{title: 'Member Details'}}/>
+        <Stack.Screen name={pages.TripMembersCreate} component={TripMembersCreate} options={{title: 'Add Trip Member'}}/>
+        <Stack.Screen name={pages.TripMembersEdit} component={TripMembersEdit} options={{title: 'Edit Member Details'}}/>
+        <Stack.Screen name={pages.TripMembersDetails} component={TripMembersDetails} options={{title: 'Member Details'}}/>
 
         <Stack.Screen name={pages.TripExpenses} component={TripExpenses} options={{title: 'Trip Expenses'}}/>
-        <Stack.Screen name={pages.TripExpensesCustomList} component={TripExpensesCustomList}
-                      options={{title: 'Trip Expenses'}}/>
-        <Stack.Screen name={pages.TripExpensesCreate} component={TripExpensesCreate}
-                      options={{title: 'Create an expense'}}/>
-        <Stack.Screen name={pages.TripExpensesEdit} component={TripExpensesEdit}
-                      options={{title: 'Edit expense details'}}/>
-        <Stack.Screen name={pages.TripExpensesDetails} component={TripExpensesDetails}
-                      options={{title: 'Expense Details'}}/>
-        <Stack.Screen name={pages.TripExpensesSettle} component={TripExpensesSettle}
-                      options={{title: 'Expense Settlements'}}/>
-        <Stack.Screen name={pages.TripExpensesComputed} component={TripExpensesComputed}
-                      options={{title: 'Computed Expenses'}}/>
+        <Stack.Screen name={pages.TripExpensesCustomList} component={TripExpensesCustomList} options={{title: 'Trip Expenses'}}/>
+        <Stack.Screen name={pages.TripExpensesCreate} component={TripExpensesCreate} options={{title: 'Create an expense'}}/>
+        <Stack.Screen name={pages.TripExpensesEdit} component={TripExpensesEdit} options={{title: 'Edit expense details'}}/>
+        <Stack.Screen name={pages.TripExpensesDetails} component={TripExpensesDetails} options={{title: 'Expense Details'}}/>
+        <Stack.Screen name={pages.TripExpensesSettle} component={TripExpensesSettle} options={{title: 'Expense Settlements'}}/>
+        <Stack.Screen name={pages.TripExpensesComputed} component={TripExpensesComputed} options={{title: 'Computed Expenses'}}/>
 
         <Stack.Screen name={pages.TripLogs} component={TripLogs} options={{title: 'Trip Logs'}}/>
-        <Stack.Screen name={pages.TripLogsFullscreenMap} component={TripLogsFullscreenMap}
-                      options={{title: 'Trip Logs Map'}}/>
+        <Stack.Screen name={pages.TripLogsFullscreenMap} component={TripLogsFullscreenMap} options={{title: 'Trip Logs Map'}}/>
         <Stack.Screen name={pages.TripLogsCreate} component={TripLogsCreate} options={{title: 'Create trip log'}}/>
         <Stack.Screen name={pages.TripLogsEdit} component={TripLogsEdit} options={{title: 'Edit log'}}/>
         <Stack.Screen name={pages.TripLogsDetails} component={TripLogsDetails} options={{title: 'Edit Log Details'}}/>
@@ -94,16 +85,11 @@ const SingleExpensesStack = () => {
             return <CustomHeader title={options.title || route.name}/>;
         }
     }}>
-        <Stack.Screen name={pages.SingleExpensesList} component={SingleExpenseList}
-                      options={{title: 'Single Expenses'}}/>
-        <Stack.Screen name={pages.SingleExpensesCreate} component={SingleExpenseCreate}
-                      options={{title: 'Single Expenses Create'}}/>
-        <Stack.Screen name={pages.SingleExpenseOverview} component={SingleExpenseOverview}
-                      options={{title: 'Single Expenses Details'}}/>
-        <Stack.Screen name={pages.SingleExpensesEdit} component={SingleExpensesEdit}
-                      options={{title: 'Single Expenses Edit'}}/>
-        <Stack.Screen name={pages.SingleExpensesSettle} component={SingleExpensesSettle}
-                      options={{title: 'Single Expenses Settle'}}/>
+        <Stack.Screen name={pages.SingleExpensesList} component={SingleExpenseList} options={{title: 'Single Expenses'}}/>
+        <Stack.Screen name={pages.SingleExpensesCreate} component={SingleExpenseCreate} options={{title: 'Single Expenses Create'}}/>
+        <Stack.Screen name={pages.SingleExpenseOverview} component={SingleExpenseOverview} options={{title: 'Single Expenses Details'}}/>
+        <Stack.Screen name={pages.SingleExpensesEdit} component={SingleExpensesEdit} options={{title: 'Single Expenses Edit'}}/>
+        <Stack.Screen name={pages.SingleExpensesSettle} component={SingleExpensesSettle} options={{title: 'Single Expenses Settle'}}/>
     </Stack.Navigator>
 }
 
@@ -114,8 +100,17 @@ const ManagementStack = () => {
         }
     }}>
         <Stack.Screen name={pages.Settings} component={Settings} options={{title: 'Settings'}}/>
-        <Stack.Screen name={pages.BackupAndRestore} component={BackupAndRestore}
-                      options={{title: 'Backup and Restore'}}/>
+        <Stack.Screen name={pages.BackupAndRestore} component={BackupAndRestore} options={{title: 'Backup and Restore'}}/>
+    </Stack.Navigator>
+}
+
+const HelpStack = () => {
+    return <Stack.Navigator screenOptions={{
+        headerTintColor: palette.text, header: ({navigation, route, options}) => {
+            return <CustomHeader title={options.title || route.name}/>;
+        }
+    }}>
+        <Stack.Screen name={pages.Help} component={Help} options={{title: 'Help'}}/>
     </Stack.Navigator>
 }
 
@@ -127,10 +122,9 @@ function App(): React.JSX.Element {
                     screenOptions={{headerShown: false}}
                     drawerContent={props => <CustomDrawer {...props} />}>
                     <Drawer.Screen name={pages.TripStack} component={TripStack} options={{title: 'Trips'}}/>
-                    <Drawer.Screen name={pages.SingleExpensesStack} component={SingleExpensesStack}
-                                   options={{title: 'Single Expenses'}}/>
-                    <Drawer.Screen name={pages.ManagementStack} component={ManagementStack}
-                                   options={{title: 'Settings'}}/>
+                    <Drawer.Screen name={pages.SingleExpensesStack} component={SingleExpensesStack} options={{title: 'Single Expenses'}}/>
+                    <Drawer.Screen name={pages.ManagementStack} component={ManagementStack} options={{title: 'Settings'}}/>
+                    <Drawer.Screen name={pages.HelpStack} component={HelpStack} options={{title: 'Help'}}/>
                 </Drawer.Navigator>
             </NavigationContainer>
         </GestureHandlerRootView>

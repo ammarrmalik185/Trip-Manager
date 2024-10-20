@@ -166,31 +166,14 @@ export default function Settings({navigation, route}: any) {
                    }}/>
             </View>
 
-            <View style={{height: 20}}/>
-            <Text style={styles.subTitle}>Feedback</Text>
-            <TouchableOpacity onPress={() => {
-                InAppReview.RequestInAppReview()
-                    .then((hasFlowFinishedSuccessfully) => {
-                        console.log('InAppReview in android', hasFlowFinishedSuccessfully);
-                        console.log(
-                            'InAppReview in ios has launched successfully',
-                            hasFlowFinishedSuccessfully,
-                        );
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-
-            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Send
-                feedback</Text></TouchableOpacity>
-
             {/*<View style={styles.horizontalLine}></View>*/}
             <View style={{height: 20}}/>
             <Text style={styles.subTitle}>Your data</Text>
 
             <TouchableOpacity onPress={() => navigation.navigate(pages.BackupAndRestore, {})}
-                              style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Backup and
-                restore</Text></TouchableOpacity>
+                              style={styles.horizontalStackContained}>
+                <Text style={styles.acceptButtonText}>Backup and restore</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
                 setModalData(new ModalData(ModalType.MultipleChoices, "Choose the trips to export", (value: boolean, selectedTrips: any) => {
@@ -216,15 +199,13 @@ export default function Settings({navigation, route}: any) {
                     }
                 }, trip.allTrips.map((t: trip) => t.title)));
                 setModalVisible(true)
-            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Export Trips and
-                Expenses</Text></TouchableOpacity>
+            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Export Trips and Expenses</Text></TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
                 FileManager.pickSingleFile({
                     type: [DocumentPicker.types.json],
                 }).then(BackupManager.recoverBackupFromString);
-            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Import Trips and
-                Expenses</Text></TouchableOpacity>
+            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Import Trips and Expenses</Text></TouchableOpacity>
 
             <TouchableOpacity style={styles.horizontalStackContained} onPress={() => {
                 BackupManager.getReadableFile().then((v) => {
@@ -235,8 +216,7 @@ export default function Settings({navigation, route}: any) {
             <TouchableOpacity onPress={() => {
                 setModalData(deleteDataModel);
                 setModalVisible(true);
-            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Delete all
-                data</Text></TouchableOpacity>
+            }} style={styles.horizontalStackContained}><Text style={styles.acceptButtonText}>Delete all data</Text></TouchableOpacity>
 
             <View style={{height: 20}}/>
 
