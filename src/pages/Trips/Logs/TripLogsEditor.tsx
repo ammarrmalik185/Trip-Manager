@@ -98,6 +98,7 @@ export default function TripLogsEditor({route, navigation}: any) {
                         <LeafletView
                             mapCenterPosition={geoLocation}
                             mapMarkers={[{position: geoLocation, icon: '📍', size: [32, 32], title: "Location"}]}
+                            doDebug={false}
                         />
                     </View>}
                 {!geoLocation && <View style={styles.mapSmall}>
