@@ -34,6 +34,7 @@ function getModal(modalData: ModalData, reset: boolean){
                             </TouchableOpacity>
                         )
                     })}
+                        <View style={{height: 10}}/>
                     </ScrollView>
                     <TouchableOpacity style={styles.declineButtonMax} onPress={() => modalData.callback(false, null)}><Text style={styles.acceptButtonText}>Cancel</Text></TouchableOpacity>
                 </View>
@@ -206,32 +207,7 @@ export default function PopupModal({state, modalData}:{state:boolean, modalData:
 
     const [oldModalData, setOldModalData] = React.useState(modalData);
 
-    const slideAnim = useRef(new Animated.Value(1000)).current;
-    const fadeAnim = useRef(new Animated.Value(0)).current;
-
-    const [internalState, setInternalState] = React.useState(false);
-
-    useEffect(() => {
-        if (state) {
-            setInternalState(true)
-            Animated.timing(slideAnim, {
-                toValue: 0,
-                duration: 500,
-                useNativeDriver: true,
-            }).start();
-        } else {
-            Animated.timing(slideAnim, {
-                toValue: 1000,
-                duration: 500,
-                useNativeDriver: true,
-            }).start(()=> {
-                setInternalState(false)
-            })
-
-        }
-    }, [state]);
-
-    var reset = false;
+    let reset;
     if (modalData != oldModalData) {
         reset = true;
         setOldModalData(modalData);
@@ -240,12 +216,10 @@ export default function PopupModal({state, modalData}:{state:boolean, modalData:
     }
 
     return (
-        <Modal isVisible={internalState}>
-            <Animated.View style={{width: "100%", height: "100%", transform: [{ translateY: slideAnim }]}}>
-                <View style={styles.modalView}>
-                    {getModal(modalData, reset)}
-                </View>
-            </Animated.View>
+        <Modal isVisible={state} animationIn={"slideInUp"} animationOut={"slideOutDown"} backdropColor={"rgba(0,0,0, 1)"} onBackButtonPress={() => modalData.callback(false)}>
+            <View style={styles.modalView}>
+                {getModal(modalData, reset)}
+            </View>
         </Modal>
     );
 }
@@ -269,6 +243,7 @@ export class ModalData{
         this.callback = callback;
         this.defaultValue = defaultValue;
     }
+
 }
 
 export enum ModalType{

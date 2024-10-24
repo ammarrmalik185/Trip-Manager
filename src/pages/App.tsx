@@ -11,11 +11,7 @@ import pages from "../types/pages.ts";
 
 import TripList from "./Trips/TripList.tsx";
 import TripOverview from "./Trips/TripOverview.tsx";
-import TripCreate from "./Trips/TripCreate.tsx";
-import TripEdit from "./Trips/TripEdit.tsx";
 import TripMembers from "./Trips/Members/TripMembers.tsx";
-import TripMembersCreate from "./Trips/Members/TripMembersCreate.tsx";
-import TripMembersEdit from "./Trips/Members/TripMembersEdit.tsx";
 import TripMembersDetails from "./Trips/Members/TripMembersDetails.tsx";
 import TripExpenses from "./Trips/Expenses/TripExpenses.tsx";
 import TripExpensesDetails from "./Trips/Expenses/TripExpensesDetails.tsx";
@@ -40,6 +36,7 @@ import Help from "./Help/Help.tsx";
 import TripExpensesEditor from "./Trips/Expenses/TripExpensesEditor.tsx";
 import TripLogsEditor from "./Trips/Logs/TripLogsEditor.tsx";
 import TripMembersEditor from "./Trips/Members/TripMembersEditor.tsx";
+import TripEditor from "./Trips/TripEditor.tsx";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -52,9 +49,8 @@ const TripStack = () => {
         }
     }}>
         <Stack.Screen name={pages.TripList} component={TripList} options={{title: 'Your Trips'}}/>
-        <Stack.Screen name={pages.TripCreate} component={TripCreate} options={{title: 'Create Trip'}}/>
-        <Stack.Screen name={pages.TripEdit} component={TripEdit} options={{title: 'Edit Trip'}}/>
-
+        <Stack.Screen name={pages.TripCreate} component={TripEditor} options={{title: 'Create Trip'}}/>
+        <Stack.Screen name={pages.TripEdit} component={TripEditor} options={{title: 'Edit Trip'}}/>
         <Stack.Screen name={pages.TripOverview} component={TripOverview} options={{title: 'Trip Overview'}}/>
 
         <Stack.Screen name={pages.TripMembers} component={TripMembers} options={{title: 'Trip Members'}}/>

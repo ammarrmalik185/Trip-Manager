@@ -25,7 +25,6 @@ export default function TripExpensesEditor({route, navigation}: any) {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-
     return <ScrollView style={styles.main}>
         <SafeAreaView>
 
@@ -182,8 +181,6 @@ export default function TripExpensesEditor({route, navigation}: any) {
 
             <View style={{margin: 30}}>
                 <TouchableOpacity style={styles.acceptButton} onPress={() => {
-
-
                     let payersValid = payers.reduce((valid, item) => valid && !!(item.amount || "").match(Utils.validNumberRegex), true);
                     let spendersValid = spenders.reduce((valid, item) => valid && !!(item.amount || "").match(Utils.validNumberRegex), true);
 

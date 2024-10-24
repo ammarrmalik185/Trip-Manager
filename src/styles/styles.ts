@@ -170,6 +170,7 @@ export default StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         margin: 20,
+        marginVertical: 30
     },
     forumView:{
         justifyContent: "center",
@@ -295,9 +296,7 @@ export default StyleSheet.create({
     modalScrollView: {
         maxHeight: 350,
         padding: 10,
-        // backgroundColor: "rgba(0,0,0, 0.2)",
-        borderRadius: 10,
-        margin: 10
+        // margin: 10
     },
     modalButtonView: {
         maxHeight: 500,
@@ -321,7 +320,7 @@ export default StyleSheet.create({
     },
     popupOptionButtonSelected:{
         backgroundColor: palette.primary,
-        padding: 5,
+        padding: 4,
         marginVertical: 4,
         borderRadius: 10,
     },
@@ -645,8 +644,8 @@ export default StyleSheet.create({
     modalText: {
         color: palette.text,
         fontSize: 20,
-        padding: 20,
-        paddingHorizontal: 40,
+        padding: 10,
+        paddingHorizontal: 20,
         textAlign: "center"
     },
     modalSubtext: {

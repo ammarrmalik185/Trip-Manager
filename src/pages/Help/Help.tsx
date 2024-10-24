@@ -7,14 +7,13 @@ export default function Help() {
     return (
         <ScrollView style={{...styles.main, paddingHorizontal: 20}}>
 
+            {/*<View style={{height: 20}}/>*/}
+            {/*<Text style={styles.subTitle}>Help</Text>*/}
+            {/*<TouchableOpacity onPress={() => {*/}
 
-         <View style={{height: 20}}/>
-            <Text style={styles.subTitle}>Help</Text>
-            <TouchableOpacity onPress={() => {
-
-            }} style={styles.horizontalStackContained}>
-                <Text style={styles.acceptButtonText}>Getting Started</Text>
-            </TouchableOpacity>
+            {/*}} style={styles.horizontalStackContained}>*/}
+            {/*    <Text style={styles.acceptButtonText}>Getting Started</Text>*/}
+            {/*</TouchableOpacity>*/}
 
             <View style={{height: 20}}/>
             <Text style={styles.subTitle}>Feedback</Text>

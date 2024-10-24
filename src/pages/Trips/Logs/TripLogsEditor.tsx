@@ -19,7 +19,7 @@ export default function TripLogsEditor({route, navigation}: any) {
 
     const [title, setTitle] = useState(currentLog.title);
     const [location, setLocation] = useState(currentLog.location);
-    const [distance, setDistance] = useState(currentLog.distance_traveled.toString());
+    const [distance, setDistance] = useState(currentLog.distance_traveled.toString() || "");
     const [description, setDescription] = useState(currentLog.description);
     const [geoLocation, setGeoLocation] = useState(currentLog.geoLocation);
     const [date, setDate] = useState(currentLog.date);
@@ -74,7 +74,7 @@ export default function TripLogsEditor({route, navigation}: any) {
                            placeholderTextColor={palette.placeholder}
                            placeholder={"Enter Total Distance Traveled"}
                            inputMode={"numeric"}
-                           value={distance.toString()}
+                           value={distance == "0" ? "" : distance}
                            onChangeText={txt => setDistance(txt)}/>
             </View>
 
