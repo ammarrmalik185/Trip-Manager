@@ -48,11 +48,14 @@ class expense {
     }
 
     validate(): boolean {
-        return this.payers.reduce((v, i) => v + i.amount, 0) != 0 &&
+        return this.title != "" && this.payers.reduce((v, i) => v + i.amount, 0) != 0 &&
         this.spenders.reduce((v, i) => v + i.amount, 0) != 0;
     }
 
     getValidationError(): string {
+        if (this.title == ""){
+            return "Title cannot be empty";
+        }
         if (this.payers.reduce((v, i) => v + i.amount, 0) == 0) {
             return "Payers total amount cannot be zero";
         }

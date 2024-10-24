@@ -1,6 +1,7 @@
 import {StyleSheet} from "react-native";
 import {palette} from "./colors.ts";
 import styles from "react-native-webview/lib/WebView.styles";
+import {convertToRGBA} from "react-native-reanimated";
 
 export default StyleSheet.create({
 
@@ -10,6 +11,17 @@ export default StyleSheet.create({
         padding: 10,
         margin: 15,
         backgroundColor: "rgba(4,4,4,0.2)",
+    },
+    textInputError:{
+        ...StyleSheet.absoluteFillObject,
+
+
+        borderColor: palette.secondary,
+        borderWidth: 2,
+        backgroundColor: "rgba(255,0,0,0.15)",
+        color: palette.secondary,
+        position: "absolute",
+        borderRadius: 10,
     },
     settingsInputPopupView:{
         borderRadius: 10,
